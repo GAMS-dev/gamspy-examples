@@ -40,7 +40,7 @@ from gamspy import (
 from gamspy.math import sqr
 
 # take number of circles as first argument
-k = int(sys.argv[1]) if len(sys.argv) > 1 else 5
+k = 5
 print("Number of circles =", k)
 
 c = Container(

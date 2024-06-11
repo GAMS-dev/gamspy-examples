@@ -1,6 +1,6 @@
 [![GAMSPy](https://github.com/GAMS-dev/gamspy/blob/develop/docs/_static/gamspy_logo.png?raw=true)](https://gamspy.readthedocs.io/en/latest/)
 
-## GAMSPy modeling examples
+## GAMSPy Modeling Examples
 
 This repository contains many examples to show how to model mathematical optimization problems by using [GAMSPy](https://github.com/GAMS-dev/gamspy).
 The example models are distributed as either Python script files (.py) or Jupyter Notebooks (.ıpynb).
@@ -8,23 +8,25 @@ The example models are distributed as either Python script files (.py) or Jupyte
 ## Installing Dependencies
 
 ```
-pip install gamspy
+git clone git@github.com:GAMS-dev/gamspy-examples.git
+pip install -r requirements.txt
 ```
 
-## Run locally
+## Running Locally
 
 ```bash
 cd <model_directory>
 python <model_name>.py
-or
-jupyter-lab <model_directory>  # All notebooks can also be run on Google Colab.
 ``` 
 
 ## Licensing
-GAMSPy pip package includes a demo license. For most of the notebooks, this demo license is sufficient. For others, you may need a different license (See [Licensing](https://gams.com/sales/licensing/)).
+GAMSPy pip package includes a demo license. For most of the notebooks, this demo license is sufficient. For others, you may need a different license (See [Licensing](https://gams.com/sales/licensing/)). In case you 
+already have a GAMSPy license, see [GAMSPy License Installation](https://gamspy.readthedocs.io/en/latest/user/installation.html) guideline.
 
 
-## Index of modeling examples
+## List of Models
+
+List of models under `models` directory is listed below. Most models have a GAMS implementation as well for comparison.
 
 | GAMSPy Model                                                  | GAMS Model                                                                                                           | Model Type    | License          |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------- | ---------------- |
@@ -140,3 +142,5 @@ GAMSPy pip package includes a demo license. For most of the notebooks, this demo
 | [edc2](models/edc2)                                           | [WaterEnergy](https://www.gams.com/latest/psoptlib_ml/libhtml/psoptlib_WaterEnergy.html)                             | MINLP         | Demo             |
 | [riversys](models/riversys)                                   | [weapons](https://www.gams.com/latest/gamslib_ml/libhtml/gamslib_weapons.html)                                       | NLP           | Demo             |
 | [mexss](models/mexss)                                         | [whouse](https://www.gams.com/latest/gamslib_ml/libhtml/gamslib_whouse.html)                                         | LP            | Demo             |
+
+All models under notebooks can be run with the demo license. 
