@@ -5,7 +5,7 @@
 ## GAMSPy Modeling Examples
 
 This repository contains many examples to show how to model mathematical optimization problems by using [GAMSPy](https://github.com/GAMS-dev/gamspy).
-The example models are distributed as either Python script files (.py) or Jupyter Notebooks (.ıpynb).
+The example models are distributed as either Python script files (under [models](models)) or Jupyter Notebooks (under [notebooks](notebooks)).
 
 ## Installing Dependencies
 
