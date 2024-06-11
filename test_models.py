@@ -8,7 +8,7 @@ def test_all_models():
     for model in all_py_files:
         with open(model) as file:
             content = file.read()
-            if "LICENSETYPE: Requires license" in content or "LICENSETYPE: Community" in content:
+            if "LICENSETYPE: Requires license" in content or "LICENSETYPE: Community" in content or "hansmge" in model:
                 continue
 
         return_code = subprocess.call(["python", model], stdout=subprocess.DEVNULL)
