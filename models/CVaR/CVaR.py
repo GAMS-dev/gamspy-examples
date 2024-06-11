@@ -15,7 +15,6 @@ Last modified: Apr 2008.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 import numpy as np
@@ -197,7 +196,6 @@ def index_data():
 def main():
     gdx_file = str(Path(__file__).parent.absolute()) + "/WorldIndices.gdx"
     m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
         load_from=gdx_file,
     )
 
@@ -205,23 +203,13 @@ def main():
     i, l = m.getSymbols(["i", "l"])
 
     # SCALARS #
-    Budget = Parameter(
-        m, name="Budget", description="Nominal investment budget"
-    )
+    Budget = Parameter(m, name="Budget", description="Nominal investment budget")
     alpha = Parameter(m, name="alpha", description="Confidence level")
-    MU_TARGET = Parameter(
-        m, name="MU_TARGET", description="Target portfolio return"
-    )
+    MU_TARGET = Parameter(m, name="MU_TARGET", description="Target portfolio return")
     MU_STEP = Parameter(m, name="MU_STEP", description="Target return step")
-    MIN_MU = Parameter(
-        m, name="MIN_MU", description="Minimum return in universe"
-    )
-    MAX_MU = Parameter(
-        m, name="MAX_MU", description="Maximum return in universe"
-    )
-    RISK_TARGET = Parameter(
-        m, name="RISK_TARGET", description="Bound on CVaR (risk)"
-    )
+    MIN_MU = Parameter(m, name="MIN_MU", description="Minimum return in universe")
+    MAX_MU = Parameter(m, name="MAX_MU", description="Maximum return in universe")
+    RISK_TARGET = Parameter(m, name="RISK_TARGET", description="Bound on CVaR (risk)")
     LossFlag = Parameter(
         m, name="LossFlag", description="Flag selecting the type of loss"
     )
@@ -273,9 +261,7 @@ def main():
         description="Measures of the deviations from the VaR",
     )
     VaR = Variable(m, name="VaR", description="Value-at-Risk")
-    Losses = Variable(
-        m, name="Losses", domain=l, description="Measures of the losses"
-    )
+    Losses = Variable(m, name="Losses", domain=l, description="Measures of the losses")
 
     # EQUATIONS #
     BudgetCon = Equation(
@@ -325,9 +311,7 @@ def main():
         + (TargetIndex[l] * Budget - Sum(i, P[i, l] * x[i])).where[
             LossFlag == Number(2)
         ]
-        + (Sum(i, EP[i] * x[i]) - Sum(i, P[i, l] * x[i])).where[
-            LossFlag == Number(3)
-        ]
+        + (Sum(i, EP[i] * x[i]) - Sum(i, P[i, l] * x[i])).where[LossFlag == Number(3)]
     )
 
     z = VaR + Sum(l, pr[l] * VaRDev[l]) / (1 - alpha)

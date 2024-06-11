@@ -23,8 +23,6 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 
 from __future__ import annotations
 
-import os
-
 import numpy as np
 import pandas as pd
 from gamspy import (
@@ -85,9 +83,7 @@ def data_records():
     inds = pd.MultiIndex.from_tuples(inds, names=["Index1", "Index2"])
     B_recs = pd.DataFrame(data, columns=cols, index=inds)
     B_recs.reset_index(inplace=True)
-    B_recs = B_recs.melt(
-        id_vars=["Index1", "Index2"], value_vars=["x", "limit"]
-    )
+    B_recs = B_recs.melt(id_vars=["Index1", "Index2"], value_vars=["x", "limit"])
 
     return (
         GenD_recs,
@@ -97,9 +93,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SETS #
     bus = Set(m, name="bus", records=[str(buses) for buses in range(1, 6)])
@@ -164,15 +158,11 @@ def main():
         description="network technical characteristics",
     )
 
-    branch[bus, node, "x"].where[branch[bus, node, "x"] == 0] = branch[
-        node, bus, "x"
-    ]
+    branch[bus, node, "x"].where[branch[bus, node, "x"] == 0] = branch[node, bus, "x"]
     branch[bus, node, "Limit"].where[branch[bus, node, "Limit"] == 0] = branch[
         node, bus, "Limit"
     ]
-    branch[bus, node, "bij"].where[conex[bus, node]] = (
-        1 / branch[bus, node, "x"]
-    )
+    branch[bus, node, "bij"].where[conex[bus, node]] = 1 / branch[bus, node, "x"]
 
     # VARIABLES #
     OF = Variable(m, name="OF")
@@ -209,27 +199,20 @@ def main():
     delta.up[bus] = np.pi
     delta.lo[bus] = -np.pi
     delta.fx[slack] = 0
-    Pij.up[bus, node].where[conex[bus, node]] = (
-        1 * branch[bus, node, "Limit"] / Sbase
-    )
-    Pij.lo[bus, node].where[conex[bus, node]] = (
-        -1 * branch[bus, node, "Limit"] / Sbase
-    )
+    Pij.up[bus, node].where[conex[bus, node]] = 1 * branch[bus, node, "Limit"] / Sbase
+    Pij.lo[bus, node].where[conex[bus, node]] = -1 * branch[bus, node, "Limit"] / Sbase
 
     loadflow.solve()
 
     #  REPORTING PARAMETERS
     report = Parameter(m, name="report", domain=[bus, "*"])
     Congestioncost = Parameter(m, name="Congestioncost")
-    report[bus, "Gen(MW)"] = (
-        Sum(Gen.where[GBconect[bus, Gen]], Pg.l[Gen]) * Sbase
-    )
+    report[bus, "Gen(MW)"] = Sum(Gen.where[GBconect[bus, Gen]], Pg.l[Gen]) * Sbase
     report[bus, "Angle"] = delta.l[bus]
     report[bus, "load(MW)"] = BusData[bus, "pd"]
     report[bus, "LMP($/MWh)"] = const2.m[bus] / Sbase
     Congestioncost[...] = (
-        Sum([bus, node], Pij.l[bus, node] * (-const2.m[bus] + const2.m[node]))
-        / 2
+        Sum([bus, node], Pij.l[bus, node] * (-const2.m[bus] + const2.m[node])) / 2
     )
 
     print("report:  \n", report.pivot().round(4), "\n")

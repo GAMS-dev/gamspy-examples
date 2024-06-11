@@ -20,7 +20,6 @@ University Press, New York and Oxford, 1979.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 from gamspy import Container, Model, Number, Problem, Sense, Sum
@@ -28,7 +27,6 @@ from gamspy import Container, Model, Number, Problem, Sense, Sum
 
 def main():
     container = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
         load_from=str(Path(__file__).parent.absolute()) + "/chenery.gdx",
     )
 
@@ -69,14 +67,10 @@ def main():
             "efy",
         ]
     )
-    lbar, plab, kbar, dbar = container.getSymbols(
-        ["lbar", "plab", "kbar", "dbar"]
-    )
+    lbar, plab, kbar, dbar = container.getSymbols(["lbar", "plab", "kbar", "dbar"])
 
     # Variables
-    x, v, y, p, l, k, e = container.getSymbols(
-        ["x", "v", "y", "p", "l", "k", "e"]
-    )
+    x, v, y, p, l, k, e = container.getSymbols(["x", "v", "y", "p", "l", "k", "e"])
     m, g, h, pk, pi, pd, td, vv = container.getSymbols(
         ["m", "g", "h", "pk", "pi", "pd", "td", "vv"]
     )
@@ -104,16 +98,12 @@ def main():
     )
     dl[i] = (
         l[i] * efy[i]
-        == ((deli[i] / vv[i] + (1 - deli[i])) ** (1 / rho[i])).where[
-            sig[i] != 0
-        ]
+        == ((deli[i] / vv[i] + (1 - deli[i])) ** (1 / rho[i])).where[sig[i] != 0]
         + Number(1).where[sig[i] == 0]
     )
     dk[i] = (
         k[i] * efy[i]
-        == ((deli[i] + (1 - deli[i]) * vv[i]) ** (1 / rho[i])).where[
-            sig[i] != 0
-        ]
+        == ((deli[i] + (1 - deli[i]) * vv[i]) ** (1 / rho[i])).where[sig[i] != 0]
         + deli[i].where[sig[i] == 0]
     )
     dv[i] = v[i] == pk * k[i] + plab * l[i]
@@ -173,15 +163,11 @@ def main():
         -rho[i] / (1 + rho[i])
     )
     l.l[i] = (
-        ((deli[i] / vv.l[i] + (1 - deli[i])) ** (1 / rho[i])).where[
-            sig[i] != 0
-        ]
+        ((deli[i] / vv.l[i] + (1 - deli[i])) ** (1 / rho[i])).where[sig[i] != 0]
         + Number(1).where[sig[i] == 0]
     ) / efy[i]
     k.l[i] = (
-        ((deli[i] + (1 - deli[i]) * vv.l[i]) ** (1 / rho[i])).where[
-            sig[i] != 0
-        ]
+        ((deli[i] + (1 - deli[i]) * vv.l[i]) ** (1 / rho[i])).where[sig[i] != 0]
         + deli[i].where[sig[i] == 0]
     ) / efy[i]
     v.l[i] = pk.l * k.l[i] + plab * l.l[i]

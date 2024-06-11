@@ -52,7 +52,6 @@ from gamspy import Variable
 
 def main():
     m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
         load_from=str(Path(__file__).parent.absolute()) + "/lop.gdx",
     )
 
@@ -77,8 +76,7 @@ def main():
     balance, defspobj = m.getSymbols(["balance", "defspobj"])
 
     balance[s, s1] = (
-        Sum(d[s1, s2], f[s, d])
-        == Sum(d[s2, s1], f[s, d]) + s.sameAs(s1) * Card(s) - 1
+        Sum(d[s1, s2], f[s, d]) == Sum(d[s2, s1], f[s, d]) + s.sameAs(s1) * Card(s) - 1
     )
 
     defspobj[...] = spobj == Sum(
@@ -95,14 +93,10 @@ def main():
     )
     sp.solve()
 
-    tree = Set(
-        m, "tree", domain=[s, s1, s2], description="shortest path tree from s"
-    )
+    tree = Set(m, "tree", domain=[s, s1, s2], description="shortest path tree from s")
     tree[s, s1, s2] = f.l[s, s1, s2]
 
-    r = Set(
-        m, "r", records=[str(idx) for idx in range(1, 101)], description="rank"
-    )
+    r = Set(m, "r", records=[str(idx) for idx in range(1, 101)], description="rank")
     k = Set(m, "k", domain=[s, s], description="arcs from root to a node")
     v = Set(
         m,
@@ -151,15 +145,11 @@ def main():
                     v[s2, r1].where[lr[root_elem, f_elem, s2, r1]] = True
                     v[f_elem, "1"].where[Card(k) == 0] = True
 
-                    l[root_elem, to, k].where[tree[root_elem, f_elem, to]] = (
+                    l[root_elem, to, k].where[tree[root_elem, f_elem, to]] = True
+                    lr[root_elem, to, v].where[tree[root_elem, f_elem, to]] = True
+                    l[root_elem, to, f_elem, to].where[tree[root_elem, f_elem, to]] = (
                         True
                     )
-                    lr[root_elem, to, v].where[tree[root_elem, f_elem, to]] = (
-                        True
-                    )
-                    l[root_elem, to, f_elem, to].where[
-                        tree[root_elem, f_elem, to]
-                    ] = True
                     lr[root_elem, to, to, r_elem].where[
                         tree[root_elem, f_elem, to]
                     ] = True
@@ -186,9 +176,7 @@ def main():
     if len(error02):
         sys.exit(f"There is an error {error02.records}")
 
-    ll = Set(
-        m, "ll", domain=[s, s], description="station pair represening a line"
-    )
+    ll = Set(m, "ll", domain=[s, s], description="station pair represening a line")
     ll[s1, s2] = Ord(s1) < Ord(s2)
 
     l[root, s, s1, s2].where[~ll[root, s]] = False
@@ -218,9 +206,7 @@ def main():
         domain=[s1, s2],
         description="direct traveler between s1 and s2",
     )
-    freq = Variable(
-        m, "freq", domain=[s1, s2], description="frequency on arc s1s2"
-    )
+    freq = Variable(m, "freq", domain=[s1, s2], description="frequency on arc s1s2")
     phi = Variable(
         m,
         "phi",
@@ -241,9 +227,7 @@ def main():
     )
     defobjdtlop = Equation(m, "defobjdtlop", description="objective function")
 
-    deffreqlop[s1, s2].where[rt[s1, s2]] = freq[s1, s2] == Sum(
-        l[ll, s1, s2], phi[ll]
-    )
+    deffreqlop[s1, s2].where[rt[s1, s2]] = freq[s1, s2] == Sum(l[ll, s1, s2], phi[ll])
 
     dtlimit[s1, s2].where[od[s1, s2]] = dt[s1, s2] <= gams_math.Min(
         od[s1, s2], maxtcap
@@ -287,9 +271,7 @@ def main():
         description="operating and capcital cost for additional cars",
     )
     length = Parameter(m, "len", domain=[s, s], description="length of line")
-    sigma = Parameter(
-        m, "sigma", domain=[s, s], description="line circulation factor"
-    )
+    sigma = Parameter(m, "sigma", domain=[s, s], description="line circulation factor")
 
     length[ll] = Sum(l[ll, s1, s2], rt[s1, s2])
     sigma[ll] = (
@@ -339,17 +321,15 @@ def main():
     couplexy = Equation(
         m, "couplexy", domain=[s, s, lf], description="coupling constraints"
     )
-    defobjilp = Equation(
-        m, "defobjilp", description="definition of the objective"
-    )
+    defobjilp = Equation(m, "defobjilp", description="definition of the objective")
 
     deffreqilp[s1, s2].where[rt[s1, s2]] = freq[s1, s2] == Sum(
         (l[ll, s1, s2], lf), Ord(lf) * x[ll, lf]
     )
 
-    defloadilp[s1, s2].where[rt[s1, s2]] = gams_math.ceil(
-        load[s1, s2] / ccap
-    ) <= Sum((l[ll, s1, s2], lf), Ord(lf) * (mincars * x[ll, lf] + y[ll, lf]))
+    defloadilp[s1, s2].where[rt[s1, s2]] = gams_math.ceil(load[s1, s2] / ccap) <= Sum(
+        (l[ll, s1, s2], lf), Ord(lf) * (mincars * x[ll, lf] + y[ll, lf])
+    )
 
     oneilp[ll] = Sum(lf, x[ll, lf]) <= 1
 
@@ -374,17 +354,11 @@ def main():
     ilp.solve(options=Options(relative_optimality_gap=0))
 
     solrep["ILP", ll, "freq"] = Sum(lf.where[x.l[ll, lf]], Ord(lf))
-    solrep["ILP", ll, "cars"] = Sum(
-        lf.where[x.l[ll, lf]], mincars + y.l[ll, lf]
-    )
+    solrep["ILP", ll, "cars"] = Sum(lf.where[x.l[ll, lf]], mincars + y.l[ll, lf])
     solsum["ILP", "cost"] = obj.l
 
-    cap = Parameter(
-        m, "cap", domain=[s, s], description="the capacity of a line"
-    )
-    sol = Set(
-        m, "sol", domain=[s, s], description="the actual lines in a line plan"
-    )
+    cap = Parameter(m, "cap", domain=[s, s], description="the capacity of a line")
+    sol = Set(m, "sol", domain=[s, s], description="the actual lines in a line plan")
 
     dtr = Variable(
         m,
@@ -426,8 +400,7 @@ def main():
     )
 
     sumbound[s2, s3].where[od[s2, s3]] = (
-        Sum(sol.where[rp[sol, s2] & rp[sol, s3]], dtr[sol, s2, s3])
-        == dt[s2, s3]
+        Sum(sol.where[rp[sol, s2] & rp[sol, s3]], dtr[sol, s2, s3]) == dt[s2, s3]
     )
 
     evaldt = Model(

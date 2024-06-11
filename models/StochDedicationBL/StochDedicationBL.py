@@ -16,7 +16,6 @@ Stochastic Dedication model with borrowing and lending variables
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 from gamspy import Container, Equation, Model, Sense, Sum, Variable
@@ -25,9 +24,7 @@ from gamspy import Container, Equation, Model, Sense, Sum, Variable
 def main():
     # Define container
     m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-        load_from=str(Path(__file__).parent.absolute())
-        + "/StochDedicationBL.gdx",
+        load_from=str(Path(__file__).parent.absolute()) + "/StochDedicationBL.gdx",
     )
 
     # Aliases
@@ -58,9 +55,7 @@ def main():
     )
 
     # Variables
-    x = Variable(
-        m, "x", domain=i, type="Positive", description="Face value purchased"
-    )
+    x = Variable(m, "x", domain=i, type="Positive", description="Face value purchased")
     surplus = Variable(
         m,
         "surplus",
@@ -92,9 +87,7 @@ def main():
         + borrow[t, l].where[tau[t] < Horizon]
         == surplus[t, l]
         + SLiability[t, l].where[tau[t] > 0]
-        + ((1 + Srf[t.lag(1), l] + spread) * borrow[t.lag(1), l]).where[
-            tau[t] > 0
-        ]
+        + ((1 + Srf[t.lag(1), l] + spread) * borrow[t.lag(1), l]).where[tau[t] > 0]
     )
 
     StochDedicationBL = Model(

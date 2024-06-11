@@ -23,8 +23,6 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 
 from __future__ import annotations
 
-import os
-
 import pandas as pd
 from gamspy import (
     Card,
@@ -61,9 +59,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SETS #
     gen = Set(m, name="gen", records=[f"g{i}" for i in range(1, 6)])
@@ -81,9 +77,7 @@ def main():
     # EQUATIONS #
     eq1 = Sum(
         gen,
-        data[gen, "a"] * P[gen] * P[gen]
-        + data[gen, "b"] * P[gen]
-        + data[gen, "c"],
+        data[gen, "a"] * P[gen] * P[gen] + data[gen, "b"] * P[gen] + data[gen, "c"],
     )
 
     eq2 = Equation(m, name="eq2", type="regular")
@@ -102,9 +96,9 @@ def main():
     )
 
     for idx, cc in enumerate(counter.toList()):
-        load[...] = Sum(gen, data[gen, "Pmin"]) + (
-            (idx) / (Card(counter) - 1)
-        ) * Sum(gen, data[gen, "Pmax"] - data[gen, "Pmin"])
+        load[...] = Sum(gen, data[gen, "Pmin"]) + ((idx) / (Card(counter) - 1)) * Sum(
+            gen, data[gen, "Pmax"] - data[gen, "Pmin"]
+        )
         ECD.solve()
         repGen[cc, gen] = P.l[gen]
         report[cc, "OF"] = ECD.objective_value

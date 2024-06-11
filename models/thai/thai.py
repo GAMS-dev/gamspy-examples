@@ -19,7 +19,6 @@ Interfaces 16, 4 (1986), 356-366.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 from gamspy import Container, Domain, Model, Sense, Sum
@@ -27,7 +26,6 @@ from gamspy import Container, Domain, Model, Sense, Sum
 
 def main():
     m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
         load_from=str(Path(__file__).parent.absolute()) + "/thai.gdx",
     )
 
@@ -57,18 +55,14 @@ def main():
         ]
     )
 
-    objdef[...] = obj == w1 * Sum(
-        Domain(j, k).where[vc[j, k]], z[j, k]
-    ) + w2 * Sum(
+    objdef[...] = obj == w1 * Sum(Domain(j, k).where[vc[j, k]], z[j, k]) + w2 * Sum(
         Domain(j, k).where[vc[j, k]], a[j, "dist"] * z[j, k]
     ) + w3 * Sum(
         Domain(j, k, i).where[a[j, i].where[vc[j, k]]],
         a[j, "dist"] * y[j, k, i],
     )
 
-    demand[i] = (
-        Sum(Domain(j, k).where[a[j, i].where[vc[j, k]]], y[j, k, i]) >= d[i]
-    )
+    demand[i] = Sum(Domain(j, k).where[a[j, i].where[vc[j, k]]], y[j, k, i]) >= d[i]
     voycap[j, k].where[vc[j, k]] = (
         Sum(i.where[a[j, i]], y[j, k, i]) <= shipcap[k] * z[j, k]
     )

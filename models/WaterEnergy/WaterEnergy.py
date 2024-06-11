@@ -23,8 +23,6 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 
 from __future__ import annotations
 
-import os
-
 import pandas as pd
 from gamspy import (
     Container,
@@ -156,9 +154,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SETS #
     t = Set(m, name="t", records=[f"t{t}" for t in range(1, 25)])
@@ -180,9 +176,7 @@ def main():
     waterdata = Parameter(
         m, name="waterdata", domain=[w, "*"], records=data_records()[2]
     )
-    PWdata = Parameter(
-        m, name="PWdata", domain=[t, "*"], records=data_records()[3]
-    )
+    PWdata = Parameter(m, name="PWdata", domain=[t, "*"], records=data_records()[3])
 
     # FREE VARIABLES #
     TC = Variable(m, name="TC")
@@ -277,9 +271,7 @@ def main():
         else:
             raise
 
-    print(
-        "Objective Function Value:  ", round(DEDcostbased.objective_value, 4)
-    )
+    print("Objective Function Value:  ", round(DEDcostbased.objective_value, 4))
 
 
 if __name__ == "__main__":

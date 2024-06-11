@@ -24,7 +24,6 @@ comments.
 
 from __future__ import annotations
 
-import os
 import sys
 
 from gamspy import (
@@ -40,9 +39,7 @@ from gamspy import (
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # Prepare data
     distances = [

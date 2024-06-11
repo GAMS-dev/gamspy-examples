@@ -17,8 +17,6 @@ vol.49, nr. 2, June 2011, pp. 335-358.
 
 from __future__ import annotations
 
-import os
-
 import gamspy.math as gams_math
 from gamspy import (
     Card,
@@ -35,9 +33,7 @@ from gamspy import (
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SETS #
     n = Set(m, name="n", records=["state1"], description="states")
@@ -72,9 +68,9 @@ def main():
         domain=[n, k],
         description="state equation",
     )
-    stateq[n, k.lead(1)] = x[n, k.lead(1)] == 2 * x[n, k] + 2 * u[
-        k
-    ] * gams_math.sqrt(x[n, k])
+    stateq[n, k.lead(1)] = x[n, k.lead(1)] == 2 * x[n, k] + 2 * u[k] * gams_math.sqrt(
+        x[n, k]
+    )
 
     # OBJECTIVE #
     j = 0.5 * Sum([k, n], (x[n, k]) + 0.5 * Sum(ku, (u[ku]) * rk * (u[ku])))

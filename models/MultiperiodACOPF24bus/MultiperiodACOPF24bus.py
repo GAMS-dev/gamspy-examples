@@ -24,7 +24,6 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 from __future__ import annotations
 
 import math
-import os
 
 import gamspy.math as gams_math
 import pandas as pd
@@ -214,9 +213,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SETS #
     i = Set(
@@ -274,9 +271,9 @@ def main():
         sqr(LN[i, j, "x"]) + sqr(LN[i, j, "r"])
     )
     LN[j, i, "z"].where[LN[i, j, "z"] == 0] = LN[i, j, "z"]
-    LN[i, j, "th"].where[
-        (LN[i, j, "Limit"]) & (LN[i, j, "x"]) & (LN[i, j, "r"])
-    ] = gams_math.atan(LN[i, j, "x"] / (LN[i, j, "r"]))
+    LN[i, j, "th"].where[(LN[i, j, "Limit"]) & (LN[i, j, "x"]) & (LN[i, j, "r"])] = (
+        gams_math.atan(LN[i, j, "x"] / (LN[i, j, "r"]))
+    )
     LN[i, j, "th"].where[
         (LN[i, j, "Limit"]) & (LN[i, j, "x"]) & (LN[i, j, "r"] == 0)
     ] = math.pi / 2
@@ -311,9 +308,7 @@ def main():
         Pij[i, j, t]
         == (
             V[i, t] * V[i, t] * gams_math.cos(LN[j, i, "th"])
-            - V[i, t]
-            * V[j, t]
-            * gams_math.cos(Va[i, t] - Va[j, t] + LN[j, i, "th"])
+            - V[i, t] * V[j, t] * gams_math.cos(Va[i, t] - Va[j, t] + LN[j, i, "th"])
         )
         / LN[j, i, "z"]
     )
@@ -322,9 +317,7 @@ def main():
         Qij[i, j, t]
         == (
             V[i, t] * V[i, t] * gams_math.sin(LN[j, i, "th"])
-            - V[i, t]
-            * V[j, t]
-            * gams_math.sin(Va[i, t] - Va[j, t] + LN[j, i, "th"])
+            - V[i, t] * V[j, t] * gams_math.sin(Va[i, t] - Va[j, t] + LN[j, i, "th"])
         )
         / LN[j, i, "z"]
         - LN[j, i, "b"] * V[i, t] * V[i, t] / 2
@@ -339,8 +332,7 @@ def main():
     ] / Sbase == Sum(j.where[cx[j, i]], Qij[i, j, t])
 
     eq5[...] = (
-        Sum([i, t], Pg[i, t] * GenD[i, "b"] * Sbase.where[GenD[i, "Pmax"]])
-        <= OF
+        Sum([i, t], Pg[i, t] * GenD[i, "b"] * Sbase.where[GenD[i, "Pmax"]]) <= OF
     )
 
     eq6[i, t].where[(GenD[i, "Pmax"]) & (Ord(t) > 1)] = (

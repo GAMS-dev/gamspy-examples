@@ -24,8 +24,6 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 
 from __future__ import annotations
 
-import os
-
 import gamspy.math as gams_math
 import pandas as pd
 from gamspy import (
@@ -93,9 +91,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SETS #
     t = Set(
@@ -119,9 +115,7 @@ def main():
         records=data_records()[0],
         description="generator cost characteristics and limits",
     )
-    data = Parameter(
-        m, name="data", domain=[t, "*"], records=data_records()[1]
-    )
+    data = Parameter(m, name="data", domain=[t, "*"], records=data_records()[1])
 
     # VARIABLES #
     p = Variable(
@@ -202,9 +196,7 @@ def main():
 
     import math
 
-    assert math.isclose(
-        DEDESScostbased.objective_value, 223360.0645, rel_tol=0.001
-    )
+    assert math.isclose(DEDESScostbased.objective_value, 223360.0645, rel_tol=0.001)
 
     # Reporting parameter
     rep = Parameter(m, name="rep", domain=[t, "*"])

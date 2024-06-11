@@ -28,16 +28,12 @@ Optimization, 2002.
 
 from __future__ import annotations
 
-import os
-
 import gamspy as gap
 import pandas as pd
 
 
 def flow_shop(process_time_df, last_machine, last_item):
-    c = gap.Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    c = gap.Container()
 
     # Sets
     i = c.addSet(
@@ -116,9 +112,7 @@ def flow_shop(process_time_df, last_machine, last_item):
     oneRankPer[i] = gap.Sum(k, rank[i, k]) == 1
     onMachRel[m, k.lead(1)] = start[m, k.lead(1)] >= comp[m, k]
     perMachRel[m.lead(1), k] = start[m.lead(1), k] >= comp[m, k]
-    defComp[m, k] = comp[m, k] == start[m, k] + gap.Sum(
-        i, proctime[m, i] * rank[i, k]
-    )
+    defComp[m, k] = comp[m, k] == start[m, k] + gap.Sum(i, proctime[m, i] * rank[i, k])
 
     defObj[...] = totwait >= comp[last_machine, last_item]
 

@@ -15,7 +15,6 @@ Last modified: Apr 2008.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 import pandas as pd
@@ -36,7 +35,6 @@ from gamspy import (
 def main():
     # Define container
     m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
         load_from=str(Path(__file__).parent.absolute()) + "/Regret.gdx",
     )
 
@@ -49,24 +47,16 @@ def main():
     AssetReturns = m.getSymbols(["AssetReturns"])[0]
 
     # SCALARS #
-    Budget = Parameter(
-        m, name="Budget", description="Nominal investment budget"
-    )
+    Budget = Parameter(m, name="Budget", description="Nominal investment budget")
     EpsRegret = Parameter(
         m,
         name="EpsRegret",
         description="Tolerance allowed for epsilon regret models",
     )
-    MU_TARGET = Parameter(
-        m, name="MU_TARGET", description="Target portfolio return"
-    )
+    MU_TARGET = Parameter(m, name="MU_TARGET", description="Target portfolio return")
     MU_STEP = Parameter(m, name="MU_STEP", description="Target return step")
-    MIN_MU = Parameter(
-        m, name="MIN_MU", description="Minimum return in universe"
-    )
-    MAX_MU = Parameter(
-        m, name="MAX_MU", description="Maximum return in universe"
-    )
+    MIN_MU = Parameter(m, name="MIN_MU", description="Minimum return in universe")
+    MAX_MU = Parameter(m, name="MAX_MU", description="Maximum return in universe")
     RISK_TARGET = Parameter(
         m, name="RISK_TARGET", description="Bound on expected regret (risk)"
     )
@@ -140,8 +130,7 @@ def main():
         name="EpsRegretCon",
         domain=l,
         description=(
-            "Equations defining the regret constraints with tolerance"
-            " threshold"
+            "Equations defining the regret constraints with tolerance" " threshold"
         ),
     )
 
@@ -151,13 +140,11 @@ def main():
 
     ExpRegretCon[...] = Sum(l, pr[l] * Regrets[l]) <= RISK_TARGET
 
-    RegretCon[l] = Regrets[l] >= TargetIndex[l] * Budget - Sum(
+    RegretCon[l] = Regrets[l] >= TargetIndex[l] * Budget - Sum(i, P[i, l] * x[i])
+
+    EpsRegretCon[l] = Regrets[l] >= (TargetIndex[l] - EpsRegret) * Budget - Sum(
         i, P[i, l] * x[i]
     )
-
-    EpsRegretCon[l] = Regrets[l] >= (
-        TargetIndex[l] - EpsRegret
-    ) * Budget - Sum(i, P[i, l] * x[i])
 
     # Objective function definition for regret minimization
     ObjDefRegret = Sum(l, pr[l] * Regrets[l])

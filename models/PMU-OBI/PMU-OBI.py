@@ -23,8 +23,6 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 
 from __future__ import annotations
 
-import os
-
 from gamspy import (
     Alias,
     Container,
@@ -40,9 +38,7 @@ from gamspy import (
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # Set
     bus = Set(m, name="bus", records=[str(idx) for idx in range(1, 15)])
@@ -91,9 +87,7 @@ def main():
     eq2 = Sum(node, alpha[node])
 
     eq3 = Equation(m, name="eq3", domain=bus)
-    eq3[bus] = (
-        PMU[bus] + Sum(node.where[conex[bus, node]], PMU[node]) >= alpha[bus]
-    )
+    eq3[bus] = PMU[bus] + Sum(node.where[conex[bus, node]], PMU[node]) >= alpha[bus]
 
     placement3 = Model(
         m,

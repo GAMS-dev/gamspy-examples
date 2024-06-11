@@ -15,8 +15,6 @@ X is the inverse of A.
 
 from __future__ import annotations
 
-import os
-
 import numpy as np
 from gamspy import (
     Alias,
@@ -46,9 +44,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SET #
     i = Set(m, name="i", records=[f"i{i}" for i in range(1, 6)])
@@ -104,9 +100,7 @@ def main():
 
     # PARAMETERS #
     b = Parameter(m, name="b", domain=i, description="Righ-hand Side term")
-    ainv = Parameter(
-        m, name="ainv", domain=[i, j], description="inverse matrix of A"
-    )
+    ainv = Parameter(m, name="ainv", domain=[i, j], description="inverse matrix of A")
 
     eobj[...] = obj == 0
     lin[i] = Sum(k, a[i, k] * col[k]) == b[i]

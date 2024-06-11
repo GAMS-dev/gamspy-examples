@@ -70,8 +70,6 @@ Princeton University Press, Princeton, New Jersey, 1963.
 
 from __future__ import annotations
 
-import os
-
 import numpy as np
 from gamspy import (
     Card,
@@ -91,9 +89,7 @@ from gamspy.math import sqrt
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # Sets
     i = Set(
@@ -230,9 +226,7 @@ def main():
     )
 
     # Parameters
-    p = Parameter(
-        m, name="p", domain=s, description="x coordinate of sample point"
-    )
+    p = Parameter(m, name="p", domain=s, description="x coordinate of sample point")
     sqrtp = Parameter(
         m, name="sqrtp", domain=s, description="y coordinate of sample point"
     )

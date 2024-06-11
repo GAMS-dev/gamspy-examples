@@ -14,8 +14,6 @@ Ternary System
 
 from __future__ import annotations
 
-import os
-
 import gamspy.math as gams_math
 from gamspy import (
     Alias,
@@ -30,9 +28,7 @@ from gamspy import (
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SET #
     i = Set(m, name="i", records=["1", "2", "3"], description="components")
@@ -119,12 +115,8 @@ def main():
         type="regular",
         description="equation of state constraint",
     )
-    defa = Equation(
-        m, name="defa", type="regular", description="definition of Amix"
-    )
-    defb = Equation(
-        m, name="defb", type="regular", description="definition of Bmix"
-    )
+    defa = Equation(m, name="defa", type="regular", description="definition of Amix")
+    defb = Equation(m, name="defb", type="regular", description="definition of Bmix")
     molesum = Equation(
         m,
         name="molesum",

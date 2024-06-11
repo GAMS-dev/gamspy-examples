@@ -18,7 +18,6 @@ de Wetering, A V, private communication.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 from gamspy import (
@@ -37,7 +36,6 @@ from gamspy.math import sqr
 
 def main():
     cont = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
         load_from=str(Path(__file__).parent.absolute()) + "/qp6.gdx",
     )
 
@@ -59,9 +57,7 @@ def main():
     mean = Parameter(
         cont, name="mean", domain=stocks, description="mean of daily return"
     )
-    dev = Parameter(
-        cont, name="dev", domain=[stocks, days], description="deviations"
-    )
+    dev = Parameter(cont, name="dev", domain=[stocks, days], description="deviations")
     totmean = Parameter(cont, name="totmean", description="total mean return")
 
     mean[s] = Sum(d, returns[s, d]) / Card(d)

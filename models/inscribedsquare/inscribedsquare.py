@@ -30,7 +30,6 @@ Contributor: Benjamin Mueller and Felipe Serrano
 from __future__ import annotations
 
 import math
-import os
 
 from gamspy import Card, Container, Equation, Model, Ord, Sense, Set, Variable
 from gamspy.math import cos, sin
@@ -45,9 +44,7 @@ def fy(t):
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # Set
     i = Set(
@@ -67,16 +64,12 @@ def main():
     x = Variable(
         m,
         name="x",
-        description=(
-            "x-coordinate of lower-left corner of square (=fx(t('1')))"
-        ),
+        description=("x-coordinate of lower-left corner of square (=fx(t('1')))"),
     )
     y = Variable(
         m,
         name="y",
-        description=(
-            "y-coordinate of lower-left corner of square (=fy(t('1')))"
-        ),
+        description=("y-coordinate of lower-left corner of square (=fy(t('1')))"),
     )
     a = Variable(
         m,
@@ -92,8 +85,7 @@ def main():
         name="b",
         type="Positive",
         description=(
-            "vertical distance between lower-left and lower-right corner of"
-            " square"
+            "vertical distance between lower-left and lower-right corner of" " square"
         ),
     )
 

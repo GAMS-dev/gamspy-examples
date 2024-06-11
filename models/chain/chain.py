@@ -31,7 +31,6 @@ Cesari, L, Optimization - Theory and Applications. Springer Verlag, 1983.
 
 from __future__ import annotations
 
-import os
 import sys
 
 import gamspy.math as gams_math
@@ -51,9 +50,7 @@ from gamspy.math import sqr
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     n_rec = int(sys.argv[1]) if len(sys.argv) > 1 else 400
 
@@ -64,18 +61,14 @@ def main():
     i = Alias(m, name="i", alias_with=nh)
 
     # SCALARS #
-    L = Parameter(
-        m, name="L", records=4, description="length of the suspended chain"
-    )
+    L = Parameter(m, name="L", records=4, description="length of the suspended chain")
     a = Parameter(
         m, name="a", records=1, description="height of the chain at t=0 (left)"
     )
     b = Parameter(
         m, name="b", records=3, description="height of the chain at t=1 (left)"
     )
-    tf = Parameter(
-        m, name="tf", records=1, description="ODEs defined in [0 tf]"
-    )
+    tf = Parameter(m, name="tf", records=1, description="ODEs defined in [0 tf]")
     h = Parameter(m, name="h", description="uniform interval length")
     n = Parameter(m, name="n", description="number of subintervals")
     tmin = Parameter(m, name="tmin")
@@ -125,8 +118,7 @@ def main():
         * h
         * Sum(
             nh[i.lead(1)],
-            gams_math.sqrt(1 + sqr(u[i]))
-            + gams_math.sqrt(1 + sqr(u[i.lead(1)])),
+            gams_math.sqrt(1 + sqr(u[i])) + gams_math.sqrt(1 + sqr(u[i.lead(1)])),
         )
         == L
     )

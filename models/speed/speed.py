@@ -21,16 +21,12 @@ No I-07-04/22-02-2007. Center for Research in Mathematics (CIMAT), Mexico.
 
 from __future__ import annotations
 
-import os
-
 import gamspy.math as gams_math
 from gamspy import Container, Equation, Model, Variable
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # VARIABLES #
     x1 = Variable(m, name="x1")
@@ -68,9 +64,7 @@ def main():
     # Constraints:
     g1[...] = 27 / (x1 * gams_math.power(x2, 2) * x3) - 1 <= 0
 
-    g2[...] = (
-        397.5 / (x1 * gams_math.power(x2, 2) * gams_math.power(x3, 2)) - 1 <= 0
-    )
+    g2[...] = 397.5 / (x1 * gams_math.power(x2, 2) * gams_math.power(x3, 2)) - 1 <= 0
 
     g3[...] = (1.93 * gams_math.power(x4, 3)) / (
         x2 * x3 * gams_math.power(x6, 4)

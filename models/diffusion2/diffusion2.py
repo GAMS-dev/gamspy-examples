@@ -18,8 +18,6 @@ http://www.ce.utexas.edu/prof/mckynney/ce385d/papers/GAMS-Tutorial.pdf
 
 from __future__ import annotations
 
-import os
-
 import numpy as np
 from gamspy import (
     Card,
@@ -485,9 +483,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SETS #
     time = Set(m, name="time", records=[f"t{t}" for t in range(1, 26)])
@@ -531,9 +527,7 @@ def main():
 
     # VARIABLES #
     # Model description
-    t = Variable(
-        m, name="t", domain=[x, y], description="field of temperature"
-    )
+    t = Variable(m, name="t", domain=[x, y], description="field of temperature")
     Q = Variable(m, name="Q", description="temperature on boundaries")
 
     # Variable bounds

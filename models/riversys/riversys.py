@@ -15,8 +15,6 @@ for water and energy management", Revision 6, February 2003.
 
 from __future__ import annotations
 
-import os
-
 import gamspy.math as gams_math
 import pandas as pd
 from gamspy import (
@@ -101,9 +99,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SETS #
     n = Set(
@@ -276,9 +272,7 @@ def main():
     s.lo["Res_2", "Dec"] = 300
 
     # EQUATIONS #
-    R_no = Equation(
-        m, name="R_no", type="regular", domain=[n, t], description="Node"
-    )
+    R_no = Equation(m, name="R_no", type="regular", domain=[n, t], description="Node")
     R_ns = Equation(
         m, name="R_ns", type="regular", domain=[n, t], description="Source"
     )
@@ -296,9 +290,7 @@ def main():
         domain=[n, t],
         description="Reservoirs node",
     )
-    R_nn = Equation(
-        m, name="R_nn", type="regular", domain=[n, t], description="Node"
-    )
+    R_nn = Equation(m, name="R_nn", type="regular", domain=[n, t], description="Node")
 
     R_no[n, t].where[nn[n]] = r[n, t] == q[n, t]
 

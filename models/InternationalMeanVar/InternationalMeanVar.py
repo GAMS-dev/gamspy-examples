@@ -31,7 +31,6 @@ We use real data for the 10-year period 1990-01-01 to 2000-01-01,
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 import gamspy.math as gams_math
@@ -48,11 +47,8 @@ from gamspy import (
 
 
 def main():
-    gdx_file = (
-        str(Path(__file__).parent.absolute()) + "/InternationalMeanVar.gdx"
-    )
+    gdx_file = str(Path(__file__).parent.absolute()) + "/InternationalMeanVar.gdx"
     m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
         load_from=gdx_file,
     )
 
@@ -83,9 +79,7 @@ def main():
     # Target return
 
     # SCALARS #
-    MU_TARGET = Parameter(
-        m, name="MU_TARGET", description="Target portfolio return"
-    )
+    MU_TARGET = Parameter(m, name="MU_TARGET", description="Target portfolio return")
     MU_STEP = Parameter(m, name="MU_STEP", description="Target return step")
 
     # Assume we want 20 portfolios in the frontier
@@ -100,9 +94,7 @@ def main():
         domain=i,
         description="Holdings of assets",
     )
-    PortVariance = Variable(
-        m, name="PortVariance", description="Portfolio variance"
-    )
+    PortVariance = Variable(m, name="PortVariance", description="Portfolio variance")
 
     # EQUATIONS #
     ReturnCon = Equation(
@@ -207,9 +199,7 @@ def main():
         ACTIVE[i] = INT_STOCK[i]
         print("\nStep 3: Italian and international stock indices\n")
 
-        FrontierHandle.write(
-            '"Step 3: Italian and international stock indices"\n'
-        )
+        FrontierHandle.write('"Step 3: Italian and international stock indices"\n')
         FrontierHandle.write('"Variance","ExpReturn",')
 
         # Asset labels
@@ -274,14 +264,10 @@ def main():
         d_bar = Variable(m, name="d_bar", type="free")
 
         # EQUATIONS #
-        RiskFreeReturnDef = Equation(
-            m, name="RiskFreeReturnDef", type="regular"
-        )
+        RiskFreeReturnDef = Equation(m, name="RiskFreeReturnDef", type="regular")
         SharpeRatio = Equation(m, name="SharpeRatio", type="regular")
 
-        RiskFreeReturnDef[...] = (
-            d_bar == Sum(a, ExpectedReturns[a] * x[a]) - RiskFree
-        )
+        RiskFreeReturnDef[...] = d_bar == Sum(a, ExpectedReturns[a] * x[a]) - RiskFree
 
         SharpeRatio[...] = z == d_bar / gams_math.sqrt(PortVariance)
 
@@ -333,9 +319,7 @@ def main():
 
         # Create a convenient subset containing only the general Italian stock index:
 
-        It_general = Set(
-            m, name="It_general", domain=ASSETS, records=["ITMHIST"]
-        )
+        It_general = Set(m, name="It_general", domain=ASSETS, records=["ITMHIST"])
 
         # The only constraint which need to be redefined is the
         # normalization constraint. Indeed, it must be se to 0.
@@ -344,9 +328,7 @@ def main():
             m,
             name="NormalConTrack",
             type="regular",
-            description=(
-                "Equation defining the normalization contraint for tracking"
-            ),
+            description=("Equation defining the normalization contraint for tracking"),
         )
 
         NormalConTrack[...] = Sum(a, x[a]) == 0

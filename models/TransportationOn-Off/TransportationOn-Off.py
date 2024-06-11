@@ -23,8 +23,6 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 
 from __future__ import annotations
 
-import os
-
 import numpy as np
 import pandas as pd
 from gamspy import Container, Equation, Model, Parameter, Set, Sum, Variable
@@ -61,9 +59,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SETS #
     i = Set(m, name="i", records=[f"s{s}" for s in range(1, 4)])
@@ -74,9 +70,7 @@ def main():
         m, name="demand", domain=j, records=np.array([217, 150, 145, 244])
     )
     c = Parameter(m, name="c", domain=[i, j], records=data_records()[0])
-    data = Parameter(
-        m, name="data", domain=[i, "*"], records=data_records()[1]
-    )
+    data = Parameter(m, name="data", domain=[i, "*"], records=data_records()[1])
 
     # VARIABLES #
     x = Variable(m, name="x", type="free", domain=[i, j])

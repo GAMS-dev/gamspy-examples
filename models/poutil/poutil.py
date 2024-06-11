@@ -29,8 +29,6 @@ Springer, pp. 221-246, 2010.
 
 from __future__ import annotations
 
-import os
-
 import numpy as np
 from gamspy import (
     Card,
@@ -49,9 +47,7 @@ from gamspy import (
 
 
 def main():
-    cont = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    cont = Container()
 
     power_forecast_recs = np.array(
         [
@@ -386,9 +382,7 @@ def main():
     )
 
     # Variables
-    cPP = Variable(
-        cont, name="cPP", type="positive", description="cost of PP usage"
-    )
+    cPP = Variable(cont, name="cPP", type="positive", description="cost of PP usage")
     pPP = Variable(
         cont,
         name="pPP",
@@ -587,14 +581,10 @@ def main():
     # same state and the constraint of the minimum idle time
     # we need variable 'chiS' to find out when a status change takes place
     # eq. (27)
-    PPchiS1[t, m].where[Ord(t) > 1] = (
-        chiS[t] >= delta[m, t] - delta[m, t.lag(1)]
-    )
+    PPchiS1[t, m].where[Ord(t) > 1] = chiS[t] >= delta[m, t] - delta[m, t.lag(1)]
 
     # second constraint for 'chiS' variable eq. (28)
-    PPchiS2[t, m].where[Ord(t) > 1] = (
-        chiS[t] >= delta[m, t.lag(1)] - delta[m, t]
-    )
+    PPchiS2[t, m].where[Ord(t) > 1] = chiS[t] >= delta[m, t.lag(1)] - delta[m, t]
 
     # control the minimum change time period eq. (29)
     PPstageChange[t].where[Ord(t) < Card(t) - Card(iS) + 2] = (
@@ -637,9 +627,7 @@ def main():
     LFCemuo[...] = eLFCs["b1"] <= eLFCb["b1"] * mu["b1"]
 
     # accumulated energy amount for all other segments (then "b1") eq. (20)
-    LFCemug[b].where[Ord(b) > 1] = (
-        eLFCs[b] <= (eLFCb[b] - eLFCb[b.lag(1)]) * mu[b]
-    )
+    LFCemug[b].where[Ord(b) > 1] = eLFCs[b] <= (eLFCb[b] - eLFCb[b.lag(1)]) * mu[b]
 
     energy = Model(
         cont,

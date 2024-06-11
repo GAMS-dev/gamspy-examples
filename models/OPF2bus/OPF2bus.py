@@ -23,8 +23,6 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 
 from __future__ import annotations
 
-import os
-
 import pandas as pd
 from gamspy import Container, Equation, Model, Parameter, Set, Sum, Variable
 
@@ -48,9 +46,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SETS #
     gen = Set(m, name="gen", records=["g1", "g2"])
@@ -77,9 +73,7 @@ def main():
 
     eq1 = Sum(
         gen,
-        data[gen, "a"] * P[gen] * P[gen]
-        + data[gen, "b"] * P[gen]
-        + data[gen, "c"],
+        data[gen, "a"] * P[gen] * P[gen] + data[gen, "b"] * P[gen] + data[gen, "c"],
     )
     eq2[...] = P["g1"] == P12
     eq3[...] = P["g2"] + P12 == L2 / Sbase

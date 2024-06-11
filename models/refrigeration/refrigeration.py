@@ -18,15 +18,11 @@ May 2009, pp.21-25.
 
 from __future__ import annotations
 
-import os
-
 from gamspy import Container, Equation, Model, Parameter, Variable
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # VARIABLES #
     x1 = Variable(m, name="x1")
@@ -76,13 +72,7 @@ def main():
         + 70.26 * x1**2
         + 281.29 * x1 * x3
         + 281.29 * x3**2
-        + 14437
-        * (x8**1.8812)
-        * (x12**0.3424)
-        * x7
-        * x10
-        * (x1**2)
-        / (x9 * x14)
+        + 14437 * (x8**1.8812) * (x12**0.3424) * x7 * x10 * (x1**2) / (x9 * x14)
         + 20470.2 * (x7**2.893) * (x11 * 0.316) * (x1 * 82)
     )
 

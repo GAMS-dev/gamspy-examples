@@ -15,7 +15,6 @@ Last modified: Apr 2008.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 import gamspy.math as gams_math
@@ -38,7 +37,6 @@ from gamspy.math import sqr
 def main():
     gdx_file = str(Path(__file__).parent.absolute()) + "/WorldIndices.gdx"
     m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
         load_from=gdx_file,
     )
 
@@ -46,19 +44,11 @@ def main():
     i, l = m.getSymbols(["i", "l"])
 
     # SCALARS #
-    Budget = Parameter(
-        m, name="Budget", description="Nominal investment budget"
-    )
-    MU_TARGET = Parameter(
-        m, name="MU_TARGET", description="Target portfolio return"
-    )
+    Budget = Parameter(m, name="Budget", description="Nominal investment budget")
+    MU_TARGET = Parameter(m, name="MU_TARGET", description="Target portfolio return")
     MU_STEP = Parameter(m, name="MU_STEP", description="Target return step")
-    MIN_MU = Parameter(
-        m, name="MIN_MU", description="Minimum return in universe"
-    )
-    MAX_MU = Parameter(
-        m, name="MAX_MU", description="Maximum return in universe"
-    )
+    MIN_MU = Parameter(m, name="MIN_MU", description="Minimum return in universe")
+    MAX_MU = Parameter(m, name="MAX_MU", description="Maximum return in universe")
 
     Budget[...] = 100.0
 

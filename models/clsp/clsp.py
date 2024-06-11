@@ -8,7 +8,6 @@ Capacitated Lot-Sizing Problem (CLSP)
 
 from __future__ import annotations
 
-import os
 from itertools import product
 
 import pandas as pd
@@ -77,9 +76,7 @@ def model_data():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
     data = model_data()
 
     # SETS
@@ -90,9 +87,7 @@ def main():
         records=data["products"],
     )
     j = Set(m, name="j", description="resources", records=data["resources"])
-    t = Set(
-        m, name="t", description="time periods", records=data["time_periods"]
-    )
+    t = Set(m, name="t", description="time periods", records=data["time_periods"])
 
     KJ = Set(
         m,

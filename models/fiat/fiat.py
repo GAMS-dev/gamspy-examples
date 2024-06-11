@@ -29,16 +29,12 @@ Problem 7.3.6. Test problem 16, page 103.
 
 from __future__ import annotations
 
-import os
-
 import gamspy.math as gams_math
 from gamspy import Container, Equation, Model, Variable
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # VARIABLES #
     q1 = Variable(m, name="q1")

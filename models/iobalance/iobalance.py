@@ -19,8 +19,6 @@ Cambridge University Press, New York, 2009.
 
 from __future__ import annotations
 
-import os
-
 import gamspy.math as gams_math
 import numpy as np
 from gamspy import (
@@ -40,9 +38,7 @@ from gamspy import (
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # Sets
 
@@ -182,9 +178,7 @@ def main():
     )
 
     rowbalz = Equation(m, name="rowbalz", domain=i, description="row totals")
-    colbalz = Equation(
-        m, name="colbalz", domain=j, description="column totals tive"
-    )
+    colbalz = Equation(m, name="colbalz", domain=j, description="column totals tive")
     defobjentz = Equation(
         m, name="defobjentz", description="entropy objective using flows"
     )
@@ -193,9 +187,7 @@ def main():
 
     colbalz[j] = Sum(i, zv[i, j]) == v[j]
 
-    zbar = Parameter(
-        m, name="zbar", domain=[i, j], description="reference flow"
-    )
+    zbar = Parameter(m, name="zbar", domain=[i, j], description="reference flow")
 
     zbar[i, j] = a0[i, j] * x[j]
     zv.lo[i, j] = 1
@@ -243,16 +235,10 @@ def main():
     defabs = Equation(
         m, name="defabs", domain=[i, j], description="absolute definition"
     )
-    defmaxp = Equation(
-        m, name="defmaxp", domain=[i, j], description="max positive"
-    )
-    defmaxn = Equation(
-        m, name="defmaxn", domain=[i, j], description="max neagtive"
-    )
+    defmaxp = Equation(m, name="defmaxp", domain=[i, j], description="max positive")
+    defmaxn = Equation(m, name="defmaxn", domain=[i, j], description="max neagtive")
     defmad = Equation(m, name="defmad", description="MAD definition")
-    defmade = Equation(
-        m, name="defmade", description="mean absolute percentage error"
-    )
+    defmade = Equation(m, name="defmade", description="mean absolute percentage error")
     deflinf = Equation(m, name="deflinf", description="infinity norm")
 
     defabs[i, j] = a[i, j] - a0[i, j] == ap[i, j] - an[i, j]
@@ -313,9 +299,7 @@ def main():
 
     defsd[...] = obj == Sum([i, j], gams_math.power(a[i, j] + a0[i, j], 2))
 
-    defrsd[...] = obj == Sum(
-        [i, j], gams_math.power(a[i, j] + a0[i, j], 2) / a0[i, j]
-    )
+    defrsd[...] = obj == Sum([i, j], gams_math.power(a[i, j] + a0[i, j], 2) / a0[i, j])
 
     # Model
     mSD = Model(

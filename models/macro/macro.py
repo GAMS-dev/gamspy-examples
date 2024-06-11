@@ -19,8 +19,6 @@ Journal of Economic Dynamics and Control 4, 2 (1982) pp.149-170.
 
 from __future__ import annotations
 
-import os
-
 import gamspy.math as gams_math
 import numpy as np
 from gamspy import (
@@ -39,17 +37,11 @@ from gamspy import (
 
 
 def main():
-    cont = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    cont = Container()
 
     # SETS #
-    n = Set(
-        cont, name="n", records=["consumpt", "invest"], description="states"
-    )
-    m = Set(
-        cont, name="m", records=["gov-expend", "money"], description="controls"
-    )
+    n = Set(cont, name="n", records=["consumpt", "invest"], description="states")
+    m = Set(cont, name="m", records=["gov-expend", "money"], description="controls")
     k = Set(
         cont,
         name="k",

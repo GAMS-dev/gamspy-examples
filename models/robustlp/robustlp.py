@@ -41,8 +41,6 @@ Processing. 284 (November, 1998).
 
 from __future__ import annotations
 
-import os
-
 from gamspy import (
     Alias,
     Container,
@@ -59,9 +57,7 @@ from gamspy.math import uniform
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     mu = 1e-2
 
@@ -107,9 +103,7 @@ def main():
     lpcons = Equation(m, name="lpcons", domain=i)
     defdual = Equation(m, name="defdual", domain=j)
 
-    lpcons[i] = (
-        mu * Sum(j, lmbda[j] + gamma[j]) + Sum(j, a[i, j] * x[j]) <= b[i]
-    )
+    lpcons[i] = mu * Sum(j, lmbda[j] + gamma[j]) + Sum(j, a[i, j] * x[j]) <= b[i]
     defdual[j] = lmbda[j] - gamma[j] == x[j]
 
     lproblp = Model(

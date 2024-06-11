@@ -20,7 +20,6 @@ de Wetering, A V, private communication.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 import gamspy.math as gams_math
@@ -42,7 +41,6 @@ from gamspy.exceptions import GamspyException
 
 def main():
     m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
         load_from=str(Path(__file__).parent.absolute()) + "/tsp4.gdx",
     )
 
@@ -169,16 +167,12 @@ def main():
     # Parameter
     cutcoeff = Parameter(m, name="cutcoeff", domain=[cc, i, j])
     rhs = Parameter(m, name="rhs", domain=cc)
-    nosubtours = Parameter(
-        m, name="nosubtours", description="number of subtours"
-    )
+    nosubtours = Parameter(m, name="nosubtours", description="number of subtours")
 
     # Equation
     cut = Equation(m, name="cut", domain=cc, description="dynamic cuts")
 
-    cut[allcuts] = (
-        Sum([i, j], cutcoeff[allcuts, i, j] * x[i, j]) <= rhs[allcuts]
-    )
+    cut[allcuts] = Sum([i, j], cutcoeff[allcuts, i, j] * x[i, j]) <= rhs[allcuts]
 
     tspcut = Model(
         m,
@@ -226,15 +220,11 @@ def main():
                 continue
             rhs[curcut] = -1
 
-            for i_loop, j_loop, t_loop2, _ in tour.records.itertuples(
-                index=False
-            ):
+            for i_loop, j_loop, t_loop2, _ in tour.records.itertuples(index=False):
                 if t_loop2 != t_loop:
                     continue
 
-                cutcoeff[curcut, i_loop, j_loop].where[
-                    x.l[i_loop, j_loop] > 0.5
-                ] = 1
+                cutcoeff[curcut, i_loop, j_loop].where[x.l[i_loop, j_loop] > 0.5] = 1
                 # not needed due to nature of assignment constraints
                 #        cutcoeff(curcut, i, j)$(x.l[i,j] < 0.5) = -1
                 rhs[curcut] = rhs[curcut] + 1

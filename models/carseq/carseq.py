@@ -32,8 +32,6 @@ Y. Kodratoff, Ed. Pitmann Publishing, London, Munich, Germany, 290-295, 1988
 
 from __future__ import annotations
 
-import os
-
 import gamspy.math as gams_math
 import numpy as np
 import pandas as pd
@@ -75,9 +73,7 @@ def main(mip=False):
         id_vars="index", var_name="Category", value_name="Value"
     )
 
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # Sets
     p = Set(
@@ -142,9 +138,9 @@ def main(mip=False):
         description="positions in the blocks",
     )
 
-    blkc[o, p, pp].where[Ord(p) <= Card(p) - bs[o] + 1] = (
-        Ord(pp) >= Ord(p)
-    ) & (Ord(pp) < Ord(p) + bs[o])
+    blkc[o, p, pp].where[Ord(p) <= Card(p) - bs[o] + 1] = (Ord(pp) >= Ord(p)) & (
+        Ord(pp) < Ord(p) + bs[o]
+    )
     blk[o, p] = Sum(pp.where[blkc[o, p, pp]], 1)
 
     # Variables

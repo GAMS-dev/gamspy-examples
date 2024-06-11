@@ -23,8 +23,6 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 
 from __future__ import annotations
 
-import os
-
 import numpy as np
 import pandas as pd
 from gamspy import Container, Equation, Model, Parameter, Set, Sum, Variable
@@ -83,9 +81,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SETS #
     t = Set(
@@ -132,9 +128,7 @@ def main():
     # Objective Function; cost of thermal units
     costThermalcalc = Sum(
         [t, i],
-        gendata[i, "a"] * sqr(p[i, t])
-        + gendata[i, "b"] * p[i, t]
-        + gendata[i, "c"],
+        gendata[i, "a"] * sqr(p[i, t]) + gendata[i, "b"] * p[i, t] + gendata[i, "c"],
     )
 
     Genconst3[i, t] = p[i, t.lead(1)] - p[i, t] <= gendata[i, "RU"]
@@ -179,9 +173,7 @@ def main():
 
     print("report1:  \n", report1.pivot().round(4))
 
-    report1.pivot().round(4).to_excel(
-        "DEDcostbased.xlsx", sheet_name="Pthermal"
-    )
+    report1.pivot().round(4).to_excel("DEDcostbased.xlsx", sheet_name="Pthermal")
 
 
 if __name__ == "__main__":

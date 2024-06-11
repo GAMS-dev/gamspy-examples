@@ -51,8 +51,6 @@ and Sons, 1978.
 
 from __future__ import annotations
 
-import os
-
 import gamspy as gp
 import pandas as pd
 
@@ -109,9 +107,7 @@ def main():
 
     maxstore = 1000
 
-    c = gp.Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    c = gp.Container()
 
     # Sets
     m = gp.Set(
@@ -164,9 +160,7 @@ def main():
         description="sales price of refined and blended oil",
         records=150,
     )
-    sc = gp.Parameter(
-        c, name="sc", description="storage cost of raw oils", records=5
-    )
+    sc = gp.Parameter(c, name="sc", description="storage cost of raw oils", records=5)
     stock = gp.Parameter(
         c,
         name="stock",
@@ -299,13 +293,11 @@ def main():
     defHmin[m] = gp.Sum(p, h[p] * use[m, p]) >= hmin * produce[m]
     defHmax[m] = gp.Sum(p, h[p] * use[m, p]) <= hmax * produce[m]
     stockbal[m, p] = (
-        store[m.lag(1, type="circular"), p] + buy[m, p]
-        == use[m, p] + store[m, p]
+        store[m.lag(1, type="circular"), p] + buy[m, p] == use[m, p] + store[m, p]
     )
     minUse[m, p] = use[m, p] >= minusep * induse[m, p]
     maxUse[m, p] = (
-        use[m, p]
-        <= (maxusepv.where[pv[p]] + maxusepnv.where[pnv[p]]) * induse[m, p]
+        use[m, p] <= (maxusepv.where[pv[p]] + maxusepnv.where[pnv[p]]) * induse[m, p]
     )
     maxNuse[m] = gp.Sum(p, induse[m, p]) <= maxnusep
     defLogic1[m] = gp.Sum(pv, induse[m, pv]) <= induse[m, "o3"] * gp.Card(pv)

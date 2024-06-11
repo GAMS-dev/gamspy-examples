@@ -15,7 +15,6 @@ Last modified: Apr 2008.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 import gamspy.math as gams_math
@@ -35,7 +34,6 @@ from gamspy import (
 
 def main():
     m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
         load_from=str(Path(__file__).parent.absolute()) + "/Sharpe.gdx",
     )
 
@@ -57,12 +55,8 @@ def main():
         domain=ii,
         description="Holdings of assets",
     )
-    PortVariance = Variable(
-        m, name="PortVariance", description="Portfolio variance"
-    )
-    d_bar = Variable(
-        m, name="d_bar", description="Portfolio expected excess return"
-    )
+    PortVariance = Variable(m, name="PortVariance", description="Portfolio variance")
+    d_bar = Variable(m, name="d_bar", description="Portfolio expected excess return")
 
     # EQUATIONS #
     ReturnDef = Equation(
@@ -112,9 +106,7 @@ def main():
         current_port_return = (
             RiskFreeRate.records.value[0] + theta * d_bar.records.level[0]
         )
-        results.append(
-            [np.sqrt(current_port_variance), current_port_return, theta]
-        )
+        results.append([np.sqrt(current_port_variance), current_port_return, theta])
         current_port_variance += 0.1
 
     # Also plot the tangent portfolio

@@ -17,8 +17,6 @@ Management Science 44, 11 (1998), 101-110.
 
 from __future__ import annotations
 
-import os
-
 from gamspy import (
     Alias,
     Card,
@@ -37,9 +35,7 @@ from gamspy.math import Round, normal, power, uniform
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # Set
     s = Set(
@@ -80,8 +76,8 @@ def main():
     p[j] = Round(mu_value + c[j] + uniform(-sigma_value, sigma_value))
 
     di[s, t].where[(Ord(s)) <= (0.25 * Card(s))] = Round(normal(50, 10))
-    di[s, t].where[(Ord(s) > 0.25 * Card(s)) & (Ord(s) <= 0.75 * Card(s))] = (
-        Round(normal(100, 20))
+    di[s, t].where[(Ord(s) > 0.25 * Card(s)) & (Ord(s) <= 0.75 * Card(s))] = Round(
+        normal(100, 20)
     )
     di[s, t].where[Ord(s) > 0.75 * Card(s)] = Round(normal(150, 40))
 
@@ -95,9 +91,7 @@ def main():
     w[...] = 5
 
     # Variable
-    x = Variable(
-        m, name="x", type="integer", domain=[j, t], description="expansion"
-    )
+    x = Variable(m, name="x", type="integer", domain=[j, t], description="expansion")
     z = Variable(
         m,
         name="z",
@@ -143,9 +137,7 @@ def main():
         objective=objdef,
     )
 
-    rotdk.solve(
-        options=Options(variable_listing_limit=0, equation_listing_limit=0)
-    )
+    rotdk.solve(options=Options(variable_listing_limit=0, equation_listing_limit=0))
 
     print("Objective Function Value: ", round(rotdk.objective_value, 2))
 

@@ -24,7 +24,6 @@ Policy Models. The World Bank, 1988.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 import numpy as np
@@ -44,7 +43,6 @@ from gamspy.math import sqr
 
 def main():
     m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
         load_from=str(Path(__file__).parent.absolute()) + "/qdemo7.gdx",
     )
 
@@ -139,12 +137,8 @@ def main():
         domain=c,
         description="commodity import prices     (dollars)",
     )
-    alpha = Parameter(
-        m, name="alpha", domain=c, description="demand curve intercept"
-    )
-    beta = Parameter(
-        m, name="beta", domain=c, description="demand curve gradient"
-    )
+    alpha = Parameter(m, name="alpha", domain=c, description="demand curve intercept")
+    beta = Parameter(m, name="beta", domain=c, description="demand curve gradient")
 
     cn[c] = Number(1).where[demdat[c, "ref-p"]]
     ce[c] = Number(1).where[demdat[c, "exp-p"]]
@@ -185,9 +179,7 @@ def main():
         name="rescost",
         description="family labor reservation wage cost (dollars)",
     )
-    tcost = Variable(
-        m, name="tcost", description="total farm cost including rescost"
-    )
+    tcost = Variable(m, name="tcost", description="total farm cost including rescost")
     flab = Variable(
         m,
         name="flab",
@@ -264,17 +256,13 @@ def main():
         domain=s,
         description="land plowed   (hectares per season)",
     )
-    ares = Equation(
-        m, name="ares", description="reservation labor cost    (dollars)"
-    )
+    ares = Equation(m, name="ares", description="reservation labor cost    (dollars)")
     acost = Equation(
         m, name="acost", description="total cost accounting     (dollars)"
     )
     amisc = Equation(m, name="amisc", description="misc cost accounting")
     aplow = Equation(m, name="aplow")
-    alab = Equation(
-        m, name="alab", description="labor cost accounting     (dollars)"
-    )
+    alab = Equation(m, name="alab", description="labor cost accounting     (dollars)")
     lclover = Equation(m, name="lclover", description="clover balance")
     lstraw = Equation(m, name="lstraw", description="straw balance")
     proc = Equation(
@@ -293,8 +281,7 @@ def main():
     landbal[t] = Sum(c, xcrop[c] * a[t, c]) <= land * fnum
 
     laborbal[t] = (
-        Sum(c, xcrop[c] * lc[t, c]) + Sum(r, xlive[r]) * llab
-        <= flab[t] + tlab[t]
+        Sum(c, xcrop[c] * lc[t, c]) + Sum(r, xlive[r]) * llab <= flab[t] + tlab[t]
     )
 
     amisc[...] = mcost == Sum(c, xcrop[c] * miscost[c])
@@ -313,9 +300,7 @@ def main():
 
     lstraw[...] = xcrop["wheat"] * straw >= Sum(r, xlive[r] * lio["straw", r])
 
-    plow[s] = (
-        Sum(c.where[sc[s, c]], xcrop[c]) <= Sum(r, xlive[r]) * hpa + thire[s]
-    )
+    plow[s] = Sum(c.where[sc[s, c]], xcrop[c]) <= Sum(r, xlive[r]) * hpa + thire[s]
 
     proc[c] = natprod[c] == xcrop[c] * yields[c]
 

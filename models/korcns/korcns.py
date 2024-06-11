@@ -26,8 +26,6 @@ Study. Oxford University Press, London, 1986.
 
 from __future__ import annotations
 
-import os
-
 import numpy as np
 import pandas as pd
 from gamspy import (
@@ -142,9 +140,7 @@ def main():
     )
 
     # Model's container
-    cont = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    cont = Container()
 
     # Sets
     i = Set(
@@ -186,9 +182,7 @@ def main():
     rhoc = Parameter(
         cont, name="rhoc", domain=i, description="Armington function exponent"
     )
-    rhot = Parameter(
-        cont, name="rhot", domain=i, description="cet function exponent"
-    )
+    rhot = Parameter(cont, name="rhot", domain=i, description="cet function exponent")
     at = Parameter(
         cont, name="at", domain=i, description="cet function shift parameter"
     )
@@ -210,9 +204,7 @@ def main():
         domain=i,
         description="government consumption shares",
     )
-    depr = Parameter(
-        cont, name="depr", domain=i, description="depreciation rates"
-    )
+    depr = Parameter(cont, name="depr", domain=i, description="depreciation rates")
     dstr = Parameter(
         cont,
         name="dstr",
@@ -226,9 +218,7 @@ def main():
         description="shares of investment by sector of destination",
     )
     te = Parameter(cont, name="te", domain=i, description="export duty rates")
-    itax = Parameter(
-        cont, name="itax", domain=i, description="indirect tax rates"
-    )
+    itax = Parameter(cont, name="itax", domain=i, description="indirect tax rates")
     htax = Parameter(
         cont,
         name="htax",
@@ -247,9 +237,7 @@ def main():
         domain=i,
         description="world market price of exports    (in dollars)",
     )
-    tm = Parameter(
-        cont, name="tm", domain=i, description="tariff rates on imports"
-    )
+    tm = Parameter(cont, name="tm", domain=i, description="tariff rates on imports")
     pwts = Parameter(cont, name="pwts", domain=i, description="cpi weights")
 
     htax["lab_hh"] = 0.08910
@@ -315,9 +303,7 @@ def main():
         cont,
         name="cles",
         domain=[i, hh],
-        records=np.array(
-            [[0.47000, 0.47000], [0.31999, 0.31999], [0.21001, 0.21001]]
-        ),
+        records=np.array([[0.47000, 0.47000], [0.31999, 0.31999], [0.21001, 0.21001]]),
         description="private consumption shares",
     )
 
@@ -354,9 +340,7 @@ def main():
         cont,
         name="er",
         type="free",
-        description=(
-            "real exchange rate                          (won per dollar)"
-        ),
+        description=("real exchange rate                          (won per dollar)"),
     )
     pd1 = Variable(
         cont, name="pd1", type="free", domain=i, description="domestic prices"
@@ -414,45 +398,35 @@ def main():
         name="x",
         type="free",
         domain=i,
-        description=(
-            "composite goods supply                        ('68 bill won)"
-        ),
+        description=("composite goods supply                        ('68 bill won)"),
     )
     xd = Variable(
         cont,
         name="xd",
         type="free",
         domain=i,
-        description=(
-            "domestic output by sector                     ('68 bill won)"
-        ),
+        description=("domestic output by sector                     ('68 bill won)"),
     )
     xxd = Variable(
         cont,
         name="xxd",
         type="free",
         domain=i,
-        description=(
-            "domestic sales                                ('68 bill won)"
-        ),
+        description=("domestic sales                                ('68 bill won)"),
     )
     e = Variable(
         cont,
         name="e",
         type="free",
         domain=i,
-        description=(
-            "exports by sector                             ('68 bill won)"
-        ),
+        description=("exports by sector                             ('68 bill won)"),
     )
     m = Variable(
         cont,
         name="m",
         type="free",
         domain=i,
-        description=(
-            "imports                                       ('68 bill won)"
-        ),
+        description=("imports                                       ('68 bill won)"),
     )
 
     # factors block
@@ -461,36 +435,28 @@ def main():
         name="k",
         type="free",
         domain=i,
-        description=(
-            "capital stock by sector                       ('68 bill won)"
-        ),
+        description=("capital stock by sector                       ('68 bill won)"),
     )
     wa = Variable(
         cont,
         name="wa",
         type="free",
         domain=lc,
-        description=(
-            "average wage rate by labor category     (mill won pr person)"
-        ),
+        description=("average wage rate by labor category     (mill won pr person)"),
     )
     ls = Variable(
         cont,
         name="ls",
         type="free",
         domain=lc,
-        description=(
-            "labor supply by labor category                (1000 persons)"
-        ),
+        description=("labor supply by labor category                (1000 persons)"),
     )
     l = Variable(
         cont,
         name="l",
         type="free",
         domain=[i, lc],
-        description=(
-            "employment by sector and labor category       (1000 persons)"
-        ),
+        description=("employment by sector and labor category       (1000 persons)"),
     )
 
     # demand block
@@ -499,133 +465,101 @@ def main():
         name="intr",
         type="free",
         domain=i,
-        description=(
-            "intermediates uses                            ('68 bill won)"
-        ),
+        description=("intermediates uses                            ('68 bill won)"),
     )
     cd = Variable(
         cont,
         name="cd",
         type="free",
         domain=i,
-        description=(
-            "final demand for private consumption          ('68 bill won)"
-        ),
+        description=("final demand for private consumption          ('68 bill won)"),
     )
     gd = Variable(
         cont,
         name="gd",
         type="free",
         domain=i,
-        description=(
-            "final demand for government consumption       ('68 bill won)"
-        ),
+        description=("final demand for government consumption       ('68 bill won)"),
     )
     id = Variable(
         cont,
         name="id",
         type="free",
         domain=i,
-        description=(
-            "final demand for productive investment        ('68 bill won)"
-        ),
+        description=("final demand for productive investment        ('68 bill won)"),
     )
     dst = Variable(
         cont,
         name="dst",
         type="free",
         domain=i,
-        description=(
-            "inventory investment by sector                ('68 bill won)"
-        ),
+        description=("inventory investment by sector                ('68 bill won)"),
     )
     y = Variable(
         cont,
         name="y",
         type="free",
-        description=(
-            "private gdp                                       (bill won)"
-        ),
+        description=("private gdp                                       (bill won)"),
     )
     gr = Variable(
         cont,
         name="gr",
         type="free",
-        description=(
-            "government revenue                                (bill won)"
-        ),
+        description=("government revenue                                (bill won)"),
     )
     tariff = Variable(
         cont,
         name="tariff",
         type="free",
-        description=(
-            "tariff revenue                                    (bill won)"
-        ),
+        description=("tariff revenue                                    (bill won)"),
     )
     indtax = Variable(
         cont,
         name="indtax",
         type="free",
-        description=(
-            "indirect tax revenue                              (bill won)"
-        ),
+        description=("indirect tax revenue                              (bill won)"),
     )
     netsub = Variable(
         cont,
         name="netsub",
         type="free",
-        description=(
-            "export duty revenue                               (bill won)"
-        ),
+        description=("export duty revenue                               (bill won)"),
     )
     gdtot = Variable(
         cont,
         name="gdtot",
         type="free",
-        description=(
-            "total volume of government consumption        ('68 bill won)"
-        ),
+        description=("total volume of government consumption        ('68 bill won)"),
     )
     hhsav = Variable(
         cont,
         name="hhsav",
         type="free",
-        description=(
-            "total household savings                           (bill won)"
-        ),
+        description=("total household savings                           (bill won)"),
     )
     govsav = Variable(
         cont,
         name="govsav",
         type="free",
-        description=(
-            "government savings                                (bill won)"
-        ),
+        description=("government savings                                (bill won)"),
     )
     deprecia = Variable(
         cont,
         name="deprecia",
         type="free",
-        description=(
-            "total depreciation expenditure                    (bill won)"
-        ),
+        description=("total depreciation expenditure                    (bill won)"),
     )
     invest = Variable(
         cont,
         name="invest",
         type="free",
-        description=(
-            "total investment                                  (bill won)"
-        ),
+        description=("total investment                                  (bill won)"),
     )
     savings = Variable(
         cont,
         name="savings",
         type="free",
-        description=(
-            "total savings                                     (bill won)"
-        ),
+        description=("total savings                                     (bill won)"),
     )
     mps = Variable(
         cont,
@@ -638,59 +572,45 @@ def main():
         cont,
         name="fsav",
         type="free",
-        description=(
-            "foreign savings                               (bill dollars)"
-        ),
+        description=("foreign savings                               (bill dollars)"),
     )
     dk = Variable(
         cont,
         name="dk",
         type="free",
         domain=i,
-        description=(
-            "volume of investment by sector of destination ('68 bill won)"
-        ),
+        description=("volume of investment by sector of destination ('68 bill won)"),
     )
     ypr = Variable(
         cont,
         name="ypr",
         type="free",
-        description=(
-            "total premium income accruing to capitalists      (bill won)"
-        ),
+        description=("total premium income accruing to capitalists      (bill won)"),
     )
     remit = Variable(
         cont,
         name="remit",
         type="free",
-        description=(
-            "net remittances from abroad                   (bill dollars)"
-        ),
+        description=("net remittances from abroad                   (bill dollars)"),
     )
     fbor = Variable(
         cont,
         name="fbor",
         type="free",
-        description=(
-            "net flow of foreign borrowing                 (bill dollars)"
-        ),
+        description=("net flow of foreign borrowing                 (bill dollars)"),
     )
     yh = Variable(
         cont,
         name="yh",
         type="free",
         domain=hh,
-        description=(
-            "total income by household type                    (bill won)"
-        ),
+        description=("total income by household type                    (bill won)"),
     )
     tothhtax = Variable(
         cont,
         name="tothhtax",
         type="free",
-        description=(
-            "household tax revenue                             (bill won)"
-        ),
+        description=("household tax revenue                             (bill won)"),
     )
 
     # welfare indicator for objective function
@@ -698,9 +618,7 @@ def main():
         cont,
         name="omega",
         type="free",
-        description=(
-            "objective function variable                   ('68 bill won)"
-        ),
+        description=("objective function variable                   ('68 bill won)"),
     )
 
     er.l[...] = 1.0000
@@ -876,9 +794,7 @@ def main():
         cont, name="lmequil", domain=lc, description="labor market equilibrium"
     )
     cet = Equation(cont, name="cet", domain=i, description="cet function")
-    esupply = Equation(
-        cont, name="esupply", domain=i, description="export supply"
-    )
+    esupply = Equation(cont, name="esupply", domain=i, description="export supply")
     armington = Equation(
         cont,
         name="armington",
@@ -911,9 +827,7 @@ def main():
     cdeq = Equation(
         cont, name="cdeq", domain=i, description="private consumption behavior"
     )
-    dsteq = Equation(
-        cont, name="dsteq", domain=i, description="inventory investment"
-    )
+    dsteq = Equation(cont, name="dsteq", domain=i, description="inventory investment")
     gdp = Equation(cont, name="gdp", description="private gdp")
     labory = Equation(
         cont, name="labory", description="total income accruing to labor"
@@ -934,9 +848,7 @@ def main():
     )
     greq = Equation(cont, name="greq", description="government revenue")
     tariffdef = Equation(cont, name="tariffdef", description="tariff revenue")
-    premium = Equation(
-        cont, name="premium", description="total import premium income"
-    )
+    premium = Equation(cont, name="premium", description="total import premium income")
     indtaxdef = Equation(
         cont,
         name="indtaxdef",
@@ -947,9 +859,7 @@ def main():
     # savings-investment block
     hhsaveq = Equation(cont, name="hhsaveq", description="household savings")
     gruse = Equation(cont, name="gruse", description="government savings")
-    depreq = Equation(
-        cont, name="depreq", description="depreciation expenditure"
-    )
+    depreq = Equation(cont, name="depreq", description="depreciation expenditure")
     totsav = Equation(cont, name="totsav", description="total savings")
     prodinv = Equation(
         cont,
@@ -982,9 +892,7 @@ def main():
 
     pedef[it] = pe[it] == pwe[it] * (1 + te[it]) * er
 
-    absorption[i] = (
-        p[i] * x[i] == pd1[i] * xxd[i] + (pm[i] * m[i]).where[it[i]]
-    )
+    absorption[i] = p[i] * x[i] == pd1[i] * xxd[i] + (pm[i] * m[i]).where[it[i]]
 
     sales[i] = px[i] * xd[i] == pd1[i] * xxd[i] + (pe[i] * e[i]).where[it[i]]
 
@@ -1070,24 +978,19 @@ def main():
 
     totsav[...] = savings == hhsav + govsav + deprecia + fsav * er
 
-    prodinv[i] = pk[i] * dk[i] == kio[i] * invest - kio[i] * Sum(
-        j, dst[j] * p[j]
-    )
+    prodinv[i] = pk[i] * dk[i] == kio[i] * invest - kio[i] * Sum(j, dst[j] * p[j])
 
     ieq[i] = id[i] == Sum(j, imat[i, j] * dk[j])
 
     # balance of payments
     caeq[...] = (
-        Sum(it, pwm[it] * m[it])
-        == Sum(it, pwe[it] * e[it]) + fsav + remit + fbor
+        Sum(it, pwm[it] * m[it]) == Sum(it, pwe[it] * e[it]) + fsav + remit + fbor
     )
     # market clearing
     equil[i] = x[i] == intr[i] + cd[i] + gd[i] + id[i] + dst[i]
 
     # objective function
-    obj[...] = omega == Product(
-        i.where[cles[i, "lab_hh"]], cd[i] ** cles[i, "lab_hh"]
-    )
+    obj[...] = omega == Product(i.where[cles[i, "lab_hh"]], cd[i] ** cles[i, "lab_hh"])
 
     er.fx[...] = er.l
     fsav.fx[...] = fsav.l
@@ -1098,16 +1001,12 @@ def main():
     gdtot.fx[...] = gdtot.l
     ls.fx[lc] = ls.l[lc]
 
-    model1 = Model(
-        cont, name="model1", equations=cont.getEquations(), problem="cns"
-    )
+    model1 = Model(cont, name="model1", equations=cont.getEquations(), problem="cns")
 
     model1.solve()
     import math
 
-    assert math.isclose(
-        omega.records["level"].tolist()[0], 339.21, rel_tol=0.001
-    )
+    assert math.isclose(omega.records["level"].tolist()[0], 339.21, rel_tol=0.001)
 
     print(
         "\nObjective Function Variable <omega>: ",

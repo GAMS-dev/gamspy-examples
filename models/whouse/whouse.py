@@ -18,8 +18,6 @@ Princeton University Press, Princeton, New Jersey, 1963.
 
 from __future__ import annotations
 
-import os
-
 import numpy as np
 from gamspy import (
     Container,
@@ -34,9 +32,7 @@ from gamspy import (
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # Sets
     t = Set(
@@ -104,9 +100,7 @@ def main():
         m, name="sb", domain=t, description="stock balance at time t (units)"
     )
 
-    sb[t] = (
-        stock[t] == stock[t.lag(1, "linear")] + buy[t] - sell[t] + istock[t]
-    )
+    sb[t] = stock[t] == stock[t.lag(1, "linear")] + buy[t] - sell[t] + istock[t]
 
     # ObjectFunction; accounting: total cost      ($)
     at = Sum(t, price[t] * (buy[t] - sell[t]) + storecost * stock[t])

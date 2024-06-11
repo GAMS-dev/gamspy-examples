@@ -12,8 +12,6 @@ reactors. A.I.Ch.E. Journal, 34, 1988, pp.1550-1558.
 
 from __future__ import annotations
 
-import os
-
 import gamspy.math as gams_math
 from gamspy import (
     Alias,
@@ -28,9 +26,7 @@ from gamspy import (
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     n = 500
 
@@ -47,21 +43,11 @@ def main():
 
     # SCALARS #
     tf = Parameter(m, name="tf", records=10, description="final time")
-    x1_0 = Parameter(
-        m, name="x1_0", records=1, description="initial value for x1"
-    )
-    x2_0 = Parameter(
-        m, name="x2_0", records=5, description="initial value for x2"
-    )
-    x3_0 = Parameter(
-        m, name="x3_0", records=0, description="initial value for x3"
-    )
-    x4_0 = Parameter(
-        m, name="x4_0", records=0, description="initial value for x4"
-    )
-    x5_0 = Parameter(
-        m, name="x5_0", records=1, description="initial value for x5"
-    )
+    x1_0 = Parameter(m, name="x1_0", records=1, description="initial value for x1")
+    x2_0 = Parameter(m, name="x2_0", records=5, description="initial value for x2")
+    x3_0 = Parameter(m, name="x3_0", records=0, description="initial value for x3")
+    x4_0 = Parameter(m, name="x4_0", records=0, description="initial value for x4")
+    x5_0 = Parameter(m, name="x5_0", records=1, description="initial value for x5")
     h = Parameter(m, name="h")
     h[...] = tf / n
 
@@ -162,9 +148,7 @@ def main():
         )
     )
 
-    state5[nh[k.lead(1)]] = x5[k.lead(1)] == x5[k] + (h / 2) * (
-        u[k] + u[k.lead(1)]
-    )
+    state5[nh[k.lead(1)]] = x5[k.lead(1)] == x5[k] + (h / 2) * (u[k] + u[k.lead(1)])
 
     ea1[nh[k]] = a1[k] == 21.87 * x2[k] / ((x2[k] + 0.4) * (x2[k] + 62.5))
     ea2[nh[k]] = a2[k] == (x2[k] * gams_math.exp(-5 * x2[k])) / (0.1 + x2[k])
@@ -199,9 +183,7 @@ def main():
 
     protein.solve(options=Options(time_limit=60000, iteration_limit=80000))
 
-    print(
-        "Objective Function Value:  ", round(protein.objective_value, 4), "\n"
-    )
+    print("Objective Function Value:  ", round(protein.objective_value, 4), "\n")
 
     # REPORTING PARAMETER #
     rep = Parameter(m, name="rep", domain=[nh, "*"])

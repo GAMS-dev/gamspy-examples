@@ -22,16 +22,12 @@ Section 7.3.5. Test problem 15, page 102.
 
 from __future__ import annotations
 
-import os
-
 import gamspy.math as gams_math
 from gamspy import Container, Equation, Model, Problem, Sense, Variable
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # Variable
     q1 = Variable(m, name="q1")
@@ -62,12 +58,9 @@ def main():
         5.72 * (10**6) * (gams_math.power(q1, 2)) * q2
         + 113 * (10**6) * (gams_math.power(q1, 2))
         + 4250 * (10**6) * q1
-    ) * (gams_math.power(w, 2)) + (
-        453 * (10**6) * (gams_math.power(q1, 2))
-    ) == 0
+    ) * (gams_math.power(w, 2)) + (453 * (10**6) * (gams_math.power(q1, 2))) == 0
     g2[...] = (
-        50 * (gams_math.power(q1, 2)) * (gams_math.power(q2, 2))
-        + 1080 * q1 * q2
+        50 * (gams_math.power(q1, 2)) * (gams_math.power(q2, 2)) + 1080 * q1 * q2
     ) * (gams_math.power(w, 6)) - (
         15.6 * 1000 * (gams_math.power(q1, 2)) * (gams_math.power(q2, 2))
         + 840 * (gams_math.power(q1, 2)) * q2

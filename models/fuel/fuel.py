@@ -23,8 +23,6 @@ Operation and Control. John Wiley and Sons, 1984, pp. 85-88.
 
 from __future__ import annotations
 
-import os
-
 import pandas as pd
 from gamspy import (
     Card,
@@ -41,9 +39,7 @@ from gamspy import (
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # Set
     t = Set(
@@ -85,9 +81,7 @@ def main():
         domain=t,
         description="generation level of oil based unit",
     )
-    others = Variable(
-        m, name="others", domain=t, description="other generation"
-    )
+    others = Variable(m, name="others", domain=t, description="other generation")
     oil = Variable(
         m, name="oil", domain=t, type="Positive", description="oil consumption"
     )

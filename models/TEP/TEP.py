@@ -23,8 +23,6 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 
 from __future__ import annotations
 
-import os
-
 import numpy as np
 import pandas as pd
 from gamspy import (
@@ -99,9 +97,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SETS #
     bus = Set(m, name="bus", records=[str(buses) for buses in range(1, 7)])
@@ -155,9 +151,7 @@ def main():
     conex[bus, node].where[branch[bus, node, "x"]] = True
     conex[bus, node].where[conex[node, bus]] = True
 
-    branch[bus, node, "x"].where[branch[node, bus, "x"]] = branch[
-        node, bus, "x"
-    ]
+    branch[bus, node, "x"].where[branch[node, bus, "x"]] = branch[node, bus, "x"]
     branch[bus, node, "cost"].where[branch[node, bus, "cost"]] = branch[
         node, bus, "cost"
     ]
@@ -167,9 +161,7 @@ def main():
     branch[bus, node, "Limit"].where[branch[bus, node, "Limit"] == 0] = branch[
         node, bus, "Limit"
     ]
-    branch[bus, node, "bij"].where[conex[bus, node]] = (
-        1 / branch[bus, node, "x"]
-    )
+    branch[bus, node, "bij"].where[conex[bus, node]] = 1 / branch[bus, node, "x"]
     M[...] = Smax(
         Domain(bus, node).where[conex[bus, node]],
         branch[bus, node, "bij"] * 3.14 * 2,
@@ -189,21 +181,11 @@ def main():
     ] = 1
 
     # EQUATIONS #
-    const1A = Equation(
-        m, name="const1A", type="regular", domain=[bus, node, k]
-    )
-    const1B = Equation(
-        m, name="const1B", type="regular", domain=[bus, node, k]
-    )
-    const1C = Equation(
-        m, name="const1C", type="regular", domain=[bus, node, k]
-    )
-    const1D = Equation(
-        m, name="const1D", type="regular", domain=[bus, node, k]
-    )
-    const1E = Equation(
-        m, name="const1E", type="regular", domain=[bus, node, k]
-    )
+    const1A = Equation(m, name="const1A", type="regular", domain=[bus, node, k])
+    const1B = Equation(m, name="const1B", type="regular", domain=[bus, node, k])
+    const1C = Equation(m, name="const1C", type="regular", domain=[bus, node, k])
+    const1D = Equation(m, name="const1D", type="regular", domain=[bus, node, k])
+    const1E = Equation(m, name="const1E", type="regular", domain=[bus, node, k])
     const2 = Equation(m, name="const2", type="regular", domain=bus)
     const3 = Equation(m, name="const3", type="regular")
 
@@ -216,32 +198,25 @@ def main():
     ] * (delta[bus] - delta[node]) >= -M * (1 - alpha[bus, node, k])
 
     const1C[bus, node, k].where[conex[node, bus]] = (
-        Pij[bus, node, k]
-        <= alpha[bus, node, k] * branch[bus, node, "Limit"] / Sbase
+        Pij[bus, node, k] <= alpha[bus, node, k] * branch[bus, node, "Limit"] / Sbase
     )
 
     const1D[bus, node, k].where[conex[node, bus]] = (
-        Pij[bus, node, k]
-        >= -alpha[bus, node, k] * branch[bus, node, "Limit"] / Sbase
+        Pij[bus, node, k] >= -alpha[bus, node, k] * branch[bus, node, "Limit"] / Sbase
     )
 
     const1E[bus, node, k].where[conex[node, bus]] = (
         alpha[bus, node, k] == alpha[node, bus, k]
     )
 
-    const2[bus] = LS[bus] + Sum(
-        Gen.where[GBconect[bus, Gen]], Pg[Gen]
-    ) - BusData[bus, "pd"] / Sbase == Sum(
-        Domain(k, node).where[conex[node, bus]], Pij[bus, node, k]
-    )
+    const2[bus] = LS[bus] + Sum(Gen.where[GBconect[bus, Gen]], Pg[Gen]) - BusData[
+        bus, "pd"
+    ] / Sbase == Sum(Domain(k, node).where[conex[node, bus]], Pij[bus, node, k])
 
     const3[...] = (
         10
         * 8760
-        * (
-            Sum(Gen, Pg[Gen] * GenData[Gen, "b"] * Sbase)
-            + 100000 * Sum(bus, LS[bus])
-        )
+        * (Sum(Gen, Pg[Gen] * GenData[Gen, "b"] * Sbase) + 100000 * Sum(bus, LS[bus]))
         + 1e6
         * Sum(
             Domain(bus, node, k).where[conex[node, bus]],

@@ -26,7 +26,6 @@ Options:
 """
 
 import argparse
-import os
 from pathlib import Path
 
 from gamspy import (
@@ -109,7 +108,6 @@ def main():
 
     # Define the container
     m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
         load_from=str(Path(__file__).parent.absolute()) + "/acopf.gdx",
     )
 
@@ -228,20 +226,12 @@ def main():
         m,
         name="type",
         domain=bus,
-        description=(
-            "bus type (probably irrelevant, but gives reference bus[es])"
-        ),
+        description=("bus type (probably irrelevant, but gives reference bus[es])"),
     )
-    pf = Parameter(
-        m, name="pf", domain=bus, description="bus demand power factor"
-    )
-    Pd = Parameter(
-        m, name="Pd", domain=bus, description="bus real power demand"
-    )
+    pf = Parameter(m, name="pf", domain=bus, description="bus demand power factor")
+    Pd = Parameter(m, name="Pd", domain=bus, description="bus real power demand")
 
-    Pg = Parameter(
-        m, name="Pg", domain=gen, description="gen real power output"
-    )
+    Pg = Parameter(m, name="Pg", domain=gen, description="gen real power output")
     Pmax = Parameter(
         m, name="Pmax", domain=gen, description="gen maximum real power output"
     )
@@ -250,9 +240,7 @@ def main():
     )
     Va = Parameter(m, name="Va", domain=bus, description="bus voltage angle")
 
-    Vm = Parameter(
-        m, name="Vm", domain=bus, description="bus voltage magnitude"
-    )
+    Vm = Parameter(m, name="Vm", domain=bus, description="bus voltage magnitude")
     MaxVm = Parameter(
         m,
         name="MaxVm",
@@ -265,16 +253,12 @@ def main():
         domain=bus,
         description="minimum bus voltage magnitude",
     )
-    Gs = Parameter(
-        m, name="Gs", domain=bus, description="bus shunt conductance"
-    )
+    Gs = Parameter(m, name="Gs", domain=bus, description="bus shunt conductance")
 
     atBus = Parameter(
         m, name="atBus", domain=[gen, bus], description="Location of generator"
     )
-    status = Parameter(
-        m, name="status", domain=gen, description="generator status"
-    )
+    status = Parameter(m, name="status", domain=gen, description="generator status")
 
     costcoef = Parameter(
         m,
@@ -314,16 +298,12 @@ def main():
         m,
         name="noloadcost",
         domain=gen,
-        description=(
-            "generator no load operating cost for piecewise cost functions"
-        ),
+        description=("generator no load operating cost for piecewise cost functions"),
     )
 
     r = Parameter(m, name="r", domain=[i, j, c], description="line resistance")
     x = Parameter(m, name="x", domain=[i, j, c], description="line reactance")
-    B = Parameter(
-        m, name="B", domain=[i, j, c], description="line susceptance"
-    )
+    B = Parameter(m, name="B", domain=[i, j, c], description="line susceptance")
     ratio = Parameter(
         m, name="ratio", domain=[i, j, c], description="transformer tap ratio"
     )
@@ -394,18 +374,18 @@ def main():
 
     # Quadratic objective function
     numcostpts[gen] = geninfo[gen, "numcostpts", "given"]
-    costcoef[gen, costcoefset].where[geninfo[gen, "costcoef", costcoefset]] = (
-        geninfo[gen, "costcoef", costcoefset]
-    )
+    costcoef[gen, costcoefset].where[geninfo[gen, "costcoef", costcoefset]] = geninfo[
+        gen, "costcoef", costcoefset
+    ]
 
     # Piecewise linear information
     numcostcoef[gen] = geninfo[gen, "numcostcoef", "given"]
-    costpts_x[gen, costptset].where[geninfo[gen, "costpts_x", costptset]] = (
-        geninfo[gen, "costpts_x", costptset]
-    )
-    costpts_y[gen, costptset].where[geninfo[gen, "costpts_y", costptset]] = (
-        geninfo[gen, "costpts_y", costptset]
-    )
+    costpts_x[gen, costptset].where[geninfo[gen, "costpts_x", costptset]] = geninfo[
+        gen, "costpts_x", costptset
+    ]
+    costpts_y[gen, costptset].where[geninfo[gen, "costpts_y", costptset]] = geninfo[
+        gen, "costpts_y", costptset
+    ]
 
     # Line resistance (r) and reactance (x)
     r[i, j, c].where[line[i, j, c]] = branchinfo[i, j, c, "r", "given"]
@@ -440,9 +420,7 @@ def main():
     branchstatus[i, j, c].where[(type[i] == 4) | (type[j] == 4)] = 0
 
     # Line susceptance
-    B[i, j, c].where[line[i, j, c]] = -x[i, j, c] / (
-        sqr(r[i, j, c]) + sqr(x[i, j, c])
-    )
+    B[i, j, c].where[line[i, j, c]] = -x[i, j, c] / (sqr(r[i, j, c]) + sqr(x[i, j, c]))
     B[j, i, c].where[B[i, j, c]] = B[i, j, c]
 
     # transformer tap ratios and angles
@@ -455,13 +433,9 @@ def main():
 
     # ---- AC model data types
     # Parameters
-    Qd = Parameter(
-        m, name="Qd", domain=bus, description="bus reactive power demand"
-    )
+    Qd = Parameter(m, name="Qd", domain=bus, description="bus reactive power demand")
 
-    Qg = Parameter(
-        m, name="Qg", domain=gen, description="gen reactive power output"
-    )
+    Qg = Parameter(m, name="Qg", domain=gen, description="gen reactive power output")
     Qmax = Parameter(
         m,
         name="Qmax",
@@ -475,9 +449,7 @@ def main():
         description="gen minimum reactive power output",
     )
 
-    Bs = Parameter(
-        m, name="Bs", domain=bus, description="bus shunt susceptance"
-    )
+    Bs = Parameter(m, name="Bs", domain=bus, description="bus shunt susceptance")
     _ = Parameter(
         m,
         name="yb",
@@ -485,9 +457,7 @@ def main():
         description="Bus admittance matrix, Ybus",
     )
 
-    g = Parameter(
-        m, name="g", domain=[i, j, c], description="line conductance"
-    )
+    g = Parameter(m, name="g", domain=[i, j, c], description="line conductance")
     bc = Parameter(
         m, name="bc", domain=[i, j, c], description="line charging susceptance"
     )
@@ -501,9 +471,7 @@ def main():
         m,
         name="numBswitched",
         domain=[bus, bus_s],
-        description=(
-            "number of each type of switched shunt elements at each bus"
-        ),
+        description=("number of each type of switched shunt elements at each bus"),
     )
 
     # Reactive power information
@@ -516,9 +484,7 @@ def main():
     Bs[bus] = businfo[bus, "Bs", "given"] / baseMVA
 
     # line conductance
-    g[i, j, c].where[line[i, j, c]] = r[i, j, c] / (
-        sqr(r[i, j, c]) + sqr(x[i, j, c])
-    )
+    g[i, j, c].where[line[i, j, c]] = r[i, j, c] / (sqr(r[i, j, c]) + sqr(x[i, j, c]))
     g[j, i, c].where[g[i, j, c]] = g[i, j, c]
 
     # line charging conductance
@@ -587,9 +553,7 @@ def main():
         m,
         name="V_LineQ",
         domain=[i, j, c],
-        description=(
-            "Reactive power flowing from bus i towards bus j on line c"
-        ),
+        description=("Reactive power flowing from bus i towards bus j on line c"),
     )
     V_interfaceP = Variable(
         m,
@@ -662,17 +626,13 @@ def main():
         m,
         name="c_LineQij",
         domain=[i, j, c],
-        description=(
-            "Reactive power flowing from bus i into bus j along line c"
-        ),
+        description=("Reactive power flowing from bus i into bus j along line c"),
     )
     c_LineQji = Equation(
         m,
         name="c_LineQji",
         domain=[i, j, c],
-        description=(
-            "Reactive power flowing from bus j into bus i along line c"
-        ),
+        description=("Reactive power flowing from bus j into bus i along line c"),
     )
 
     c_BalanceP = Equation(
@@ -713,9 +673,9 @@ def main():
 
     # ===== SECTION: EQUATIONS PART 1
     # Apparent power limit on line ijc
-    c_SLimit[i, j, c].where[branchstatus[i, j, c] | branchstatus[j, i, c]] = (
-        sqr(V_LineP[i, j, c]) + sqr(V_LineQ[i, j, c]) <= sqr(rateA[i, j, c])
-    )
+    c_SLimit[i, j, c].where[branchstatus[i, j, c] | branchstatus[j, i, c]] = sqr(
+        V_LineP[i, j, c]
+    ) + sqr(V_LineQ[i, j, c]) <= sqr(rateA[i, j, c])
 
     # Limit voltage magnitude on a line
     c_V_limit_lo[i] = sqr(V_real[i]) + sqr(V_imag[i]) >= sqr(MinVm[i])
@@ -768,20 +728,18 @@ def main():
         gen.where[atBus[gen, i] & status[gen]], V_P[gen]
     ) - Pd[i] == Sum(
         Domain(j, c).where[branchstatus[i, j, c]], V_LineP[i, j, c]
-    ) + Sum(Domain(j, c).where[branchstatus[j, i, c]], V_LineP[i, j, c]) + Gs[
-        i
-    ] * (sqr(V_real[i]) + sqr(V_imag[i]))
+    ) + Sum(Domain(j, c).where[branchstatus[j, i, c]], V_LineP[i, j, c]) + Gs[i] * (
+        sqr(V_real[i]) + sqr(V_imag[i])
+    )
 
     # Balance of reactive power for bus
     c_BalanceQ[i].where[type[i] != 4] = Sum(
         gen.where[atBus[gen, i] & status[gen]], V_Q[gen]
     ) - Qd[i] == Sum(
         Domain(j, c).where[branchstatus[i, j, c]], V_LineQ[i, j, c]
-    ) + Sum(Domain(j, c).where[branchstatus[j, i, c]], V_LineQ[i, j, c]) - Bs[
-        i
-    ] * (sqr(V_real[i]) + sqr(V_imag[i])) - (
+    ) + Sum(Domain(j, c).where[branchstatus[j, i, c]], V_LineQ[i, j, c]) - Bs[i] * (
         sqr(V_real[i]) + sqr(V_imag[i])
-    ) * Sum(
+    ) - (sqr(V_real[i]) + sqr(V_imag[i])) * Sum(
         bus_s.where[~bus_s.sameAs("given")],
         Bswitched[i, bus_s] * V_shunt[i, bus_s],
     )
@@ -861,28 +819,20 @@ def main():
                 raise ValueError("Zero-length piecewise segment detected")
 
             next_slope[...] = (
-                costpts_y[gen_, f"{int(cps_)+2}"]
-                - costpts_y[gen_, f"{int(cps_)+1}"]
-            ) / (
-                costpts_x[gen_, f"{int(cps_)+2}"]
-                - costpts_x[gen_, f"{int(cps_)+1}"]
-            )
+                costpts_y[gen_, f"{int(cps_)+2}"] - costpts_y[gen_, f"{int(cps_)+1}"]
+            ) / (costpts_x[gen_, f"{int(cps_)+2}"] - costpts_x[gen_, f"{int(cps_)+1}"])
 
             if cur_slope.toValue() - next_slope.toValue() > 1e-8:
                 thisgen[gen1] = False
                 thisgen[gen_] = True
                 print("thisgen: ", thisgen.toList())
-                raise Exception(
-                    "Nonconvex piecewise linear costs not supported"
-                )
+                raise Exception("Nonconvex piecewise linear costs not supported")
 
     # ===== SECTION: EQUATIONS PART 2
     # Defining piecewise linear generator cost curves
     # P is in per-unit, costpts_x is in MW, and costpts_y is in $/hr
     c_pw_cost[gen, costptset].where[
-        status[gen]
-        & (Ord(costptset) < numcostpts[gen])
-        & (costmodel[gen] == 1)
+        status[gen] & (Ord(costptset) < numcostpts[gen]) & (costmodel[gen] == 1)
     ] = (
         V_pw_cost[gen]
         >= (
@@ -895,9 +845,7 @@ def main():
 
     # Piecewise linear objective function
     if args.obj == "pwl":
-        c_obj[...] = V_objcost == Sum(
-            gen.where[costmodel[gen] == 1], V_pw_cost[gen]
-        )
+        c_obj[...] = V_objcost == Sum(gen.where[costmodel[gen] == 1], V_pw_cost[gen])
 
     # Quadratic objective function
     elif args.obj == "quad":
@@ -952,9 +900,9 @@ def main():
             description="End region heating limit for reactive power",
         )
 
-        c_Armature[gen].where[
-            status[gen] & (Qfield[gen] != SpecialValues.EPS)
-        ] = sqr(V_P[gen]) + sqr(V_Q[gen]) <= sqr(R_max[gen])
+        c_Armature[gen].where[status[gen] & (Qfield[gen] != SpecialValues.EPS)] = sqr(
+            V_P[gen]
+        ) + sqr(V_Q[gen]) <= sqr(R_max[gen])
 
         c_Field[gen].where[
             status[gen]
@@ -1110,10 +1058,7 @@ def main():
             costptset.where[Ord(costptset) < numcostpts[gen]],
             (
                 (costpts_y[gen, costptset.lead(1)] - costpts_y[gen, costptset])
-                / (
-                    costpts_x[gen, costptset.lead(1)]
-                    - costpts_x[gen, costptset]
-                )
+                / (costpts_x[gen, costptset.lead(1)] - costpts_x[gen, costptset])
             )
             * (V_P.l[gen] * baseMVA - costpts_x[gen, costptset])
             + costpts_y[gen, costptset]
@@ -1169,9 +1114,7 @@ def main():
     total_cost = Parameter(
         m, name="total_cost", description="Cost of objective function"
     )
-    LMP = Parameter(
-        m, name="LMP", domain=bus, description="Locational marginal price"
-    )
+    LMP = Parameter(m, name="LMP", domain=bus, description="Locational marginal price")
     LineSP = Parameter(
         m,
         name="LineSP",
@@ -1209,12 +1152,14 @@ def main():
         LineSP[j, i, c].where[branchstatus[i, j, c]] = V_LineP.m[j, i, c]
 
     # Find which lines are at their limits
-    lines_at_limit[i, j, c].where[
-        branchstatus[i, j, c] | branchstatus[j, i, c]
-    ] = Number(1).where[
-        sqr(rateA[i, j, c]) - sqr(V_LineP.l[i, j, c]) - sqr(V_LineQ.l[i, j, c])
-        <= 1e-4
-    ]
+    lines_at_limit[i, j, c].where[branchstatus[i, j, c] | branchstatus[j, i, c]] = (
+        Number(
+            1
+        ).where[
+            sqr(rateA[i, j, c]) - sqr(V_LineP.l[i, j, c]) - sqr(V_LineQ.l[i, j, c])
+            <= 1e-4
+        ]
+    )
     print("lines at their bound: ", lines_at_limit.records)
     print("Model status: ", acopf.status.name)
     print("Objective Function Value: ", round(acopf.objective_value, 3))

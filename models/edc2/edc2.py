@@ -13,8 +13,6 @@ EDC of a total power of 1980 MW using 15 power generating units.
 
 from __future__ import annotations
 
-import os
-
 import gamspy.math as gams_math
 import numpy as np
 from gamspy import (
@@ -337,9 +335,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
-    )
+    m = Container()
 
     # SETS #
     i = Set(
@@ -348,9 +344,7 @@ def main():
         records=[str(i) for i in range(1, 16)],
         description="generating units",
     )
-    bou = Set(
-        m, name="bou", records=["low", "upp"], description="lower and upper"
-    )
+    bou = Set(m, name="bou", records=["low", "upp"], description="lower and upper")
     coef = Set(
         m,
         name="coef",
@@ -365,44 +359,29 @@ def main():
 
     # The output of the minimum and maximum operation of the
     # generating units in MW.
-    bound = Parameter(
-        m, name="bound", domain=[i, bou], records=data_records()[0]
-    )
+    bound = Parameter(m, name="bound", domain=[i, bou], records=data_records()[0])
 
     # The cost coefficients of generator units.
-    data = Parameter(
-        m, name="data", domain=[i, coef], records=data_records()[1]
-    )
+    data = Parameter(m, name="data", domain=[i, coef], records=data_records()[1])
 
     # The loss coefficients
-    Losscoef = Parameter(
-        m, name="Losscoef", domain=[i, j], records=data_records()[2]
-    )
+    Losscoef = Parameter(m, name="Losscoef", domain=[i, j], records=data_records()[2])
 
     Load = Parameter(m, name="Load", records=1980)
 
     # VARIABLES #
-    P = Variable(
-        m, name="P", domain=i, description="optimal generation level of i"
-    )
+    P = Variable(m, name="P", domain=i, description="optimal generation level of i")
 
     # Objective function #
     cost = Sum(
         i,
-        data[i, "a"] * gams_math.power(P[i], 2)
-        + data[i, "b"] * P[i]
-        + data[i, "c"],
+        data[i, "a"] * gams_math.power(P[i], 2) + data[i, "b"] * P[i] + data[i, "c"],
     )
 
     # Constraints #
-    bal = Equation(
-        m, name="bal", type="regular", description="demand-supply balance"
-    )
+    bal = Equation(m, name="bal", type="regular", description="demand-supply balance")
 
-    bal[...] = (
-        Sum(i, P[i]) - Sum([i, j], P[i] * Losscoef[i, j] * P[j] / 10000)
-        == Load
-    )
+    bal[...] = Sum(i, P[i]) - Sum([i, j], P[i] * Losscoef[i, j] * P[j] / 10000) == Load
 
     # Bounds on variables:
     P.lo[i] = bound[i, "low"]

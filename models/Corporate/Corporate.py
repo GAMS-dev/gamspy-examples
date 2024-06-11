@@ -15,7 +15,6 @@ Last modified: May 2008.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 import gamspy.math as gams_math
@@ -34,7 +33,6 @@ from gamspy import (
 def main():
     # Define container
     m = Container(
-        system_directory=os.getenv("SYSTEM_DIRECTORY", None),
         load_from=str(Path(__file__).parent.absolute()) + "/Corporate.gdx",
     )
 
@@ -54,9 +52,7 @@ def main():
     )
 
     # ALIASES
-    i, l, j, m1, m2, m3, a = m.getSymbols(
-        ["i", "l", "j", "m1", "m2", "m3", "a"]
-    )
+    i, l, j, m1, m2, m3, a = m.getSymbols(["i", "l", "j", "m1", "m2", "m3", "a"])
 
     # PARAMETERS #
     AssetReturns = m.getSymbols(["AssetReturns"])[0]
@@ -109,15 +105,9 @@ def main():
         description="Current benchmark scenario returns",
     )
 
-    BroadAssetReturns["BA_1", l] = Sum(
-        m1, AssetWeights[m1] * AssetReturns[m1, l]
-    )
-    BroadAssetReturns["BA_2", l] = Sum(
-        m2, AssetWeights[m2] * AssetReturns[m2, l]
-    )
-    BroadAssetReturns["BA_3", l] = Sum(
-        m3, AssetWeights[m3] * AssetReturns[m3, l]
-    )
+    BroadAssetReturns["BA_1", l] = Sum(m1, AssetWeights[m1] * AssetReturns[m1, l])
+    BroadAssetReturns["BA_2", l] = Sum(m2, AssetWeights[m2] * AssetReturns[m2, l])
+    BroadAssetReturns["BA_3", l] = Sum(m3, AssetWeights[m3] * AssetReturns[m3, l])
 
     IndexReturns[l] = Sum(j, BroadWeights[j] * BroadAssetReturns[j, l])
 
@@ -146,9 +136,7 @@ def main():
         domain=j,
         description="Percentages invested in each broad asset class",
     )
-    PortRet = Variable(
-        m, name="PortRet", domain=l, description="Portfolio returns"
-    )
+    PortRet = Variable(m, name="PortRet", domain=l, description="Portfolio returns")
 
     # EQUATIONS #
     BroadPortRetDef = Equation(
@@ -167,8 +155,7 @@ def main():
         m,
         name="BroadNormalCon",
         description=(
-            "Equation defining the normalization contraint for broad asset"
-            " classes"
+            "Equation defining the normalization contraint for broad asset" " classes"
         ),
     )
     NormalCon = Equation(
@@ -286,9 +273,7 @@ def main():
     print("\n## Model Integrated ##")
     print("x: \n", x.records.level.tolist())
 
-    print(
-        "\nObjective Function Value: ", round(TacticalModel.objective_value, 3)
-    )
+    print("\nObjective Function Value: ", round(TacticalModel.objective_value, 3))
 
 
 if __name__ == "__main__":
