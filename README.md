@@ -81,6 +81,7 @@ List of models under `models` directory is listed below. Most models have a GAMS
 | [InternationalMeanVar](models/InternationalMeanVar)           | [InternationalMeanVar](https://www.gams.com/latest/finlib_ml/libhtml/finlib_InternationalMeanVar.html)               | NLP           | Demo             |
 | [invmat](models/invmat)                                       |                                                                                                                      | LP            | Demo             |
 | [iobalance](models/iobalance)                                 | [iobalance](https://www.gams.com/latest/gamslib_ml/libhtml/gamslib_iobalance.html)                                   | LP, NLP, QCP  | Demo             |
+| [knapsack](models/knapsack)                                       |                                          | MIP           | Demo             |
 | [korcns](models/korcns)                                       | [korcns](https://www.gams.com/latest/gamslib_ml/libhtml/gamslib_korcns.html)                                         | CNS           | Demo             |
 | [linear](models/linear)                                       | [linear](https://www.gams.com/latest/gamslib_ml/libhtml/gamslib_linear.html)                                         | DNLP, LP, NLP | Demo             |
 | [lop](models/lop)                                             | [lop](https://www.gams.com/latest/gamslib_ml/libhtml/gamslib_lop.html)                                               | LP, MIP       | Demo             |
