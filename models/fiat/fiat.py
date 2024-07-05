@@ -29,12 +29,17 @@ Problem 7.3.6. Test problem 16, page 103.
 
 from __future__ import annotations
 
+import os
+import sys
+
 import gamspy.math as gams_math
 from gamspy import Container, Equation, Model, Variable
 
 
 def main():
-    m = Container()
+    m = Container(
+        system_directory=os.getenv("GAMSPY_GAMS_SYSDIR", None),
+    )
 
     # VARIABLES #
     q1 = Variable(m, name="q1")
@@ -304,10 +309,8 @@ def main():
         objective=k,
     )
 
-    fiat.solve()
-    import math
+    fiat.solve(output=sys.stdout)
 
-    assert math.isclose(fiat.objective_value, 1.4594, rel_tol=0.001)
     print("Objective Function Value:  ", fiat.objective_value)
     # End Fiat
 

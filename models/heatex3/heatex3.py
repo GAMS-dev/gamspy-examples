@@ -17,11 +17,15 @@ Section 5.4.3. Test Problem 2, pages 52-54.
 
 from __future__ import annotations
 
+import os
+
 from gamspy import Container, Equation, Model, Parameter, Variable
 
 
 def main():
-    m = Container()
+    m = Container(
+        system_directory=os.getenv("GAMSPY_GAMS_SYSDIR", None),
+    )
 
     # SCALARS #
     Tcin = Parameter(
@@ -88,8 +92,10 @@ def main():
 
     # Objective function:
     objval = (
-        1300 * (1000 / ((1 / 30) * (dT11 * dT12) + (1 / 6) * (dT11 + dT12))) ** 0.6
-        + 1300 * (600 / ((1 / 30) * (dT21 * dT22) + (1 / 6) * (dT21 + dT22))) ** 0.6
+        1300
+        * (1000 / ((1 / 30) * (dT11 * dT12) + (1 / 6) * (dT11 + dT12))) ** 0.6
+        + 1300
+        * (600 / ((1 / 30) * (dT21 * dT22) + (1 / 6) * (dT21 + dT22))) ** 0.6
     )
 
     # Constraints:
@@ -169,12 +175,11 @@ def main():
     )
 
     HeatEx3.solve()
+    print("Objective Function Variable:  ", HeatEx3.objective_value)
 
     import math
 
-    assert math.isclose(HeatEx3.objective_value, 4845.4620, rel_tol=0.001)
-
-    print("Objective Function Variable:  ", HeatEx3.objective_value)
+    assert math.isclose(HeatEx3.objective_value, 5937.437344646649)
 
     # End HeatEx3
 

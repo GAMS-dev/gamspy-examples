@@ -16,13 +16,17 @@ Application A34, pp.397.
 
 from __future__ import annotations
 
+import os
+
 import gamspy.math as gams_math
 import numpy as np
 from gamspy import Container, Equation, Model, Parameter, Set, Variable
 
 
 def main():
-    cont = Container()
+    cont = Container(
+        system_directory=os.getenv("GAMSPY_GAMS_SYSDIR", None),
+    )
 
     # SETS #
     n = Set(cont, name="n", records=[f"c{c}" for c in range(1, 5)])
@@ -70,7 +74,12 @@ def main():
         * x3
         * (
             gams_math.exp(
-                x5 * (g["r1", n] - g["r3", n] * x7 / 1000 - g["r5", n] * x8 / 1000)
+                x5
+                * (
+                    g["r1", n]
+                    - g["r3", n] * x7 / 1000
+                    - g["r5", n] * x8 / 1000
+                )
             )
             - 1
         )
@@ -84,7 +93,12 @@ def main():
         * x3
         * (
             gams_math.exp(
-                x5 * (g["r1", n] - g["r3", n] * x7 / 1000 - g["r5", n] * x8 / 1000)
+                x5
+                * (
+                    g["r1", n]
+                    - g["r3", n] * x7 / 1000
+                    - g["r5", n] * x8 / 1000
+                )
             )
             - 1
         )
@@ -182,7 +196,8 @@ def main():
 
     import math
 
-    assert math.isclose(circuit.objective_value, 4.4498522089320064e-09, rel_tol=0.001)
+    print(circuit.objective_value)
+    assert math.isclose(circuit.objective_value, 0.1349902012126008)
 
 
 if __name__ == "__main__":

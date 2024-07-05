@@ -15,6 +15,7 @@ Last modified: Apr 2008.
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 from gamspy import (
@@ -31,7 +32,9 @@ from gamspy import (
 
 
 def main():
-    m = Container()
+    m = Container(
+        system_directory=os.getenv("GAMSPY_GAMS_SYSDIR", None),
+    )
 
     # Read from MeanVarMip.gdx the data needed to run the mean-variance model
     m.read(
@@ -78,7 +81,9 @@ def main():
         domain=i,
         description="Indicator variable for assets included in the portfolio",
     )
-    PortVariance = Variable(m, name="PortVariance", description="Portfolio variance")
+    PortVariance = Variable(
+        m, name="PortVariance", description="Portfolio variance"
+    )
     PortReturn = Variable(m, name="PortReturn", description="Portfolio return")
 
     # In case short sales are allowed these bounds must be set properly.
@@ -166,7 +171,9 @@ def main():
         if lamda_loop > 1:
             break
         lamda[...] = lamda_loop
-        MeanVarMip.solve(options=Options(minlp="SBB", relative_optimality_gap=0))
+        MeanVarMip.solve(
+            options=Options(minlp="SHOT", relative_optimality_gap=0)
+        )
         MeanVarianceMIP += f"{round(lamda_loop,1)},{round(MeanVarMip.objective_value,4)},{round(PortVariance.records.level[0],4)},{round(PortReturn.records.level[0],4)},"
         x_recs = [str(round(x_rec, 4)) for x_rec in x.records.level.tolist()]
         MeanVarianceMIP += ",".join(x_recs)
@@ -273,15 +280,23 @@ def main():
         if lamda_loop > 1:
             break
         lamda[...] = lamda_loop
-        MeanVarWithCost.solve(options=Options(minlp="SBB", relative_optimality_gap=0))
+        MeanVarWithCost.solve(
+            options=Options(minlp="SHOT", relative_optimality_gap=0)
+        )
         MeanVarianceWithCost += f"{round(lamda_loop,1)},{round(MeanVarWithCost.objective_value,4)},{round(PortVariance.records.level[0],4)},{round(PortReturn.records.level[0],4)},"
-        x0_recs = [str(round(x_rec, 4)) for x_rec in x_0.records.level.tolist()]
-        x1_recs = [str(round(x_rec, 4)) for x_rec in x_1.records.level.tolist()]
+        x0_recs = [
+            str(round(x_rec, 4)) for x_rec in x_0.records.level.tolist()
+        ]
+        x1_recs = [
+            str(round(x_rec, 4)) for x_rec in x_1.records.level.tolist()
+        ]
         MeanVarianceWithCost += ",".join(x0_recs) + ","
         MeanVarianceWithCost += ",".join(x1_recs) + "\n"
         lamda_loop += 0.1
 
-    with open("MeanVarianceWithCost.csv", "w", encoding="UTF-8") as FrontierHandleTwo:
+    with open(
+        "MeanVarianceWithCost.csv", "w", encoding="UTF-8"
+    ) as FrontierHandleTwo:
         FrontierHandleTwo.write(MeanVarianceWithCost)
 
     # ***** Portfolio Revision *****
@@ -292,7 +307,9 @@ def main():
 
     BuyLimits = Parameter(m, name="BuyLimits", domain=[Bound, i])
     SellLimits = Parameter(m, name="SellLimits", domain=[Bound, i])
-    InitHold = Parameter(m, name="InitHold", domain=i, description="Current holdings")
+    InitHold = Parameter(
+        m, name="InitHold", domain=i, description="Current holdings"
+    )
 
     # We set the curret holding to the optimal unconstrained mean-variance portfolio
     # with lamda = 0.5
@@ -393,7 +410,9 @@ def main():
         objective=ObjDef,
     )
 
-    MeanVarianceRevision = '"Model status","Lambda","z","Variance","ExpReturn",'
+    MeanVarianceRevision = (
+        '"Model status","Lambda","z","Variance","ExpReturn",'
+    )
 
     MeanVarianceRevision += ",".join(i_recs) + ","
     MeanVarianceRevision += ",".join(i_recs) + ","
@@ -404,11 +423,17 @@ def main():
         if lamda_loop > 1:
             break
         lamda[...] = lamda_loop
-        MeanVarRevision.solve(options=Options(minlp="SBB", relative_optimality_gap=0))
+        MeanVarRevision.solve(
+            options=Options(minlp="SHOT", relative_optimality_gap=0)
+        )
         MeanVarianceRevision += f"{MeanVarRevision.status},{round(lamda_loop,1)},{round(MeanVarRevision.objective_value,4)},{round(PortVariance.records.level[0],4)},{round(PortReturn.records.level[0],4)},"
         x_recs = [str(round(x_rec, 4)) for x_rec in x.records.level.tolist()]
-        buy_recs = [str(round(x_rec, 4)) for x_rec in buy.records.level.tolist()]
-        sell_recs = [str(round(x_rec, 4)) for x_rec in sell.records.level.tolist()]
+        buy_recs = [
+            str(round(x_rec, 4)) for x_rec in buy.records.level.tolist()
+        ]
+        sell_recs = [
+            str(round(x_rec, 4)) for x_rec in sell.records.level.tolist()
+        ]
         MeanVarianceRevision += ",".join(x_recs) + ","
         MeanVarianceRevision += ",".join(buy_recs) + ","
         MeanVarianceRevision += ",".join(sell_recs) + "\n"

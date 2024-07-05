@@ -17,6 +17,8 @@ Revista Romana de Informatica si Automatica, vol.16, no.1, 2006, pp.15-18.
 
 from __future__ import annotations
 
+import os
+
 import pandas as pd
 from gamspy import (
     Container,
@@ -32,7 +34,9 @@ from gamspy import (
 
 
 def main():
-    m = Container()
+    m = Container(
+        system_directory=os.getenv("GAMSPY_GAMS_SYSDIR", None),
+    )
 
     # Set
     n = Set(m, name="n", records=["res1", "res2"], description="reservoirs")
@@ -103,7 +107,9 @@ def main():
                 ["res1", "enda", 200],
             ]
         ),
-        description=("required released water from the first reservoir rez1 (mil.m3)"),
+        description=(
+            "required released water from the first reservoir rez1 (mil.m3)"
+        ),
     )
 
     # Variable
@@ -165,11 +171,11 @@ def main():
         sense=Sense.MIN,
         objective=objf,
     )
-    reservoir.solve()
+    reservoir.solve(solver="CONOPT")
 
     import math
 
-    assert math.isclose(reservoir.objective_value, 81.0, abs_tol=1e-1)
+    assert math.isclose(reservoir.objective_value, 81.0)
 
     print("Objective Function Value: ", reservoir.objective_value)
 
