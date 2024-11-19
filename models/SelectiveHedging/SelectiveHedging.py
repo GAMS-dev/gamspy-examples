@@ -36,7 +36,8 @@ from gamspy import (
 def main(output=None):
     # Define container
     m = Container(
-        load_from=str(Path(__file__).parent.absolute()) + "/SelectiveHedging.gdx",
+        load_from=str(Path(__file__).parent.absolute())
+        + "/SelectiveHedging.gdx",
     )
 
     # SETS #
@@ -85,7 +86,9 @@ def main(output=None):
         domain=[SS, BB],
         description="Hedged bond returns",
     )
-    ExchangeRatesReturns = Parameter(m, name="ExchangeRatesReturns", domain=[SS, EE])
+    ExchangeRatesReturns = Parameter(
+        m, name="ExchangeRatesReturns", domain=[SS, EE]
+    )
 
     BondReturns[l, i] = (BondPrices1[l, i] - BondPrices0[i]) / BondPrices0[i]
     ExchangeRatesReturns[l, e] = (
@@ -146,7 +149,8 @@ def main(output=None):
             pr[l]
             * Sum(
                 i,
-                UnhedgedBondReturns[l, i] * u[i] + HedgedBondReturns[l, i] * h[i],
+                UnhedgedBondReturns[l, i] * u[i]
+                + HedgedBondReturns[l, i] * h[i],
             ),
         )
         >= mu
@@ -159,7 +163,9 @@ def main(output=None):
             i,
             UnhedgedBondReturns[s, i] * u[i] + HedgedBondReturns[s, i] * h[i],
         ),
-    ) - Sum(i, UnhedgedBondReturns[l, i] * u[i] + HedgedBondReturns[l, i] * h[i])
+    ) - Sum(
+        i, UnhedgedBondReturns[l, i] * u[i] + HedgedBondReturns[l, i] * h[i]
+    )
 
     NormalCon[...] = Sum(i, h[i] + u[i]) == 1.0
 
@@ -214,7 +220,6 @@ def main(output=None):
     # Fully hedged model
     u.fx[i] = 0.0
 
-    IndexFund.status = None
     for pp, _ in p.records.itertuples(index=False):
         if IndexFund.status not in [
             ModelStatus.OptimalGlobal,
@@ -238,7 +243,6 @@ def main(output=None):
     u.up[i] = 1.0
     h.fx[i] = 0.0
 
-    IndexFund.status = None
     for pp, _ in p.records.itertuples(index=False):
         if IndexFund.status not in [
             ModelStatus.OptimalGlobal,

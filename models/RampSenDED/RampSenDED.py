@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+
 from gamspy import Container, Equation, Model, Parameter, Set, Sum, Variable
 from gamspy.math import sqr
 
@@ -128,11 +129,13 @@ def main():
     # Objective Function; cost of thermal units
     costThermalcalc = Sum(
         [t, i],
-        gendata[i, "a"] * sqr(p[i, t]) + gendata[i, "b"] * p[i, t] + gendata[i, "c"],
+        gendata[i, "a"] * sqr(p[i, t])
+        + gendata[i, "b"] * p[i, t]
+        + gendata[i, "c"],
     )
 
-    Genconst3[i, t] = p[i, t.lead(1)] - p[i, t] <= gendata[i, "RU"]
-    Genconst4[i, t] = p[i, t.lag(1)] - p[i, t] <= gendata[i, "RD"]
+    Genconst3[i, t] = p[i, t + 1] - p[i, t] <= gendata[i, "RU"]
+    Genconst4[i, t] = p[i, t - 1] - p[i, t] <= gendata[i, "RD"]
     balance[t] = Sum(i, p[i, t]) >= demand[t]
     EMcalc[...] = (
         Sum(
@@ -173,7 +176,9 @@ def main():
 
     print("report1:  \n", report1.pivot().round(4))
 
-    report1.pivot().round(4).to_excel("DEDcostbased.xlsx", sheet_name="Pthermal")
+    report1.pivot().round(4).to_excel(
+        "DEDcostbased.xlsx", sheet_name="Pthermal"
+    )
 
 
 if __name__ == "__main__":

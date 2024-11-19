@@ -11,6 +11,7 @@ from __future__ import annotations
 from itertools import product
 
 import pandas as pd
+
 from gamspy import (
     Alias,
     Container,
@@ -87,7 +88,9 @@ def main():
         records=data["products"],
     )
     j = Set(m, name="j", description="resources", records=data["resources"])
-    t = Set(m, name="t", description="time periods", records=data["time_periods"])
+    t = Set(
+        m, name="t", description="time periods", records=data["time_periods"]
+    )
 
     KJ = Set(
         m,
@@ -159,7 +162,7 @@ def main():
     stock = Equation(
         m, name="stock", domain=[k, t], description="Stock balance equation"
     )
-    stock[...] = Z[k, t] == Z[k, t.lag(1)] + X[k, t] - d[k, t]
+    stock[...] = Z[k, t] == Z[k, t - 1] + X[k, t] - d[k, t]
 
     production = Equation(
         m, name="production", domain=[k, t], description="Ensure production"

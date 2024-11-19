@@ -17,9 +17,8 @@ Revista Romana de Informatica si Automatica, vol.16, no.1, 2006, pp.15-18.
 
 from __future__ import annotations
 
-import os
-
 import pandas as pd
+
 from gamspy import (
     Container,
     Equation,
@@ -34,9 +33,7 @@ from gamspy import (
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("GAMSPY_GAMS_SYSDIR", None),
-    )
+    m = Container()
 
     # Set
     n = Set(m, name="n", records=["res1", "res2"], description="reservoirs")
@@ -138,12 +135,10 @@ def main():
     )
 
     bal1[n, t].where[~tt[t]] = (
-        s["res1", t] - s["res1", t.lag(1, "linear")]
+        s["res1", t] - s["res1", t - 1]
         == q["res1", t] + r2[t] - q2[t] - r["res1", t]
     )
-    bal2[n, t].where[~tt[t]] = (
-        s["res2", t] - s["res2", t.lag(1, "linear")] == q2[t] - r2[t]
-    )
+    bal2[n, t].where[~tt[t]] = s["res2", t] - s["res2", t - 1] == q2[t] - r2[t]
     dec[n, t].where[~tt[t]] = (s["res2", t] - s["res1", t]) - (
         s["res2", t] - s["res1", t]
     ) * (1.0 - q2[t] / (q2[t] + 0.000001)) == 0.0

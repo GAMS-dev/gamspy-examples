@@ -28,8 +28,18 @@ Optimization, 2002.
 
 from __future__ import annotations
 
-import gamspy as gap
 import pandas as pd
+
+import gamspy as gap
+
+
+def main():
+    process_time, last_machine, last_item = prepare_data()
+    flow_shop(
+        process_time_df=process_time,
+        last_machine=last_machine,
+        last_item=last_item,
+    )
 
 
 def flow_shop(process_time_df, last_machine, last_item):
@@ -110,9 +120,11 @@ def flow_shop(process_time_df, last_machine, last_item):
 
     oneInPosition[k] = gap.Sum(i, rank[i, k]) == 1
     oneRankPer[i] = gap.Sum(k, rank[i, k]) == 1
-    onMachRel[m, k.lead(1)] = start[m, k.lead(1)] >= comp[m, k]
-    perMachRel[m.lead(1), k] = start[m.lead(1), k] >= comp[m, k]
-    defComp[m, k] = comp[m, k] == start[m, k] + gap.Sum(i, proctime[m, i] * rank[i, k])
+    onMachRel[m, k + 1] = start[m, k + 1] >= comp[m, k]
+    perMachRel[m + 1, k] = start[m + 1, k] >= comp[m, k]
+    defComp[m, k] = comp[m, k] == start[m, k] + gap.Sum(
+        i, proctime[m, i] * rank[i, k]
+    )
 
     defObj[...] = totwait >= comp[last_machine, last_item]
 
@@ -165,9 +177,4 @@ def prepare_data():
 
 
 if __name__ == "__main__":
-    process_time, last_machine, last_item = prepare_data()
-    flow_shop(
-        process_time_df=process_time,
-        last_machine=last_machine,
-        last_item=last_item,
-    )
+    main()

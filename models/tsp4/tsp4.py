@@ -167,12 +167,16 @@ def main():
     # Parameter
     cutcoeff = Parameter(m, name="cutcoeff", domain=[cc, i, j])
     rhs = Parameter(m, name="rhs", domain=cc)
-    nosubtours = Parameter(m, name="nosubtours", description="number of subtours")
+    nosubtours = Parameter(
+        m, name="nosubtours", description="number of subtours"
+    )
 
     # Equation
     cut = Equation(m, name="cut", domain=cc, description="dynamic cuts")
 
-    cut[allcuts] = Sum([i, j], cutcoeff[allcuts, i, j] * x[i, j]) <= rhs[allcuts]
+    cut[allcuts] = (
+        Sum([i, j], cutcoeff[allcuts, i, j] * x[i, j]) <= rhs[allcuts]
+    )
 
     tspcut = Model(
         m,
@@ -201,7 +205,7 @@ def main():
             fromi[j] = nextj[j]
 
             if nextj.toList()[0] in visited.toList():  # if already visited...
-                tt[t] = tt[t.lag(1)]
+                tt[t] = tt[t - 1]
                 for ix_loop in ix.toList():
                     if (
                         ix_loop in visited.toList()
@@ -220,16 +224,20 @@ def main():
                 continue
             rhs[curcut] = -1
 
-            for i_loop, j_loop, t_loop2, _ in tour.records.itertuples(index=False):
+            for i_loop, j_loop, t_loop2, _ in tour.records.itertuples(
+                index=False
+            ):
                 if t_loop2 != t_loop:
                     continue
 
-                cutcoeff[curcut, i_loop, j_loop].where[x.l[i_loop, j_loop] > 0.5] = 1
+                cutcoeff[curcut, i_loop, j_loop].where[
+                    x.l[i_loop, j_loop] > 0.5
+                ] = 1
                 # not needed due to nature of assignment constraints
                 #        cutcoeff(curcut, i, j)$(x.l[i,j] < 0.5) = -1
                 rhs[curcut] = rhs[curcut] + 1
             allcuts[curcut] = True  # include this cut in set
-            curcut[cc] = curcut[cc.lag(1)]
+            curcut[cc] = curcut[cc - 1]
 
         tspcut.solve()
         print(

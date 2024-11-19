@@ -115,8 +115,12 @@ def main():
         type="regular",
         description="equation of state constraint",
     )
-    defa = Equation(m, name="defa", type="regular", description="definition of Amix")
-    defb = Equation(m, name="defb", type="regular", description="definition of Bmix")
+    defa = Equation(
+        m, name="defa", type="regular", description="definition of Amix"
+    )
+    defb = Equation(
+        m, name="defb", type="regular", description="definition of Bmix"
+    )
     molesum = Equation(
         m,
         name="molesum",
@@ -149,7 +153,7 @@ def main():
     molesum[...] = Sum(i, x[i]) == 1.0
 
     # Simple Bounds of variables
-    z.lo[...] = 0.001
+    z.lo = 0.001
     x.lo["1"] = 0.001
     x.lo["2"] = 0.001
     x.lo["3"] = 0.001

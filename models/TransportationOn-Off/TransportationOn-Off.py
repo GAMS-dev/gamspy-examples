@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+
 from gamspy import Container, Equation, Model, Parameter, Set, Sum, Variable
 from gamspy.math import sqr
 
@@ -70,7 +71,9 @@ def main():
         m, name="demand", domain=j, records=np.array([217, 150, 145, 244])
     )
     c = Parameter(m, name="c", domain=[i, j], records=data_records()[0])
-    data = Parameter(m, name="data", domain=[i, "*"], records=data_records()[1])
+    data = Parameter(
+        m, name="data", domain=[i, "*"], records=data_records()[1]
+    )
 
     # VARIABLES #
     x = Variable(m, name="x", type="free", domain=[i, j])

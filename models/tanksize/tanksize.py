@@ -132,9 +132,9 @@ def main():
     TIMECAP[...] = Sum(n, d[n] + Sum(p, TS[p] * omega[p, n])) == T
     UNIQUE[n] = Sum(p, omega[p, n]) <= 1
     NONIDLE[n] = Sum(p, DUB[p] * omega[p, n]) >= d[n]
-    MATBAL[p, n] = s[p, n.lead(1, "circular")] == s[p, n] + pC[p, n] - DPD[p] * (
-        d[n] + Sum(pp, TS[pp] * omega[pp, n])
-    )
+    MATBAL[p, n] = s[p, n.lead(1, "circular")] == s[p, n] + pC[p, n] - DPD[
+        p
+    ] * (d[n] + Sum(pp, TS[pp] * omega[pp, n]))
     TANKCAP[p, n] = s[p, n] <= sM[p]
     PPN1[p, n] = pC[p, n] <= PRMAX[p] * d[n] * omega[p, n]
     PPN2[p, n] = pC[p, n] >= PRMIN[p] * d[n] * omega[p, n]
@@ -146,9 +146,11 @@ def main():
     DEFcS[...] = cS == Sum(
         [p, n], CSTI[p] * sH[p, n] * (d[n] + Sum(pp, TS[pp] * omega[pp, n]))
     )
-    DefsH[p, n] = sH[p, n] == 0.5 * (s[p, n.lead(1, "circular")] + s[p, n]) - SLB[p]
-    SEQUENCE[p, n] = 1 - omega[p, n] >= omega[p, n.lead(1, "linear")]
-    SYMMETRY[n] = Sum(p, omega[p, n]) >= Sum(p, omega[p, n.lead(1, "linear")])
+    DefsH[p, n] = (
+        sH[p, n] == 0.5 * (s[p, n.lead(1, "circular")] + s[p, n]) - SLB[p]
+    )
+    SEQUENCE[p, n] = 1 - omega[p, n] >= omega[p, n + 1]
+    SYMMETRY[n] = Sum(p, omega[p, n]) >= Sum(p, omega[p, n + 1])
 
     s.lo[p, n] = SLB[p]
     s.up[p, n] = SUB[p]
@@ -173,7 +175,9 @@ def main():
 
     import math
 
-    assert math.isclose(Sequenz.objective_value, 1.2686437535008857, rel_tol=0.001)
+    assert math.isclose(
+        Sequenz.objective_value, 1.2686437535008857, rel_tol=0.001
+    )
 
     print("Objective Function Value: ", Sequenz.objective_value)
 

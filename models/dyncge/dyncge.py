@@ -16,6 +16,7 @@ University of Tokyo Press. (in Japanese)
 from __future__ import annotations
 
 import numpy as np
+
 from gamspy import (
     Alias,
     Container,
@@ -65,11 +66,15 @@ def main():
         records=["AGR", "LMN", "HMN", "SRV"],
         description="goods",
     )
-    h = Set(m, name="h", domain=u, records=["CAP", "LAB"], description="factor")
+    h = Set(
+        m, name="h", domain=u, records=["CAP", "LAB"], description="factor"
+    )
     h_mob = Set(
         m, name="h_mob", domain=h, records=["LAB"], description="mobile factor"
     )
-    t = Set(m, name="t", records=[str(i) for i in range(31)], description="time")
+    t = Set(
+        m, name="t", records=[str(i) for i in range(31)], description="time"
+    )
 
     # Alias
     v = Alias(m, name="v", alias_with=u)
@@ -232,35 +237,59 @@ def main():
     # Base year values
     Y00 = Parameter(m, name="Y00", domain=j, description="composite factor")
     F00 = Parameter(m, name="F00", domain=[h, j], description="factor input")
-    X00 = Parameter(m, name="X00", domain=[i, j], description="intermediate input")
+    X00 = Parameter(
+        m, name="X00", domain=[i, j], description="intermediate input"
+    )
     Z00 = Parameter(m, name="Z00", domain=j, description="gross output")
-    Xp00 = Parameter(m, name="Xp00", domain=i, description="household consumption")
-    Xg00 = Parameter(m, name="Xg00", domain=i, description="government consumption")
+    Xp00 = Parameter(
+        m, name="Xp00", domain=i, description="household consumption"
+    )
+    Xg00 = Parameter(
+        m, name="Xg00", domain=i, description="government consumption"
+    )
     Xv00 = Parameter(m, name="Xv00", domain=i, description="investment demand")
     E00 = Parameter(m, name="E00", domain=i, description="exports")
     M00 = Parameter(m, name="M00", domain=i, description="imports")
-    Q00 = Parameter(m, name="Q00", domain=i, description="Armington's composite good")
+    Q00 = Parameter(
+        m, name="Q00", domain=i, description="Armington's composite good"
+    )
     D00 = Parameter(m, name="D00", domain=i, description="domestic good")
     Sp00 = Parameter(m, name="Sp00", description="private savings")
     Td00 = Parameter(m, name="Td00", description="direct tax")
     Tz00 = Parameter(m, name="Tz00", domain=j, description="production tax")
     Tm00 = Parameter(m, name="Tm00", domain=j, description="import tariff")
     III00 = Parameter(m, name="III00", description="composite investment")
-    II00 = Parameter(m, name="II00", domain=j, description="sectoral investment")
+    II00 = Parameter(
+        m, name="II00", domain=j, description="sectoral investment"
+    )
     KK00 = Parameter(m, name="KK00", domain=j, description="capital stock")
-    CC00 = Parameter(m, name="CC00", description="composite consumption or felicity")
+    CC00 = Parameter(
+        m, name="CC00", description="composite consumption or felicity"
+    )
     FF00 = Parameter(m, name="FF00", domain=h, description="factor endowment")
-    Sf00 = Parameter(m, name="Sf00", description="foreign savings in US dollars")
-    tauz00 = Parameter(m, name="tauz00", domain=i, description="production tax rate")
-    taum00 = Parameter(m, name="taum00", domain=i, description="import tariff rate")
+    Sf00 = Parameter(
+        m, name="Sf00", description="foreign savings in US dollars"
+    )
+    tauz00 = Parameter(
+        m, name="tauz00", domain=i, description="production tax rate"
+    )
+    taum00 = Parameter(
+        m, name="taum00", domain=i, description="import tariff rate"
+    )
 
     # Base run value
     Y0 = Parameter(m, name="Y0", domain=[j, t], description="composite factor")
     F0 = Parameter(m, name="F0", domain=[h, j, t], description="factor input")
-    X0 = Parameter(m, name="X0", domain=[i, j, t], description="intermediate input")
+    X0 = Parameter(
+        m, name="X0", domain=[i, j, t], description="intermediate input"
+    )
     Z0 = Parameter(m, name="Z0", domain=[j, t], description="gross output")
-    Xp0 = Parameter(m, name="Xp0", domain=[i, t], description="household consumption")
-    Xv0 = Parameter(m, name="Xv0", domain=[i, t], description="investment demand")
+    Xp0 = Parameter(
+        m, name="Xp0", domain=[i, t], description="household consumption"
+    )
+    Xv0 = Parameter(
+        m, name="Xv0", domain=[i, t], description="investment demand"
+    )
     E0 = Parameter(m, name="E0", domain=[i, t], description="exports")
     M0 = Parameter(m, name="M0", domain=[i, t], description="imports")
     Q0 = Parameter(
@@ -271,8 +300,12 @@ def main():
     Td0 = Parameter(m, name="Td0", domain=t, description="direct tax")
     Tz0 = Parameter(m, name="Tz0", domain=[j, t], description="production tax")
     Tm0 = Parameter(m, name="Tm0", domain=[j, t], description="import tariff")
-    III0 = Parameter(m, name="III0", domain=t, description="composite investment")
-    II0 = Parameter(m, name="II0", domain=[j, t], description="sectoral investment")
+    III0 = Parameter(
+        m, name="III0", domain=t, description="composite investment"
+    )
+    II0 = Parameter(
+        m, name="II0", domain=[j, t], description="sectoral investment"
+    )
     KK0 = Parameter(m, name="KK0", domain=[j, t], description="capital stock")
     CC0 = Parameter(
         m,
@@ -280,10 +313,18 @@ def main():
         domain=t,
         description="composite consumption or felicity",
     )
-    FF0 = Parameter(m, name="FF0", domain=[h, t], description="factor endowment")
-    pf0 = Parameter(m, name="pf0", domain=[h, j, t], description="factor price")
-    py0 = Parameter(m, name="py0", domain=[j, t], description="composite factor price")
-    pz0 = Parameter(m, name="pz0", domain=[j, t], description="gross output price")
+    FF0 = Parameter(
+        m, name="FF0", domain=[h, t], description="factor endowment"
+    )
+    pf0 = Parameter(
+        m, name="pf0", domain=[h, j, t], description="factor price"
+    )
+    py0 = Parameter(
+        m, name="py0", domain=[j, t], description="composite factor price"
+    )
+    pz0 = Parameter(
+        m, name="pz0", domain=[j, t], description="gross output price"
+    )
     pq0 = Parameter(
         m,
         name="pq0",
@@ -302,30 +343,52 @@ def main():
         domain=[i, t],
         description="import price in local currency",
     )
-    pd0 = Parameter(m, name="pd0", domain=[i, t], description="domestic good price")
+    pd0 = Parameter(
+        m, name="pd0", domain=[i, t], description="domestic good price"
+    )
     pk0 = Parameter(
         m, name="pk0", domain=t, description="composite investment goods price"
     )
-    epsilon0 = Parameter(m, name="epsilon0", domain=t, description="exchange rate")
-    PRICE0 = Parameter(m, name="PRICE0", domain=t, description="numeraire price")
+    epsilon0 = Parameter(
+        m, name="epsilon0", domain=t, description="exchange rate"
+    )
+    PRICE0 = Parameter(
+        m, name="PRICE0", domain=t, description="numeraire price"
+    )
 
     # Exogenous variables
-    Xg0 = Parameter(m, name="Xg0", domain=[i, t], description="government consumption")
+    Xg0 = Parameter(
+        m, name="Xg0", domain=[i, t], description="government consumption"
+    )
     Sf0 = Parameter(
         m, name="Sf0", domain=t, description="foreign savings in US dollars"
     )
-    pWe = Parameter(m, name="pWe", domain=i, description="export price in US dollars")
-    pWm = Parameter(m, name="pWm", domain=i, description="import price in US dollars")
-    tauz = Parameter(m, name="tauz", domain=i, description="production tax rate")
-    taum = Parameter(m, name="taum", domain=i, description="import tariff rate")
+    pWe = Parameter(
+        m, name="pWe", domain=i, description="export price in US dollars"
+    )
+    pWm = Parameter(
+        m, name="pWm", domain=i, description="import price in US dollars"
+    )
+    tauz = Parameter(
+        m, name="tauz", domain=i, description="production tax rate"
+    )
+    taum = Parameter(
+        m, name="taum", domain=i, description="import tariff rate"
+    )
 
     # for result reporting
     Y1 = Parameter(m, name="Y1", domain=[j, t], description="composite factor")
     F1 = Parameter(m, name="F1", domain=[h, j, t], description="factor input")
-    X1 = Parameter(m, name="X1", domain=[i, j, t], description="intermediate input")
+    X1 = Parameter(
+        m, name="X1", domain=[i, j, t], description="intermediate input"
+    )
     Z1 = Parameter(m, name="Z1", domain=[j, t], description="gross output")
-    Xp1 = Parameter(m, name="Xp1", domain=[i, t], description="household consumption")
-    Xv1 = Parameter(m, name="Xv1", domain=[i, t], description="investment demand")
+    Xp1 = Parameter(
+        m, name="Xp1", domain=[i, t], description="household consumption"
+    )
+    Xv1 = Parameter(
+        m, name="Xv1", domain=[i, t], description="investment demand"
+    )
     E1 = Parameter(m, name="E1", domain=[i, t], description="exports")
     M1 = Parameter(m, name="M1", domain=[i, t], description="imports")
     Q1 = Parameter(
@@ -342,9 +405,15 @@ def main():
         domain=[h, t],
         description="initial sectoral factor uses",
     )
-    II1 = Parameter(m, name="II1", domain=[j, t], description="sectoral investment")
-    III1 = Parameter(m, name="III1", domain=t, description="composite investment")
-    KK1 = Parameter(m, name="KK1", domain=[j, t], description="sectoral capital stock")
+    II1 = Parameter(
+        m, name="II1", domain=[j, t], description="sectoral investment"
+    )
+    III1 = Parameter(
+        m, name="III1", domain=t, description="composite investment"
+    )
+    KK1 = Parameter(
+        m, name="KK1", domain=[j, t], description="sectoral capital stock"
+    )
     CC1 = Parameter(m, name="CC1", domain=t, description="utility")
     tauz1 = Parameter(
         m, name="tauz1", domain=[i, t], description="production tax rates"
@@ -352,8 +421,12 @@ def main():
     taum1 = Parameter(
         m, name="taum1", domain=[i, t], description="import tariff rates"
     )
-    pz1 = Parameter(m, name="pz1", domain=[j, t], description="gross output price")
-    pd1 = Parameter(m, name="pd1", domain=[j, t], description="domestic good price")
+    pz1 = Parameter(
+        m, name="pz1", domain=[j, t], description="gross output price"
+    )
+    pd1 = Parameter(
+        m, name="pd1", domain=[j, t], description="domestic good price"
+    )
     pm1 = Parameter(m, name="pm1", domain=[j, t], description="import price")
     pe1 = Parameter(m, name="pe1", domain=[j, t], description="export price")
     pq1 = Parameter(
@@ -362,13 +435,19 @@ def main():
         domain=[j, t],
         description="Armington's composite good price",
     )
-    pf1 = Parameter(m, name="pf1", domain=[h, j, t], description="factor price")
-    py1 = Parameter(m, name="py1", domain=[j, t], description="composite factor price")
+    pf1 = Parameter(
+        m, name="pf1", domain=[h, j, t], description="factor price"
+    )
+    py1 = Parameter(
+        m, name="py1", domain=[j, t], description="composite factor price"
+    )
     epsilon1 = Parameter(
         m, name="epsilon1", domain=t, description="foreign exchange rate"
     )
     pk1 = Parameter(m, name="pk1", domain=t, description="capital good price")
-    PRICE1 = Parameter(m, name="PRICE1", domain=t, description="numeraire price")
+    PRICE1 = Parameter(
+        m, name="PRICE1", domain=t, description="numeraire price"
+    )
 
     Td00[...] = SAM["GOV", "HOH"]
     Tz00[j] = SAM["IDT", j]
@@ -499,14 +578,18 @@ def main():
         domain=i,
         description="share par. in composite cons. func.",
     )
-    a = Parameter(m, name="a", description="scale par. in composite cons. func.")
+    a = Parameter(
+        m, name="a", description="scale par. in composite cons. func."
+    )
     beta = Parameter(
         m,
         name="beta",
         domain=[h, j],
         description="share par. in production func.",
     )
-    b = Parameter(m, name="b", domain=j, description="scale par. in production func.")
+    b = Parameter(
+        m, name="b", domain=j, description="scale par. in production func."
+    )
     ax = Parameter(
         m,
         name="ax",
@@ -516,7 +599,9 @@ def main():
     ay = Parameter(
         m, name="ay", domain=j, description="composite fact. input req. coeff."
     )
-    lamda = Parameter(m, name="lamda", domain=i, description="investment demand share")
+    lamda = Parameter(
+        m, name="lamda", domain=i, description="investment demand share"
+    )
     iota = Parameter(
         m, name="iota", description="scale par. in comp. inv. prod. func."
     )
@@ -568,19 +653,27 @@ def main():
     gamma[i] = Q00[i] / (
         deltam[i] * M00[i] ** eta[i] + deltad[i] * D00[i] ** eta[i]
     ) ** (1 / eta[i])
-    xie[i] = E00[i] ** (1 - phi[i]) / (E00[i] ** (1 - phi[i]) + D00[i] ** (1 - phi[i]))
-    xid[i] = D00[i] ** (1 - phi[i]) / (E00[i] ** (1 - phi[i]) + D00[i] ** (1 - phi[i]))
-    theta[i] = Z00[i] / (xie[i] * E00[i] ** phi[i] + xid[i] * D00[i] ** phi[i]) ** (
-        1 / phi[i]
+    xie[i] = E00[i] ** (1 - phi[i]) / (
+        E00[i] ** (1 - phi[i]) + D00[i] ** (1 - phi[i])
     )
+    xid[i] = D00[i] ** (1 - phi[i]) / (
+        E00[i] ** (1 - phi[i]) + D00[i] ** (1 - phi[i])
+    )
+    theta[i] = Z00[i] / (
+        xie[i] * E00[i] ** phi[i] + xid[i] * D00[i] ** phi[i]
+    ) ** (1 / phi[i])
     ssp[...] = Sp00 / (Sum([h, j], F00[h, j]) - Td00)
 
     # ===============================================================
     # Defining model system -----------------------------------------
     # ===============================================================
     # Variables
-    Y = Variable(m, name="Y", type="free", domain=j, description="composite factor")
-    F = Variable(m, name="F", type="free", domain=[h, j], description="factor input")
+    Y = Variable(
+        m, name="Y", type="free", domain=j, description="composite factor"
+    )
+    F = Variable(
+        m, name="F", type="free", domain=[h, j], description="factor input"
+    )
     X = Variable(
         m,
         name="X",
@@ -605,7 +698,9 @@ def main():
         domain=i,
         description="government consumption",
     )
-    Xv = Variable(m, name="Xv", type="free", domain=i, description="investment demand")
+    Xv = Variable(
+        m, name="Xv", type="free", domain=i, description="investment demand"
+    )
     E = Variable(m, name="E", type="free", domain=i, description="exports")
     M = Variable(m, name="M", type="free", domain=i, description="imports")
     Q = Variable(
@@ -615,9 +710,15 @@ def main():
         domain=i,
         description="Armington's composite good",
     )
-    D = Variable(m, name="D", type="free", domain=i, description="domestic good")
-    FF = Variable(m, name="FF", type="free", domain=h, description="factor endowments")
-    pf = Variable(m, name="pf", type="free", domain=[h, j], description="factor price")
+    D = Variable(
+        m, name="D", type="free", domain=i, description="domestic good"
+    )
+    FF = Variable(
+        m, name="FF", type="free", domain=h, description="factor endowments"
+    )
+    pf = Variable(
+        m, name="pf", type="free", domain=[h, j], description="factor price"
+    )
     py = Variable(
         m,
         name="py",
@@ -662,24 +763,38 @@ def main():
         type="free",
         description="composite investment goods price",
     )
-    epsilon = Variable(m, name="epsilon", type="free", description="exchange rate")
+    epsilon = Variable(
+        m, name="epsilon", type="free", description="exchange rate"
+    )
     Sp = Variable(m, name="Sp", type="free", description="private savings")
     Sf = Variable(m, name="Sf", type="free", description="foreign savings")
     Td = Variable(m, name="Td", type="free", description="direct tax")
-    Tz = Variable(m, name="Tz", type="free", domain=j, description="production tax")
-    Tm = Variable(m, name="Tm", type="free", domain=i, description="import tariff")
-    KK = Variable(m, name="KK", type="free", domain=j, description="capital stock")
+    Tz = Variable(
+        m, name="Tz", type="free", domain=j, description="production tax"
+    )
+    Tm = Variable(
+        m, name="Tm", type="free", domain=i, description="import tariff"
+    )
+    KK = Variable(
+        m, name="KK", type="free", domain=j, description="capital stock"
+    )
     II = Variable(
         m, name="II", type="free", domain=j, description="sectoral investment"
     )
-    III = Variable(m, name="III", type="free", description="composite investment")
-    PRICE = Variable(m, name="PRICE", type="free", description="numeraire price")
+    III = Variable(
+        m, name="III", type="free", description="composite investment"
+    )
+    PRICE = Variable(
+        m, name="PRICE", type="free", description="numeraire price"
+    )
 
     # Equations
     eqpy = Equation(
         m, name="eqpy", domain=j, description="composite factor prod. func."
     )
-    eqF = Equation(m, name="eqF", domain=[h, j], description="factor demand function")
+    eqF = Equation(
+        m, name="eqF", domain=[h, j], description="factor demand function"
+    )
     eqX = Equation(
         m,
         name="eqX",
@@ -689,7 +804,9 @@ def main():
     eqY = Equation(
         m, name="eqY", domain=j, description="composite factor demand function"
     )
-    eqpzs = Equation(m, name="eqpzs", domain=j, description="unit cost function")
+    eqpzs = Equation(
+        m, name="eqpzs", domain=j, description="unit cost function"
+    )
     eqTd = Equation(m, name="eqTd", description="direct tax revenue function")
     eqTz = Equation(
         m, name="eqTz", domain=j, description="production tax revenue function"
@@ -697,23 +814,37 @@ def main():
     eqTm = Equation(
         m, name="eqTm", domain=i, description="import tariff revenue function"
     )
-    eqXv = Equation(m, name="eqXv", domain=i, description="investment demand function")
+    eqXv = Equation(
+        m, name="eqXv", domain=i, description="investment demand function"
+    )
     eqSp = Equation(m, name="eqSp", description="private saving function")
-    eqXp = Equation(m, name="eqXp", domain=i, description="household demand function")
+    eqXp = Equation(
+        m, name="eqXp", domain=i, description="household demand function"
+    )
     eqpe = Equation(
         m, name="eqpe", domain=i, description="world export price equation"
     )
     eqpm = Equation(
         m, name="eqpm", domain=i, description="world import price equation"
     )
-    eqepsilon = Equation(m, name="eqepsilon", description="balance of payments")
-    eqpqs = Equation(m, name="eqpqs", domain=i, description="Armington function")
-    eqM = Equation(m, name="eqM", domain=i, description="import demand function")
+    eqepsilon = Equation(
+        m, name="eqepsilon", description="balance of payments"
+    )
+    eqpqs = Equation(
+        m, name="eqpqs", domain=i, description="Armington function"
+    )
+    eqM = Equation(
+        m, name="eqM", domain=i, description="import demand function"
+    )
     eqD = Equation(
         m, name="eqD", domain=i, description="domestic good demand function"
     )
-    eqpzd = Equation(m, name="eqpzd", domain=i, description="transformation function")
-    eqE = Equation(m, name="eqE", domain=i, description="export supply function")
+    eqpzd = Equation(
+        m, name="eqpzd", domain=i, description="transformation function"
+    )
+    eqE = Equation(
+        m, name="eqE", domain=i, description="export supply function"
+    )
     eqDs = Equation(
         m, name="eqDs", domain=i, description="domestic good supply function"
     )
@@ -793,7 +924,9 @@ def main():
     eqSp[...] = Sp == ssp * (Sum([h, j], pf[h, j] * F[h, j]) - Td)
 
     # [household consumption] --                          (Cobb-Douglas)
-    eqXp[i] = Xp[i] == alpha[i] * (Sum([h, j], pf[h, j] * F[h, j]) - Sp - Td) / pq[i]
+    eqXp[i] = (
+        Xp[i] == alpha[i] * (Sum([h, j], pf[h, j] * F[h, j]) - Sp - Td) / pq[i]
+    )
 
     # [international trade] --
     eqpe[i] = pe[i] == epsilon * pWe[i]
@@ -820,7 +953,8 @@ def main():
     # domestic good demand function                               (CES)
     eqD[i] = (
         D[i]
-        == (gamma[i] ** eta[i] * deltad[i] * pq[i] / pd[i]) ** (1 / (1 - eta[i]))
+        == (gamma[i] ** eta[i] * deltad[i] * pq[i] / pd[i])
+        ** (1 / (1 - eta[i]))
         * Q[i]
     )
 
@@ -897,25 +1031,25 @@ def main():
     pe.l[i] = 1
     pm.l[i] = 1
     pd.l[i] = 1
-    pk.l[...] = 1
-    epsilon.l[...] = 1
-    Sp.l[...] = Sp00
-    Td.l[...] = Td00
+    pk.l = 1
+    epsilon.l = 1
+    Sp.l = Sp00
+    Td.l = Td00
     Tz.l[j] = Tz00[j]
     Tm.l[i] = Tm00[i]
     FF.l[h] = FF00[h]
-    III.l[...] = III00
+    III.l = III00
     II.l[j] = II00[j]
 
     # ---------------------------------------------------------------
     # Numeraire
-    PRICE.fx[...] = 1
+    PRICE.fx = 1
 
     # Initial factor endowments and exogenous variables
     FF.fx[h_mob] = FF00[h_mob]
     KK.fx[j] = KK00[j]
     Xg.fx[i] = Xg00[i]
-    Sf.fx[...] = Sf00
+    Sf.fx = Sf00
 
     # ===============================================================
     # Defining and solving the model --------------------------------
@@ -979,7 +1113,7 @@ def main():
         KK.fx[j] = (1 - dep) * KK.l[j] + II.l[j]
         if int(iteration) < 30:
             Xg.fx[i] = Xg0[i, str(int(iteration) + 1)]
-            Sf.fx[...] = Sf0[str(int(iteration) + 1)]
+            Sf.fx = Sf0[str(int(iteration) + 1)]
 
     # ===============================================================
     # Aftermath Computation
@@ -1396,7 +1530,9 @@ def main():
     EV = Parameter(
         m, name="EV", domain=t, description="equivalent variations [current]"
     )
-    EV_TTL = Parameter(m, name="EV_TTL", description="total EV [discounted Sum]")
+    EV_TTL = Parameter(
+        m, name="EV_TTL", description="total EV [discounted Sum]"
+    )
 
     dY[j, t].where[Y0[j, t]] = (Y1[j, t] / Y0[j, t] - 1) * 100
     dF[h, j, t].where[F0[h, j, t]] = (F1[h, j, t] / F0[h, j, t] - 1) * 100
@@ -1426,52 +1562,52 @@ def main():
     dpy[j, t].where[py0[j, t]] = (py1[j, t] / py0[j, t] - 1) * 100
     depsilon[t].where[epsilon0[t]] = (epsilon1[t] / epsilon0[t] - 1) * 100
     dpk[t].where[pk0[t]] = (pk1[t] / pk0[t] - 1) * 100
-    gY0[j, t.lead(1)].where[Y0[j, t]] = (Y0[j, t.lead(1)] / Y0[j, t] - 1) * 100
-    gF0[h, j, t.lead(1)].where[F0[h, j, t]] = (
-        F0[h, j, t.lead(1)] / F0[h, j, t] - 1
+    gY0[j, t + 1].where[Y0[j, t]] = (Y0[j, t + 1] / Y0[j, t] - 1) * 100
+    gF0[h, j, t + 1].where[F0[h, j, t]] = (
+        F0[h, j, t + 1] / F0[h, j, t] - 1
     ) * 100
-    gX0[i, j, t.lead(1)].where[X0[i, j, t]] = (
-        X0[i, j, t.lead(1)] / X0[i, j, t] - 1
+    gX0[i, j, t + 1].where[X0[i, j, t]] = (
+        X0[i, j, t + 1] / X0[i, j, t] - 1
     ) * 100
-    gZ0[j, t.lead(1)].where[Z0[j, t]] = (Z0[j, t.lead(1)] / Z0[j, t] - 1) * 100
-    gXp0[i, t.lead(1)].where[Xp0[i, t]] = (Xp0[i, t.lead(1)] / Xp0[i, t] - 1) * 100
-    gXv0[i, t.lead(1)].where[Xv0[i, t]] = (Xv0[i, t.lead(1)] / Xv0[i, t] - 1) * 100
-    gE0[i, t.lead(1)].where[E0[i, t]] = (E0[i, t.lead(1)] / E0[i, t] - 1) * 100
-    gM0[i, t.lead(1)].where[M0[i, t]] = (M0[i, t.lead(1)] / M0[i, t] - 1) * 100
-    gQ0[i, t.lead(1)].where[Q0[i, t]] = (Q0[i, t.lead(1)] / Q0[i, t] - 1) * 100
-    gD0[i, t.lead(1)].where[D0[i, t]] = (D0[i, t.lead(1)] / D0[i, t] - 1) * 100
-    gSp0[t.lead(1)].where[Sp0[t]] = (Sp0[t.lead(1)] / Sp0[t] - 1) * 100
-    gTd0[t.lead(1)].where[Td0[t]] = (Td0[t.lead(1)] / Td0[t] - 1) * 100
-    gTz0[j, t.lead(1)].where[Tz0[j, t]] = (Tz0[j, t.lead(1)] / Tz0[j, t] - 1) * 100
-    gTm0[i, t.lead(1)].where[Tm0[i, t]] = (Tm0[i, t.lead(1)] / Tm0[i, t] - 1) * 100
-    gFF0[h, t.lead(1)].where[FF0[h, t]] = (FF0[h, t.lead(1)] / FF0[h, t] - 1) * 100
-    gII0[j, t.lead(1)].where[II0[j, t]] = (II0[j, t.lead(1)] / II0[j, t] - 1) * 100
-    gIII0[t.lead(1)].where[III0[t]] = (III0[t.lead(1)] / III0[t] - 1) * 100
-    gKK0[j, t.lead(1)].where[KK0[j, t]] = (KK0[j, t.lead(1)] / KK0[j, t] - 1) * 100
-    gCC0[t.lead(1)].where[CC0[t]] = (CC0[t.lead(1)] / CC0[t] - 1) * 100
-    gY1[j, t.lead(1)].where[Y1[j, t]] = (Y1[j, t.lead(1)] / Y1[j, t] - 1) * 100
-    gF1[h, j, t.lead(1)].where[F1[h, j, t]] = (
-        F1[h, j, t.lead(1)] / F1[h, j, t] - 1
+    gZ0[j, t + 1].where[Z0[j, t]] = (Z0[j, t + 1] / Z0[j, t] - 1) * 100
+    gXp0[i, t + 1].where[Xp0[i, t]] = (Xp0[i, t + 1] / Xp0[i, t] - 1) * 100
+    gXv0[i, t + 1].where[Xv0[i, t]] = (Xv0[i, t + 1] / Xv0[i, t] - 1) * 100
+    gE0[i, t + 1].where[E0[i, t]] = (E0[i, t + 1] / E0[i, t] - 1) * 100
+    gM0[i, t + 1].where[M0[i, t]] = (M0[i, t + 1] / M0[i, t] - 1) * 100
+    gQ0[i, t + 1].where[Q0[i, t]] = (Q0[i, t + 1] / Q0[i, t] - 1) * 100
+    gD0[i, t + 1].where[D0[i, t]] = (D0[i, t + 1] / D0[i, t] - 1) * 100
+    gSp0[t + 1].where[Sp0[t]] = (Sp0[t + 1] / Sp0[t] - 1) * 100
+    gTd0[t + 1].where[Td0[t]] = (Td0[t + 1] / Td0[t] - 1) * 100
+    gTz0[j, t + 1].where[Tz0[j, t]] = (Tz0[j, t + 1] / Tz0[j, t] - 1) * 100
+    gTm0[i, t + 1].where[Tm0[i, t]] = (Tm0[i, t + 1] / Tm0[i, t] - 1) * 100
+    gFF0[h, t + 1].where[FF0[h, t]] = (FF0[h, t + 1] / FF0[h, t] - 1) * 100
+    gII0[j, t + 1].where[II0[j, t]] = (II0[j, t + 1] / II0[j, t] - 1) * 100
+    gIII0[t + 1].where[III0[t]] = (III0[t + 1] / III0[t] - 1) * 100
+    gKK0[j, t + 1].where[KK0[j, t]] = (KK0[j, t + 1] / KK0[j, t] - 1) * 100
+    gCC0[t + 1].where[CC0[t]] = (CC0[t + 1] / CC0[t] - 1) * 100
+    gY1[j, t + 1].where[Y1[j, t]] = (Y1[j, t + 1] / Y1[j, t] - 1) * 100
+    gF1[h, j, t + 1].where[F1[h, j, t]] = (
+        F1[h, j, t + 1] / F1[h, j, t] - 1
     ) * 100
-    gX1[i, j, t.lead(1)].where[X1[i, j, t]] = (
-        X1[i, j, t.lead(1)] / X1[i, j, t] - 1
+    gX1[i, j, t + 1].where[X1[i, j, t]] = (
+        X1[i, j, t + 1] / X1[i, j, t] - 1
     ) * 100
-    gZ1[j, t.lead(1)].where[Z1[j, t]] = (Z1[j, t.lead(1)] / Z1[j, t] - 1) * 100
-    gXp1[i, t.lead(1)].where[Xp1[i, t]] = (Xp1[i, t.lead(1)] / Xp1[i, t] - 1) * 100
-    gXv1[i, t.lead(1)].where[Xv1[i, t]] = (Xv1[i, t.lead(1)] / Xv1[i, t] - 1) * 100
-    gE1[i, t.lead(1)].where[E1[i, t]] = (E1[i, t.lead(1)] / E1[i, t] - 1) * 100
-    gM1[i, t.lead(1)].where[M1[i, t]] = (M1[i, t.lead(1)] / M1[i, t] - 1) * 100
-    gQ1[i, t.lead(1)].where[Q1[i, t]] = (Q1[i, t.lead(1)] / Q1[i, t] - 1) * 100
-    gD1[i, t.lead(1)].where[D1[i, t]] = (D1[i, t.lead(1)] / D1[i, t] - 1) * 100
-    gSp1[t.lead(1)].where[Sp1[t]] = (Sp1[t.lead(1)] / Sp1[t] - 1) * 100
-    gTd1[t.lead(1)].where[Td1[t]] = (Td1[t.lead(1)] / Td1[t] - 1) * 100
-    gTz1[j, t.lead(1)].where[Tz1[j, t]] = (Tz1[j, t.lead(1)] / Tz1[j, t] - 1) * 100
-    gTm1[i, t.lead(1)].where[Tm1[i, t]] = (Tm1[i, t.lead(1)] / Tm1[i, t] - 1) * 100
-    gFF1[h, t.lead(1)].where[FF1[h, t]] = (FF1[h, t.lead(1)] / FF1[h, t] - 1) * 100
-    gII1[j, t.lead(1)].where[II1[j, t]] = (II1[j, t.lead(1)] / II1[j, t] - 1) * 100
-    gIII1[t.lead(1)].where[III1[t]] = (III1[t.lead(1)] / III1[t] - 1) * 100
-    gKK1[j, t.lead(1)].where[KK1[j, t]] = (KK1[j, t.lead(1)] / KK1[j, t] - 1) * 100
-    gCC1[t.lead(1)].where[CC1[t]] = (CC1[t.lead(1)] / CC1[t] - 1) * 100
+    gZ1[j, t + 1].where[Z1[j, t]] = (Z1[j, t + 1] / Z1[j, t] - 1) * 100
+    gXp1[i, t + 1].where[Xp1[i, t]] = (Xp1[i, t + 1] / Xp1[i, t] - 1) * 100
+    gXv1[i, t + 1].where[Xv1[i, t]] = (Xv1[i, t + 1] / Xv1[i, t] - 1) * 100
+    gE1[i, t + 1].where[E1[i, t]] = (E1[i, t + 1] / E1[i, t] - 1) * 100
+    gM1[i, t + 1].where[M1[i, t]] = (M1[i, t + 1] / M1[i, t] - 1) * 100
+    gQ1[i, t + 1].where[Q1[i, t]] = (Q1[i, t + 1] / Q1[i, t] - 1) * 100
+    gD1[i, t + 1].where[D1[i, t]] = (D1[i, t + 1] / D1[i, t] - 1) * 100
+    gSp1[t + 1].where[Sp1[t]] = (Sp1[t + 1] / Sp1[t] - 1) * 100
+    gTd1[t + 1].where[Td1[t]] = (Td1[t + 1] / Td1[t] - 1) * 100
+    gTz1[j, t + 1].where[Tz1[j, t]] = (Tz1[j, t + 1] / Tz1[j, t] - 1) * 100
+    gTm1[i, t + 1].where[Tm1[i, t]] = (Tm1[i, t + 1] / Tm1[i, t] - 1) * 100
+    gFF1[h, t + 1].where[FF1[h, t]] = (FF1[h, t + 1] / FF1[h, t] - 1) * 100
+    gII1[j, t + 1].where[II1[j, t]] = (II1[j, t + 1] / II1[j, t] - 1) * 100
+    gIII1[t + 1].where[III1[t]] = (III1[t + 1] / III1[t] - 1) * 100
+    gKK1[j, t + 1].where[KK1[j, t]] = (KK1[j, t + 1] / KK1[j, t] - 1) * 100
+    gCC1[t + 1].where[CC1[t]] = (CC1[t + 1] / CC1[t] - 1) * 100
 
     # Welfare measure: Hicksian equivalent variations ---------------
     EV[t] = (CC1[t] - CC0[t]) / a / Product(i, (alpha[i] / 1) ** alpha[i])

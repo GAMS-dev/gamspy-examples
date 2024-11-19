@@ -20,6 +20,7 @@ from sys import argv
 
 import numpy as np
 import pandas as pd
+
 from gamspy import (
     Alias,
     Card,
@@ -209,8 +210,12 @@ def main():
     i, l = m.getSymbols(["i", "l"])
 
     # SCALARS #
-    Budget = Parameter(m, name="Budget", description="Nominal investment budget")
-    Omega = Parameter(m, name="Omega", description="Bound on the expected shortfalls")
+    Budget = Parameter(
+        m, name="Budget", description="Nominal investment budget"
+    )
+    Omega = Parameter(
+        m, name="Omega", description="Bound on the expected shortfalls"
+    )
 
     Budget[...] = 100.0
 
@@ -290,7 +295,9 @@ def main():
 
     PutCon[...] = Sum(l, pr[l] * yNeg[l]) <= Omega
 
-    TargetDevDef[l] = Sum(i, (P[i, l] - TargetIndex[l]) * x[i]) == yPos[l] - yNeg[l]
+    TargetDevDef[l] = (
+        Sum(i, (P[i, l] - TargetIndex[l]) * x[i]) == yPos[l] - yNeg[l]
+    )
 
     # Objective function definition for MAD
     ObjDef = Sum(l, pr[l] * yPos[l])
@@ -311,7 +318,7 @@ def main():
         options=Options(
             variable_listing_limit=0,
             equation_listing_limit=0,
-            solver_link_type=2,
+            solve_link_type="disk",
         )
     )
 
@@ -322,7 +329,9 @@ def main():
     PiOmega = Variable(m, name="PiOmega", type="positive")
 
     # EQUATIONS #
-    DualTrackingDef = Equation(m, name="DualTrackingDef", type="regular", domain=i)
+    DualTrackingDef = Equation(
+        m, name="DualTrackingDef", type="regular", domain=i
+    )
     MeasureDef = Equation(m, name="MeasureDef", type="regular", domain=l)
 
     DualTrackingDef[i] = Sum(l, (P[i, l] - TargetIndex[l]) * Pi[l]) == 0.0
@@ -346,7 +355,7 @@ def main():
         options=Options(
             variable_listing_limit=0,
             equation_listing_limit=0,
-            solver_link_type=2,
+            solve_link_type="disk",
         )
     )
 
@@ -429,7 +438,7 @@ def main():
             options=Options(
                 variable_listing_limit=0,
                 equation_listing_limit=0,
-                solver_link_type=2,
+                solve_link_type="disk",
             )
         )
 
@@ -452,7 +461,7 @@ def main():
             options=Options(
                 variable_listing_limit=0,
                 equation_listing_limit=0,
-                solver_link_type=2,
+                solve_link_type="disk",
             )
         )
 
@@ -473,7 +482,7 @@ def main():
         options=Options(
             variable_listing_limit=0,
             equation_listing_limit=0,
-            solver_link_type=2,
+            solve_link_type="disk",
         )
     )
 
@@ -484,7 +493,9 @@ def main():
     Price = Parameter(m, name="Price", domain=i)
     Discount = Parameter(m, name="Discount", domain=i)
     Premium = Parameter(m, name="Premium", domain=i)
-    BenchMarkNeutralPrice = Parameter(m, name="BenchMarkNeutralPrice", domain=i)
+    BenchMarkNeutralPrice = Parameter(
+        m, name="BenchMarkNeutralPrice", domain=i
+    )
     Psi = Parameter(m, name="Psi", domain=l)
     liquidity = Parameter(
         m, name="liquidity", domain=[i, "*"], description="Liquidity report"
@@ -534,7 +545,7 @@ def main():
             options=Options(
                 variable_listing_limit=0,
                 equation_listing_limit=0,
-                solver_link_type=2,
+                solve_link_type="disk",
             )
         )
         FrontierPortfolios[jj, i] = x.l[i]

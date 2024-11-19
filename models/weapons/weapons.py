@@ -19,6 +19,7 @@ Nonlinear Programming. John Wiley and Sons, New York, 1968, pp. 22-27.
 from __future__ import annotations
 
 import pandas as pd
+
 from gamspy import (
     Card,
     Container,
@@ -214,14 +215,20 @@ def main():
         domain=t,
         description="minimum number of weapons required per target",
     )
-    probe = Equation(m, name="probe", domain=t, description="probability definition")
+    probe = Equation(
+        m, name="probe", domain=t, description="probability definition"
+    )
 
     maxw[w] = Sum(t.where[td[w, t]], x[w, t]) <= wa[w]
     minw[t].where[tm[t]] = Sum(w.where[td[w, t]], x[w, t]) >= tm[t]
-    probe[t] = prob[t] == 1 - Product(w.where[td[w, t]], (1 - td[w, t]) ** x[w, t])
+    probe[t] = prob[t] == 1 - Product(
+        w.where[td[w, t]], (1 - td[w, t]) ** x[w, t]
+    )
 
     _ = Sum(t, mv[t] * prob[t])
-    etd = Sum(t, mv[t] * (1 - Product(w.where[td[w, t]], (1 - td[w, t]) ** x[w, t])))
+    etd = Sum(
+        t, mv[t] * (1 - Product(w.where[td[w, t]], (1 - td[w, t]) ** x[w, t]))
+    )
 
     war = Model(
         m,

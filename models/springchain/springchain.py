@@ -27,6 +27,7 @@ from __future__ import annotations
 import math
 
 import pandas as pd
+
 from gamspy import (
     Card,
     Container,
@@ -74,8 +75,12 @@ def main():
     )
 
     # Variable
-    x = Variable(cont, name="x", domain=n, description="x-coordinates of nodes")
-    y = Variable(cont, name="y", domain=n, description="y-coordinates of nodes")
+    x = Variable(
+        cont, name="x", domain=n, description="x-coordinates of nodes"
+    )
+    y = Variable(
+        cont, name="y", domain=n, description="y-coordinates of nodes"
+    )
     delta_x = Variable(cont, name="delta_x", domain=n)
     delta_y = Variable(cont, name="delta_y", domain=n)
     unit = Variable(cont, name="unit")
@@ -96,12 +101,16 @@ def main():
     link_up = Equation(cont, name="link_up", domain=n)
     cone_eq = Equation(cont, name="cone_eq")
 
-    pot_energy = Sum(n.where[Ord(n) > 1 & (Ord(n) < Card(n))], m[n] * g * y[n]) + k * v
-    delta_x_eq[n] = delta_x[n] == x[n] - x[n.lag(1)]
-    delta_y_eq[n] = delta_y[n] == y[n] - y[n.lag(1)]
+    pot_energy = (
+        Sum(n.where[Ord(n) > 1 & (Ord(n) < Card(n))], m[n] * g * y[n]) + k * v
+    )
+    delta_x_eq[n] = delta_x[n] == x[n] - x[n - 1]
+    delta_y_eq[n] = delta_y[n] == y[n] - y[n - 1]
 
     link_L0[n] = t_L0[n] == L0 + t[n]
-    link_up[n].where[Ord(n) > 1] = t_L0[n] ** 2 >= delta_x[n] ** 2 + delta_y[n] ** 2
+    link_up[n].where[Ord(n) > 1] = (
+        t_L0[n] ** 2 >= delta_x[n] ** 2 + delta_y[n] ** 2
+    )
 
     cone_eq[...] = 2 * v * unit >= Sum(n.where[Ord(n) > 1], t[n] ** 2)
 
@@ -121,7 +130,7 @@ def main():
     y.fx["n0"] = a_y
     x.fx[f"n{N}"] = b_x
     y.fx[f"n{N}"] = b_y
-    unit.fx[...] = 1
+    unit.fx = 1
 
     spring.solve()
 

@@ -17,9 +17,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import gamspy.math as gams_math
 import numpy as np
 import pandas as pd
+
+import gamspy.math as gams_math
 from gamspy import (
     Alias,
     Container,
@@ -55,8 +56,12 @@ def main():
         domain=ii,
         description="Holdings of assets",
     )
-    PortVariance = Variable(m, name="PortVariance", description="Portfolio variance")
-    d_bar = Variable(m, name="d_bar", description="Portfolio expected excess return")
+    PortVariance = Variable(
+        m, name="PortVariance", description="Portfolio variance"
+    )
+    d_bar = Variable(
+        m, name="d_bar", description="Portfolio expected excess return"
+    )
 
     # EQUATIONS #
     ReturnDef = Equation(
@@ -85,7 +90,7 @@ def main():
     ObjDef = d_bar / gams_math.sqrt(PortVariance)
 
     # Put strictly positive bound on Variance to keep the model out of trouble:
-    PortVariance.lo[...] = 0.001
+    PortVariance.lo = 0.001
 
     Sharpe = Model(
         m,
@@ -106,7 +111,9 @@ def main():
         current_port_return = (
             RiskFreeRate.records.value[0] + theta * d_bar.records.level[0]
         )
-        results.append([np.sqrt(current_port_variance), current_port_return, theta])
+        results.append(
+            [np.sqrt(current_port_variance), current_port_return, theta]
+        )
         current_port_variance += 0.1
 
     # Also plot the tangent portfolio

@@ -19,8 +19,9 @@ Nonlinear Programming. John Wiley and Sons, New York, 1968, pp. 86-88.
 
 from __future__ import annotations
 
-import gamspy.math as gams_math
 import pandas as pd
+
+import gamspy.math as gams_math
 from gamspy import (
     Container,
     Equation,
@@ -162,7 +163,9 @@ def main():
 
     # Variables
     obj = Variable(m, name="obj", type="free", description="objective value")
-    dev = Variable(m, name="dev", type="free", domain=i, description="total deviation")
+    dev = Variable(
+        m, name="dev", type="free", domain=i, description="total deviation"
+    )
     devp = Variable(
         m,
         name="devp",
@@ -225,7 +228,9 @@ def main():
 
     ls6[...] = obj == Sum(i, gams_math.power(dev[i] / dat[i, "y"], 2))
 
-    ls7[...] = obj == Sum(i, gams_math.power(gams_math.abs(dev[i] / dat[i, "y"]), 3))
+    ls7[...] = obj == Sum(
+        i, gams_math.power(gams_math.abs(dev[i] / dat[i, "y"]), 3)
+    )
 
     ls8[...] = obj == Sum(i, gams_math.power(dev[i] / dat[i, "y"], 4))
 

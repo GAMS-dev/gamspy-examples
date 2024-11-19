@@ -61,14 +61,18 @@ def main():
     i = Alias(m, name="i", alias_with=nh)
 
     # SCALARS #
-    L = Parameter(m, name="L", records=4, description="length of the suspended chain")
+    L = Parameter(
+        m, name="L", records=4, description="length of the suspended chain"
+    )
     a = Parameter(
         m, name="a", records=1, description="height of the chain at t=0 (left)"
     )
     b = Parameter(
         m, name="b", records=3, description="height of the chain at t=1 (left)"
     )
-    tf = Parameter(m, name="tf", records=1, description="ODEs defined in [0 tf]")
+    tf = Parameter(
+        m, name="tf", records=1, description="ODEs defined in [0 tf]"
+    )
     h = Parameter(m, name="h", description="uniform interval length")
     n = Parameter(m, name="n", description="number of subintervals")
     tmin = Parameter(m, name="tmin")
@@ -105,20 +109,20 @@ def main():
         0.5
         * h
         * Sum(
-            nh[i.lead(1)],
+            nh[i + 1],
             x[i] * gams_math.sqrt(1 + sqr(u[i]))
-            + x[i.lead(1)] * gams_math.sqrt(1 + sqr(u[i.lead(1)])),
+            + x[i + 1] * gams_math.sqrt(1 + sqr(u[i + 1])),
         )
     )
 
-    x_eqn[i.lead(1)] = x[i.lead(1)] == x[i] + 0.5 * h * (u[i] + u[i.lead(1)])
+    x_eqn[i + 1] = x[i + 1] == x[i] + 0.5 * h * (u[i] + u[i + 1])
 
     length_eqn[...] = (
         0.5
         * h
         * Sum(
-            nh[i.lead(1)],
-            gams_math.sqrt(1 + sqr(u[i])) + gams_math.sqrt(1 + sqr(u[i.lead(1)])),
+            nh[i + 1],
+            gams_math.sqrt(1 + sqr(u[i])) + gams_math.sqrt(1 + sqr(u[i + 1])),
         )
         == L
     )

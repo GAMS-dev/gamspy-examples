@@ -71,6 +71,7 @@ Princeton University Press, Princeton, New Jersey, 1963.
 from __future__ import annotations
 
 import numpy as np
+
 from gamspy import (
     Card,
     Container,
@@ -322,8 +323,8 @@ def main():
         description="relative increase of sqrtx in segment",
     )
 
-    nseg[s].where[g[s]] = p[s.lead(1, "linear")] - p[s]
-    ninc[s].where[g[s]] = sqrtp[s.lead(1, "linear")] - sqrtp[s]
+    nseg[s].where[g[s]] = p[s + 1] - p[s]
+    ninc[s].where[g[s]] = sqrtp[s + 1] - sqrtp[s]
 
     # Variables
     seg = Variable(
@@ -389,7 +390,7 @@ def main():
     trnsdiscB.solve()
 
     # Now restart the local solver from this approximate point
-    transport.solve()
+    transport.solve(options=Options(nlp="conopt"))
 
     print(
         "Improved Objective Function Value: ",
@@ -397,7 +398,7 @@ def main():
     )
 
     # Ensure that we are better off transport.objective_value
-    if transport.objective_value - localopt.records.value[0] > 1e-6:
+    if transport.objective_value - localopt.toValue() > 1e-6:
         raise Exception("we should get an improved transport.objective_value")
 
 

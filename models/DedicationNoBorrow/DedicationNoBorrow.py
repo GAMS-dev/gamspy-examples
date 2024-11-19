@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+
 from gamspy import (
     Alias,
     Card,
@@ -116,10 +117,14 @@ def main():
 
     Price = Parameter(m, name="Price", domain=i, description="Bond prices")
     Coupon = Parameter(m, name="Coupon", domain=i, description="Coupons")
-    Maturity = Parameter(m, name="Maturity", domain=i, description="Maturities")
+    Maturity = Parameter(
+        m, name="Maturity", domain=i, description="Maturities"
+    )
     rf = Parameter(m, name="rf", domain=t, description="Reinvestment rates")
     F = Parameter(m, name="F", domain=[t, i], description="Cashflows")
-    BondData = Parameter(m, name="BondData", domain=[i, "*"], records=bond_data_recs)
+    BondData = Parameter(
+        m, name="BondData", domain=[i, "*"], records=bond_data_recs
+    )
     Liability = Parameter(
         m, name="Liability", domain=t, description="Stream of liabilities"
     )
@@ -185,7 +190,7 @@ def main():
     CashFlowCon[t] = (
         Sum(i, F[t, i] * x[i])
         + (v0 - Sum(i, Price[i] * x[i])).where[tau[t] == 0]
-        + ((1 + rf[t.lag(1)]) * surplus[t.lag(1)]).where[tau[t] > 0]
+        + ((1 + rf[t - 1]) * surplus[t - 1]).where[tau[t] > 0]
         == surplus[t] + Liability[t].where[tau[t] > 0]
     )
 

@@ -55,6 +55,7 @@ Special Issue on Linear Algebra in Control, Signals and Image Processing.
 from __future__ import annotations
 
 import pandas as pd
+
 from gamspy import (
     Container,
     Equation,
@@ -199,7 +200,9 @@ def main():
     reseq = Equation(
         m, name="reseq", domain=k, description="resource restriction on truss"
     )
-    trusscomp = Equation(m, name="trusscomp", description="compliance of truss")
+    trusscomp = Equation(
+        m, name="trusscomp", description="compliance of truss"
+    )
     stiffness = Equation(
         m,
         name="stifness",

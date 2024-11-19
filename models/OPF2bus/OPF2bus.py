@@ -24,6 +24,7 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 from __future__ import annotations
 
 import pandas as pd
+
 from gamspy import Container, Equation, Model, Parameter, Set, Sum, Variable
 
 
@@ -73,7 +74,9 @@ def main():
 
     eq1 = Sum(
         gen,
-        data[gen, "a"] * P[gen] * P[gen] + data[gen, "b"] * P[gen] + data[gen, "c"],
+        data[gen, "a"] * P[gen] * P[gen]
+        + data[gen, "b"] * P[gen]
+        + data[gen, "c"],
     )
     eq2[...] = P["g1"] == P12
     eq3[...] = P["g2"] + P12 == L2 / Sbase
@@ -81,8 +84,8 @@ def main():
 
     P.lo[gen] = data[gen, "Pmin"] / Sbase
     P.up[gen] = data[gen, "Pmax"] / Sbase
-    P12.lo[...] = -P12_max
-    P12.up[...] = P12_max
+    P12.lo = -P12_max
+    P12.up = P12_max
     delta.fx["1"] = 0
 
     OPF = Model(

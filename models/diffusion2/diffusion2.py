@@ -18,9 +18,8 @@ http://www.ce.utexas.edu/prof/mckynney/ce385d/papers/GAMS-Tutorial.pdf
 
 from __future__ import annotations
 
-import os
-
 import numpy as np
+
 from gamspy import (
     Card,
     Container,
@@ -485,9 +484,7 @@ def data_records():
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("GAMSPY_GAMS_SYSDIR", None),
-    )
+    m = Container()
 
     # SETS #
     time = Set(m, name="time", records=[f"t{t}" for t in range(1, 26)])
@@ -542,7 +539,7 @@ def main():
 
     # Initial values
     t.l[x, y] = 0.0
-    Q.l[...] = 0.0
+    Q.l = 0.0
 
     # EQUATIONS #
     temp = Equation(
@@ -614,15 +611,15 @@ def main():
         * (
             supply[x, y] / c / rho
             + (
-                (v[x.lead(1), y] + v[x, y]) * (t[x.lead(1), y] - t[x, y])
-                - (v[x, y] + v[x.lag(1), y]) * (t[x, y] - t[x.lag(1), y])
+                (v[x + 1, y] + v[x, y]) * (t[x + 1, y] - t[x, y])
+                - (v[x, y] + v[x - 1, y]) * (t[x, y] - t[x - 1, y])
             )
             / dx
             / dx
             / 2.0
             + (
-                (v[x, y.lead(1)] + v[x, y]) * (t[x, y.lead(1)] - t[x, y])
-                - (v[x, y.lag(1)] == v[x, y]) * (t[x, y] - t[x, y.lag(1)])
+                (v[x, y + 1] + v[x, y]) * (t[x, y + 1] - t[x, y])
+                - (v[x, y - 1] == v[x, y]) * (t[x, y] - t[x, y - 1])
             )
             / dy
             / dy
@@ -630,10 +627,10 @@ def main():
         )
     )
 
-    f1[x, y].where[(Ord(x) == 1)] = t[x.lead(1), y] - t[x, y] >= 0
-    f2[x, y].where[(Ord(x) == Card(x))] = t[x, y] - t[x.lag(1), y] <= 0
-    f3[x, y].where[(Ord(y) == 1)] = t[x, y.lead(1)] - t[x, y] >= 0
-    f4[x, y].where[(Ord(y) == Card(y))] = t[x, y] - t[x, y.lag(1)] <= 0
+    f1[x, y].where[(Ord(x) == 1)] = t[x + 1, y] - t[x, y] >= 0
+    f2[x, y].where[(Ord(x) == Card(x))] = t[x, y] - t[x - 1, y] <= 0
+    f3[x, y].where[(Ord(y) == 1)] = t[x, y + 1] - t[x, y] >= 0
+    f4[x, y].where[(Ord(y) == Card(y))] = t[x, y] - t[x, y - 1] <= 0
 
     fp1[x, y].where[(Ord(x) == 1)] = t[x, y] == Q
     fp2[x, y].where[(Ord(x) == Card(x))] = t[x, y] == Q

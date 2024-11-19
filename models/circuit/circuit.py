@@ -16,17 +16,14 @@ Application A34, pp.397.
 
 from __future__ import annotations
 
-import os
+import numpy as np
 
 import gamspy.math as gams_math
-import numpy as np
 from gamspy import Container, Equation, Model, Parameter, Set, Variable
 
 
 def main():
-    cont = Container(
-        system_directory=os.getenv("GAMSPY_GAMS_SYSDIR", None),
-    )
+    cont = Container()
 
     # SETS #
     n = Set(cont, name="n", records=[f"c{c}" for c in range(1, 5)])
@@ -150,38 +147,38 @@ def main():
     obj = x10
 
     # Bounds on variables
-    x1.lo[...] = 0
-    x1.up[...] = 10
-    x2.lo[...] = 0
-    x2.up[...] = 10
-    x3.lo[...] = 0
-    x3.up[...] = 10
-    x4.lo[...] = 0
-    x4.up[...] = 10
-    x5.lo[...] = 0
-    x5.up[...] = 10
-    x6.lo[...] = 0
-    x6.up[...] = 10
-    x7.lo[...] = 0
-    x7.up[...] = 10
-    x8.lo[...] = 0
-    x8.up[...] = 10
-    x9.lo[...] = 0
-    x9.up[...] = 10
-    x10.lo[...] = 0
-    x10.up[...] = 10
+    x1.lo = 0
+    x1.up = 10
+    x2.lo = 0
+    x2.up = 10
+    x3.lo = 0
+    x3.up = 10
+    x4.lo = 0
+    x4.up = 10
+    x5.lo = 0
+    x5.up = 10
+    x6.lo = 0
+    x6.up = 10
+    x7.lo = 0
+    x7.up = 10
+    x8.lo = 0
+    x8.up = 10
+    x9.lo = 0
+    x9.up = 10
+    x10.lo = 0
+    x10.up = 10
 
     # Initial point
-    x1.l[...] = 0.7
-    x2.l[...] = 0.38
-    x3.l[...] = 0.8
-    x4.l[...] = 1.5
-    x5.l[...] = 6
-    x6.l[...] = 6
-    x7.l[...] = 4
-    x8.l[...] = 1
-    x9.l[...] = 1.6
-    x10.l[...] = 1
+    x1.l = 0.7
+    x2.l = 0.38
+    x3.l = 0.8
+    x4.l = 1.5
+    x5.l = 6
+    x6.l = 6
+    x7.l = 4
+    x8.l = 1
+    x9.l = 1.6
+    x10.l = 1
 
     circuit = Model(
         cont,

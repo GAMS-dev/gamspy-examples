@@ -57,7 +57,9 @@ def main():
     mean = Parameter(
         cont, name="mean", domain=stocks, description="mean of daily return"
     )
-    dev = Parameter(cont, name="dev", domain=[stocks, days], description="deviations")
+    dev = Parameter(
+        cont, name="dev", domain=[stocks, days], description="deviations"
+    )
     totmean = Parameter(cont, name="totmean", description="total mean return")
 
     mean[s] = Sum(d, returns[s, d]) / Card(d)

@@ -30,7 +30,6 @@ Contributor: Benjamin Mueller and Felipe Serrano
 from __future__ import annotations
 
 import math
-import os
 
 from gamspy import Card, Container, Equation, Model, Ord, Sense, Set, Variable
 from gamspy.math import cos, sin
@@ -45,9 +44,7 @@ def fy(t):
 
 
 def main():
-    m = Container(
-        system_directory=os.getenv("GAMSPY_GAMS_SYSDIR", None),
-    )
+    m = Container()
 
     # Set
     i = Set(
@@ -147,10 +144,10 @@ def main():
     )
 
     t.l[i] = -math.pi + (Ord(i) - 1) * 2 * math.pi / Card(i)
-    x.l[...] = fx(t.l["1"])
-    y.l[...] = fy(t.l["1"])
-    a.l[...] = 1
-    b.l[...] = 1
+    x.l = fx(t.l["1"])
+    y.l = fy(t.l["1"])
+    a.l = 1
+    b.l = 1
 
     square.solve()
 

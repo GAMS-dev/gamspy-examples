@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+
 from gamspy import (
     Alias,
     Container,
@@ -51,11 +52,17 @@ def main():
     j = Alias(m, name="j", alias_with=i)
 
     # PARAMETER #
-    data = Parameter(m, name="data", domain=["*", "*", "*"], records=data_records())
+    data = Parameter(
+        m, name="data", domain=["*", "*", "*"], records=data_records()
+    )
 
     # VARIABLES #
-    rx = Variable(m, name="rx", domain=i, description="real part of the solution")
-    ix = Variable(m, name="ix", domain=i, description="imaginary part of the solution")
+    rx = Variable(
+        m, name="rx", domain=i, description="real part of the solution"
+    )
+    ix = Variable(
+        m, name="ix", domain=i, description="imaginary part of the solution"
+    )
 
     # EQUATIONS #
     real = Equation(
@@ -97,7 +104,9 @@ def main():
     rep["rx", i] = rx.l[i]
     rep["ix", i] = ix.l[i]
 
-    print("Objective Function Value:  ", round(syscomp.objective_value, 4), "\n")
+    print(
+        "Objective Function Value:  ", round(syscomp.objective_value, 4), "\n"
+    )
     print("Solution Summary:\n", rep.pivot().round(3))
 
     # End of SysComp

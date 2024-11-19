@@ -24,6 +24,7 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 from __future__ import annotations
 
 import pandas as pd
+
 from gamspy import Container, Equation, Model, Parameter, Set, Sum, Variable
 
 
@@ -132,7 +133,7 @@ def main():
     END3.solve()
     report[gen, "penalty"] = P.l[gen]
 
-    TE.up[...] = 90000
+    TE.up = 90000
     END1.solve()
 
     import math

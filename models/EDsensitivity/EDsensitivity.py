@@ -24,6 +24,7 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 from __future__ import annotations
 
 import pandas as pd
+
 from gamspy import (
     Card,
     Container,
@@ -77,7 +78,9 @@ def main():
     # EQUATIONS #
     eq1 = Sum(
         gen,
-        data[gen, "a"] * P[gen] * P[gen] + data[gen, "b"] * P[gen] + data[gen, "c"],
+        data[gen, "a"] * P[gen] * P[gen]
+        + data[gen, "b"] * P[gen]
+        + data[gen, "c"],
     )
 
     eq2 = Equation(m, name="eq2", type="regular")
@@ -96,9 +99,9 @@ def main():
     )
 
     for idx, cc in enumerate(counter.toList()):
-        load[...] = Sum(gen, data[gen, "Pmin"]) + ((idx) / (Card(counter) - 1)) * Sum(
-            gen, data[gen, "Pmax"] - data[gen, "Pmin"]
-        )
+        load[...] = Sum(gen, data[gen, "Pmin"]) + (
+            (idx) / (Card(counter) - 1)
+        ) * Sum(gen, data[gen, "Pmax"] - data[gen, "Pmin"])
         ECD.solve()
         repGen[cc, gen] = P.l[gen]
         report[cc, "OF"] = ECD.objective_value

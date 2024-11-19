@@ -64,7 +64,9 @@ def main():
     # Constraints:
     g1[...] = 27 / (x1 * gams_math.power(x2, 2) * x3) - 1 <= 0
 
-    g2[...] = 397.5 / (x1 * gams_math.power(x2, 2) * gams_math.power(x3, 2)) - 1 <= 0
+    g2[...] = (
+        397.5 / (x1 * gams_math.power(x2, 2) * gams_math.power(x3, 2)) - 1 <= 0
+    )
 
     g3[...] = (1.93 * gams_math.power(x4, 3)) / (
         x2 * x3 * gams_math.power(x6, 4)
@@ -93,20 +95,20 @@ def main():
     g11[...] = (1.1 * x7 + 1.9) / x5 - 1 <= 0
 
     # Bounds on variables
-    x1.lo[...] = 2.6
-    x1.up[...] = 3.6
-    x2.lo[...] = 0.7
-    x2.up[...] = 0.8
-    x3.lo[...] = 17
-    x3.up[...] = 28
-    x4.lo[...] = 7.3
-    x4.up[...] = 8.3
-    x5.lo[...] = 7.8
-    x5.up[...] = 8.3
-    x6.lo[...] = 2.9
-    x6.up[...] = 3.9
-    x7.lo[...] = 5.0
-    x7.up[...] = 5.5
+    x1.lo = 2.6
+    x1.up = 3.6
+    x2.lo = 0.7
+    x2.up = 0.8
+    x3.lo = 17
+    x3.up = 28
+    x4.lo = 7.3
+    x4.up = 8.3
+    x5.lo = 7.8
+    x5.up = 8.3
+    x6.lo = 2.9
+    x6.up = 3.9
+    x7.lo = 5.0
+    x7.up = 5.5
 
     speed = Model(
         m,

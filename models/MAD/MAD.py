@@ -44,11 +44,19 @@ def main():
     i, l = m.getSymbols(["i", "l"])
 
     # SCALARS #
-    Budget = Parameter(m, name="Budget", description="Nominal investment budget")
-    MU_TARGET = Parameter(m, name="MU_TARGET", description="Target portfolio return")
+    Budget = Parameter(
+        m, name="Budget", description="Nominal investment budget"
+    )
+    MU_TARGET = Parameter(
+        m, name="MU_TARGET", description="Target portfolio return"
+    )
     MU_STEP = Parameter(m, name="MU_STEP", description="Target return step")
-    MIN_MU = Parameter(m, name="MIN_MU", description="Minimum return in universe")
-    MAX_MU = Parameter(m, name="MAX_MU", description="Maximum return in universe")
+    MIN_MU = Parameter(
+        m, name="MIN_MU", description="Minimum return in universe"
+    )
+    MAX_MU = Parameter(
+        m, name="MAX_MU", description="Maximum return in universe"
+    )
 
     Budget[...] = 100.0
 
@@ -203,7 +211,7 @@ def main():
         MU_TARGET[...] = mu_target
 
         MeanVariance.solve()
-        z.l[...] = gams_math.sqrt(z.l)
+        z.l = gams_math.sqrt(z.l)
 
         output_csv += f"{z.records.level.round(3)[0]},{round(MU_TARGET.records.value[0] * Budget.records.value[0],3)},"
         x_recs = [str(x_rec) for x_rec in x.records.level.round(3).tolist()]

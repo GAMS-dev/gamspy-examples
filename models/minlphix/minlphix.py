@@ -39,27 +39,27 @@ A Superstructure of the form ...
 
                         _______               _______
                        _|_    |              _|_    |
-                      /   \  ( )            /   \  ( )
+                      /   |  ( )            /   |  ( )
                       |   |___|__ A         |   |___|___ B
                       |   |                 |   |
             |---------| 1 |                 | 3 |
             |         |   |       ----------|   |
             |         |   |       |         |   |
             |         |   |_______|         |   |
-            |         \___/  |  BC          \___/_______ C
+            |         |___/  |  BC          |___/_______ C
      F      |           |   ( )               |     |
    -------->|           |____|                |----( )
    (ABC)    |
             |           _______               _______
             |          _|_    |              _|_    |
-            |         /   \  ( )            /   \  ( )
+            |         /   |  ( )            /   |  ( )
             |         |   |___| AB          |   |___|___ A
             |         |   |   |_____________|   |
             |---------| 2 |                 | 4 |
                       |   |                 |   |
                       |   |                 |   |
                       |   |______ C         |   |_______ B
-                      \___/  |              \___/   |
+                      |___/  |              |___/   |
                         |   ( )               |    ( )
                         |____|                |_____|
 
@@ -83,6 +83,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+
 from gamspy import (
     Alias,
     Container,
@@ -116,7 +117,9 @@ def main():
         records=[f"r-{i}" for i in range(1, 5)],
         description="reboilers",
     )
-    hu = Set(cont, name="hu", records=["lp", "ex"], description="hot utilities")
+    hu = Set(
+        cont, name="hu", records=["lp", "ex"], description="hot utilities"
+    )
     cu = Set(cont, name="cu", records=["cw"], description="cold utilities")
     n = Set(cont, name="n", records=["a", "b"], description="index")
     m = Set(cont, name="m", records=["ab", "bc"], description="intermediates")
@@ -170,7 +173,9 @@ def main():
         domain=[i, j],
         description="direction of heat integration",
     )
-    zcr = Set(cont, name="zcr", domain=[i, j], description="reboiler-condenser pairs")
+    zcr = Set(
+        cont, name="zcr", domain=[i, j], description="reboiler-condenser pairs"
+    )
 
     zlim[i, j] = zcrhx[i, j] & (Ord(i) < Ord(j))
     zcr[i, j] = Ord(i) == Ord(j)
@@ -638,14 +643,17 @@ def main():
         )
         + Sum(
             [i, cu],
-            fchx * ycu[i, cu] + (vchx / htc) * (qcu[i, cu] / (lmtd[i] + 1 - ycol[i])),
+            fchx * ycu[i, cu]
+            + (vchx / htc) * (qcu[i, cu] / (lmtd[i] + 1 - ycol[i])),
         )
         + Sum(
             [hu, j],
-            fchx * yhu[hu, j] + (vchx / htc) * (qhu[hu, j] / (thu[hu] - tr[j])),
+            fchx * yhu[hu, j]
+            + (vchx / htc) * (qhu[hu, j] / (thu[hu] - tr[j])),
         )
     ) + beta * (
-        Sum([i, cu], costcw * qcu[i, cu]) + Sum([hu, j], costhu[hu] * qhu[hu, j])
+        Sum([i, cu], costcw * qcu[i, cu])
+        + Sum([hu, j], costhu[hu] * qhu[hu, j])
     )
 
     # limit the denominator in the second line of the objective away from zero
@@ -670,7 +678,9 @@ def main():
 
     feed[...] = Sum(zlead[i], f[i]) == totflow
 
-    duty[i] = qc[i] == (kf[i, "a"] + kf[i, "b"] * (tc[i] - tcmin[i])) + s3[i] - s4[i]
+    duty[i] = (
+        qc[i] == (kf[i, "a"] + kf[i, "b"] * (tc[i] - tcmin[i])) + s3[i] - s4[i]
+    )
 
     rebcon[zcr[i, j]] = qr[j] == qc[i]
 
@@ -725,7 +735,9 @@ def main():
             zcrhx[i, j],
             yhx[i, j]
             + Sum(
-                Domain(ip, jp).where[(Ord(ip) == Ord(j)) & (Ord(jp) == Ord(i))],
+                Domain(ip, jp).where[
+                    (Ord(ip) == Ord(j)) & (Ord(jp) == Ord(i))
+                ],
                 yhx[ip, jp],
             ),
         )
@@ -752,7 +764,7 @@ def main():
 
     import math
 
-    assert math.isclose(skip.objective_value, 316.6927, rel_tol=0.001)
+    assert math.isclose(skip.objective_value, 316.6926941764859)
 
     print("Best integer solution found:", skip.objective_value)
 

@@ -24,8 +24,9 @@ DOI: doi.org/10.1007/978-3-319-62350-4
 
 from __future__ import annotations
 
-import gamspy.math as gams_math
 import pandas as pd
+
+import gamspy.math as gams_math
 from gamspy import (
     Container,
     Equation,
@@ -115,7 +116,9 @@ def main():
         records=data_records()[0],
         description="generator cost characteristics and limits",
     )
-    data = Parameter(m, name="data", domain=[t, "*"], records=data_records()[1])
+    data = Parameter(
+        m, name="data", domain=[t, "*"], records=data_records()[1]
+    )
 
     # VARIABLES #
     p = Variable(
@@ -168,14 +171,14 @@ def main():
         + gendata[g, "c"],
     )
 
-    Genconst3[g, t] = p[g, t.lead(1)] - p[g, t] <= gendata[g, "RU0"]
+    Genconst3[g, t] = p[g, t + 1] - p[g, t] <= gendata[g, "RU0"]
 
-    Genconst4[g, t] = p[g, t.lag(1)] - p[g, t] <= gendata[g, "RD0"]
+    Genconst4[g, t] = p[g, t - 1] - p[g, t] <= gendata[g, "RD0"]
 
     constESS[t] = (
         SOC[t]
         == SOC0.where[Ord(t) == 1]
-        + SOC[t.lag(1)].where[Ord(t) > 1]
+        + SOC[t - 1].where[Ord(t) > 1]
         + Pc[t] * eta_c
         - Pd[t] / eta_d
     )
@@ -196,7 +199,9 @@ def main():
 
     import math
 
-    assert math.isclose(DEDESScostbased.objective_value, 223360.0645, rel_tol=0.001)
+    assert math.isclose(
+        DEDESScostbased.objective_value, 223360.0645, rel_tol=0.001
+    )
 
     # Reporting parameter
     rep = Parameter(m, name="rep", domain=[t, "*"])

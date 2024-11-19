@@ -19,8 +19,9 @@ Journal of Economic Dynamics and Control 4, 2 (1982) pp.149-170.
 
 from __future__ import annotations
 
-import gamspy.math as gams_math
 import numpy as np
+
+import gamspy.math as gams_math
 from gamspy import (
     Alias,
     Card,
@@ -40,8 +41,12 @@ def main():
     cont = Container()
 
     # SETS #
-    n = Set(cont, name="n", records=["consumpt", "invest"], description="states")
-    m = Set(cont, name="m", records=["gov-expend", "money"], description="controls")
+    n = Set(
+        cont, name="n", records=["consumpt", "invest"], description="states"
+    )
+    m = Set(
+        cont, name="m", records=["gov-expend", "money"], description="controls"
+    )
     k = Set(
         cont,
         name="k",
@@ -159,8 +164,8 @@ def main():
         (u[m, ku] - utilde[m, ku]) * rk[m, mp] * (u[mp, ku] - utilde[mp, ku]),
     )
 
-    stateq[n, k.lead(1)] = (
-        x[n, k.lead(1)]
+    stateq[n, k + 1] = (
+        x[n, k + 1]
         == Sum(nn, a[n, nn] * x[nn, k]) + Sum(m, b[n, m] * u[m, k]) + c[n]
     )
 

@@ -63,7 +63,9 @@ def main():
         domain=[c, h],
         description="demand function share parameter",
     )
-    a = Parameter(m, "a", domain=[c, s], description="activity analysis matrix")
+    a = Parameter(
+        m, "a", domain=[c, s], description="activity analysis matrix"
+    )
 
     alpha[c, h] = d[c, h] / Sum(cc, d[cc, h])
     a[c, s] = data["output", c, s] - data["input", c, s]
@@ -78,7 +80,9 @@ def main():
     y = Variable(
         m, "y", type=VariableType.POSITIVE, domain=s, description="production"
     )
-    i = Variable(m, "i", type=VariableType.POSITIVE, domain=h, description="income")
+    i = Variable(
+        m, "i", type=VariableType.POSITIVE, domain=h, description="income"
+    )
 
     mkt = Equation(m, "mkt", domain=c, description="commodity market")
     profit = Equation(m, "profit", domain=s, description="zero profit")

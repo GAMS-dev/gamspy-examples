@@ -58,9 +58,12 @@ def main():
         5.72 * (10**6) * (gams_math.power(q1, 2)) * q2
         + 113 * (10**6) * (gams_math.power(q1, 2))
         + 4250 * (10**6) * q1
-    ) * (gams_math.power(w, 2)) + (453 * (10**6) * (gams_math.power(q1, 2))) == 0
+    ) * (gams_math.power(w, 2)) + (
+        453 * (10**6) * (gams_math.power(q1, 2))
+    ) == 0
     g2[...] = (
-        50 * (gams_math.power(q1, 2)) * (gams_math.power(q2, 2)) + 1080 * q1 * q2
+        50 * (gams_math.power(q1, 2)) * (gams_math.power(q2, 2))
+        + 1080 * q1 * q2
     ) * (gams_math.power(w, 6)) - (
         15.6 * 1000 * (gams_math.power(q1, 2)) * (gams_math.power(q2, 2))
         + 840 * (gams_math.power(q1, 2)) * q2
@@ -79,18 +82,18 @@ def main():
     b2l[...] = 20.0 - 15.0 * k <= q2
     b2u[...] = q2 <= 20.0 + 15.0 * k
 
-    q1.lo[...] = 0
-    q1.up[...] = 2
-    q2.lo[...] = 0
-    q2.up[...] = 2
-    w.lo[...] = 0
-    w.up[...] = 2
-    k.lo[...] = 0
-    k.up[...] = 2
-    q1.l[...] = 0.1
-    q2.l[...] = 0.1
-    w.l[...] = 0.1
-    k.l[...] = 0.1
+    q1.lo = 0
+    q1.up = 2
+    q2.lo = 0
+    q2.up = 2
+    w.lo = 0
+    w.up = 2
+    k.lo = 0
+    k.up = 2
+    q1.l = 0.1
+    q2.l = 0.1
+    w.l = 0.1
+    k.l = 0.1
 
     benz = Model(
         m,

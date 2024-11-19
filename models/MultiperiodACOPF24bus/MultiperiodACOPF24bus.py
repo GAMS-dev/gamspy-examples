@@ -25,8 +25,9 @@ from __future__ import annotations
 
 import math
 
-import gamspy.math as gams_math
 import pandas as pd
+
+import gamspy.math as gams_math
 from gamspy import (
     Alias,
     Card,
@@ -271,9 +272,9 @@ def main():
         sqr(LN[i, j, "x"]) + sqr(LN[i, j, "r"])
     )
     LN[j, i, "z"].where[LN[i, j, "z"] == 0] = LN[i, j, "z"]
-    LN[i, j, "th"].where[(LN[i, j, "Limit"]) & (LN[i, j, "x"]) & (LN[i, j, "r"])] = (
-        gams_math.atan(LN[i, j, "x"] / (LN[i, j, "r"]))
-    )
+    LN[i, j, "th"].where[
+        (LN[i, j, "Limit"]) & (LN[i, j, "x"]) & (LN[i, j, "r"])
+    ] = gams_math.atan(LN[i, j, "x"] / (LN[i, j, "r"]))
     LN[i, j, "th"].where[
         (LN[i, j, "Limit"]) & (LN[i, j, "x"]) & (LN[i, j, "r"] == 0)
     ] = math.pi / 2
@@ -308,7 +309,9 @@ def main():
         Pij[i, j, t]
         == (
             V[i, t] * V[i, t] * gams_math.cos(LN[j, i, "th"])
-            - V[i, t] * V[j, t] * gams_math.cos(Va[i, t] - Va[j, t] + LN[j, i, "th"])
+            - V[i, t]
+            * V[j, t]
+            * gams_math.cos(Va[i, t] - Va[j, t] + LN[j, i, "th"])
         )
         / LN[j, i, "z"]
     )
@@ -317,7 +320,9 @@ def main():
         Qij[i, j, t]
         == (
             V[i, t] * V[i, t] * gams_math.sin(LN[j, i, "th"])
-            - V[i, t] * V[j, t] * gams_math.sin(Va[i, t] - Va[j, t] + LN[j, i, "th"])
+            - V[i, t]
+            * V[j, t]
+            * gams_math.sin(Va[i, t] - Va[j, t] + LN[j, i, "th"])
         )
         / LN[j, i, "z"]
         - LN[j, i, "b"] * V[i, t] * V[i, t] / 2
@@ -332,15 +337,16 @@ def main():
     ] / Sbase == Sum(j.where[cx[j, i]], Qij[i, j, t])
 
     eq5[...] = (
-        Sum([i, t], Pg[i, t] * GenD[i, "b"] * Sbase.where[GenD[i, "Pmax"]]) <= OF
+        Sum([i, t], Pg[i, t] * GenD[i, "b"] * Sbase.where[GenD[i, "Pmax"]])
+        <= OF
     )
 
     eq6[i, t].where[(GenD[i, "Pmax"]) & (Ord(t) > 1)] = (
-        Pg[i, t] - Pg[i, t.lag(1)] <= GenD[i, "RU"] / Sbase
+        Pg[i, t] - Pg[i, t - 1] <= GenD[i, "RU"] / Sbase
     )
 
     eq7[i, t].where[(GenD[i, "Pmax"]) & (Ord(t) < Card(t))] = (
-        Pg[i, t] - Pg[i, t.lead(1)] <= GenD[i, "RD"] / Sbase
+        Pg[i, t] - Pg[i, t + 1] <= GenD[i, "RD"] / Sbase
     )
 
     loadflow = Model(
@@ -373,7 +379,7 @@ def main():
     Pw.up[i, t] = WD[t, "w"] * Wcap[i] / Sbase
     Pw.lo[i, t] = 0
 
-    loadflow.solve()
+    loadflow.solve(solver="CONOPT")
 
     # Reporting Parameters
     report = Parameter(m, name="report", domain=[t, i, "*"])

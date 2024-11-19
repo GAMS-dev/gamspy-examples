@@ -36,7 +36,7 @@ from gamspy import (
 from gamspy.math import Max as gams_max
 
 
-def main(gr_c=8, gg_c=4, nw_c=10, mip=False):
+def main(gr_c=8, gg_c=4, nw_c=10, mip=True):
     cont = Container()
 
     gf_c = gr_c * gg_c
@@ -65,7 +65,9 @@ def main(gr_c=8, gg_c=4, nw_c=10, mip=False):
     gf1 = Alias(cont, name="gf1", alias_with=gf)
     gf2 = Alias(cont, name="gf2", alias_with=gf)
 
-    mgf = Set(cont, name="mgf", domain=[gf1, gf2], description="possible meeting")
+    mgf = Set(
+        cont, name="mgf", domain=[gf1, gf2], description="possible meeting"
+    )
     mgf[gf1, gf2] = Ord(gf2) > Ord(gf1)
 
     # Variable
@@ -128,7 +130,9 @@ def main(gr_c=8, gg_c=4, nw_c=10, mip=False):
     )
 
     if not isinstance(mip, bool):
-        raise Exception(f"Argument <mip> should be a boolean. Not {type(mip)}.")
+        raise Exception(
+            f"Argument <mip> should be a boolean. Not {type(mip)}."
+        )
 
     if mip:
         m.type = "binary"
@@ -158,7 +162,9 @@ def main(gr_c=8, gg_c=4, nw_c=10, mip=False):
         defredm[mgf] = redm[mgf] >= numm[mgf] - 1
 
     else:
-        defm[w, gr, mgf[gf1, gf2]] = m[w, gr, mgf] == x[w, gr, gf1] & x[w, gr, gf2]
+        defm[w, gr, mgf[gf1, gf2]] = (
+            m[w, gr, mgf] == x[w, gr, gf1] & x[w, gr, gf2]
+        )
 
         defredm[mgf] = redm[mgf] == gams_max(0, numm[mgf] - 1)
 

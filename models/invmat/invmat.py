@@ -16,6 +16,7 @@ X is the inverse of A.
 from __future__ import annotations
 
 import numpy as np
+
 from gamspy import (
     Alias,
     Container,
@@ -100,7 +101,9 @@ def main():
 
     # PARAMETERS #
     b = Parameter(m, name="b", domain=i, description="Righ-hand Side term")
-    ainv = Parameter(m, name="ainv", domain=[i, j], description="inverse matrix of A")
+    ainv = Parameter(
+        m, name="ainv", domain=[i, j], description="inverse matrix of A"
+    )
 
     eobj[...] = obj == 0
     lin[i] = Sum(k, a[i, k] * col[k]) == b[i]
