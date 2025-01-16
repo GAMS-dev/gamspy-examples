@@ -12,7 +12,7 @@ The example models are distributed as either Python script files (under [models]
 ```
 git clone git@github.com:GAMS-dev/gamspy-examples.git
 pip install -r requirements.txt
-```
+```adsfs
 
 ## Running Locally
 
