@@ -10,6 +10,7 @@ def test_all_models():
             content = file.read()
             if "LICENSETYPE: Requires license" in content or "LICENSETYPE: Community" in content or "hansmge" in model:
                 continue
-
-        return_code = subprocess.call(["python", model], stdout=subprocess.DEVNULL)
+            
+        print(f"Running {model}...")
+        return_code = subprocess.call(["python", model])
         assert return_code == 0

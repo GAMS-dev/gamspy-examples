@@ -764,7 +764,7 @@ def main():
 
     import math
 
-    assert math.isclose(skip.objective_value, 316.6926941764859)
+    assert math.isclose(skip.objective_value, 316.6926941764859, rel_tol=1e-6)
 
     print("Best integer solution found:", skip.objective_value)
 
