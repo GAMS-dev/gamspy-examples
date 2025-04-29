@@ -1,0 +1,3524 @@
+[
+    {
+        "id": 10259,
+        "cuisine": "greek",
+        "ingredients": [
+            "lettuce",
+            "tomatoes",
+            "garlic",
+            "pepper",
+            "onion",
+            "cumin",
+            "coriander",
+            "bean",
+            "cheese"
+        ],
+        "quantities": [
+            "0.35",
+            "0.53",
+            "0.14",
+            "0.02",
+            "0.10",
+            "0.39",
+            "0.09",
+            "0.82",
+            "0.09"
+        ]
+    },
+    {
+        "id": 25693,
+        "cuisine": "southern_us",
+        "ingredients": [
+            "flour",
+            "pepper",
+            "salt",
+            "tomatoes",
+            "black pepper",
+            "thyme",
+            "eggs",
+            "milk",
+            "oil"
+        ],
+        "quantities": [
+            "0.32",
+            "0.03",
+            "0.16",
+            "1.09",
+            "0.13",
+            "0.26",
+            "0.13",
+            "0.10",
+            "0.05"
+        ]
+    },
+    {
+        "id": 20130,
+        "cuisine": "filipino",
+        "ingredients": [
+            "eggs",
+            "pepper",
+            "salt",
+            "oil",
+            "chili",
+            "chicken breast",
+            "garlic",
+            "onion",
+            "butter",
+            "whole chicken"
+        ],
+        "quantities": [
+            "0.31",
+            "0.03",
+            "0.14",
+            "0.06",
+            "2.15",
+            "2.13",
+            "0.11",
+            "0.03",
+            "0.26",
+            "1.96"
+        ]
+    },
+    {
+        "id": 6602,
+        "cuisine": "jamaican",
+        "ingredients": [
+            "flour",
+            "sugar",
+            "butter",
+            "eggs",
+            "ginger",
+            "salt",
+            "cinnamon",
+            "milk",
+            "vanilla"
+        ],
+        "quantities": [
+            "0.19",
+            "0.28",
+            "0.13",
+            "0.07",
+            "0.17",
+            "0.13",
+            "0.15",
+            "0.25",
+            "0.03"
+        ]
+    },
+    {
+        "id": 42779,
+        "cuisine": "spanish",
+        "ingredients": [
+            "oil",
+            "salt",
+            "shrimp",
+            "pepper",
+            "garlic",
+            "cilantro",
+            "parsley",
+            "sirloin steak",
+            "vinegar",
+            "salt",
+            "ham"
+        ],
+        "quantities": [
+            "0.06",
+            "0.11",
+            "0.70",
+            "0.02",
+            "0.11",
+            "0.36",
+            "0.08",
+            "1.09",
+            "0.03",
+            "0.30",
+            "0.32"
+        ]
+    },
+    {
+        "id": 16903,
+        "cuisine": "mexican",
+        "ingredients": [
+            "oil",
+            "onion",
+            "pork chops",
+            "peppers",
+            "jalapenos",
+            "tortillas",
+            "cheddar cheese",
+            "black pepper",
+            "salt",
+            "lettuce",
+            "chili",
+            "cilantro"
+        ],
+        "quantities": [
+            "0.05",
+            "0.14",
+            "1.99",
+            "0.92",
+            "3.15",
+            "0.59",
+            "0.16",
+            "0.08",
+            "0.30",
+            "0.30",
+            "2.83",
+            "0.22"
+        ]
+    },
+    {
+        "id": 45887,
+        "cuisine": "chinese",
+        "ingredients": [
+            "ginger",
+            "bean",
+            "black pepper",
+            "oil",
+            "sugar",
+            "wine",
+            "garlic",
+            "beef extra lean",
+            "red pepper"
+        ],
+        "quantities": [
+            "0.18",
+            "0.77",
+            "0.28",
+            "0.06",
+            "0.12",
+            "0.69",
+            "0.17",
+            "0.60",
+            "0.03"
+        ]
+    },
+    {
+        "id": 2698,
+        "cuisine": "italian",
+        "ingredients": [
+            "parsley",
+            "red pepper",
+            "oil",
+            "lemon",
+            "fish",
+            "garlic",
+            "chili",
+            "salt",
+            "parsley"
+        ],
+        "quantities": [
+            "0.16",
+            "0.04",
+            "0.05",
+            "0.09",
+            "1.05",
+            "0.11",
+            "1.83",
+            "0.22",
+            "0.15"
+        ]
+    },
+    {
+        "id": 41995,
+        "cuisine": "mexican",
+        "ingredients": [
+            "cinnamon",
+            "cilantro",
+            "chili",
+            "coriander",
+            "salt",
+            "black pepper",
+            "garlic",
+            "tomatoes",
+            "avocado",
+            "lime",
+            "steak",
+            "salt",
+            "cumin",
+            "black pepper",
+            "oil",
+            "onions"
+        ],
+        "quantities": [
+            "0.15",
+            "0.22",
+            "1.06",
+            "0.07",
+            "0.08",
+            "0.10",
+            "0.08",
+            "0.28",
+            "0.52",
+            "0.14",
+            "0.98",
+            "0.23",
+            "0.19",
+            "0.20",
+            "0.04",
+            "1.12"
+        ]
+    },
+    {
+        "id": 31908,
+        "cuisine": "italian",
+        "ingredients": [
+            "parmesan",
+            "butter",
+            "flour",
+            "chicken stock",
+            "cheese",
+            "black pepper",
+            "bacon",
+            "spaghetti",
+            "milk",
+            "oil",
+            "salt"
+        ],
+        "quantities": [
+            "0.08",
+            "0.16",
+            "0.46",
+            "3.13",
+            "0.11",
+            "0.04",
+            "0.45",
+            "0.50",
+            "0.20",
+            "0.05",
+            "0.15"
+        ]
+    },
+    {
+        "id": 13121,
+        "cuisine": "thai",
+        "ingredients": [
+            "pork loin",
+            "peanut butter",
+            "cilantro",
+            "basil",
+            "rice",
+            "shrimp",
+            "bean"
+        ],
+        "quantities": [
+            "0.69",
+            "0.03",
+            "0.02",
+            "0.37",
+            "0.55",
+            "2.24",
+            "0.07"
+        ]
+    },
+    {
+        "id": 49136,
+        "cuisine": "italian",
+        "ingredients": [
+            "tomatoes",
+            "butter",
+            "parsley",
+            "oil",
+            "spaghetti",
+            "bacon",
+            "red pepper",
+            "olives",
+            "lemon",
+            "garlic"
+        ],
+        "quantities": [
+            "0.80",
+            "0.13",
+            "0.02",
+            "0.04",
+            "0.66",
+            "0.20",
+            "0.04",
+            "0.29",
+            "0.22",
+            "0.09"
+        ]
+    },
+    {
+        "id": 27976,
+        "cuisine": "cajun_creole",
+        "ingredients": [
+            "lemon",
+            "tomatoes",
+            "paprika",
+            "mango",
+            "chicken stock",
+            "chili",
+            "onions",
+            "peppers",
+            "oil"
+        ],
+        "quantities": [
+            "0.21",
+            "0.71",
+            "0.33",
+            "1.81",
+            "2.91",
+            "1.22",
+            "0.42",
+            "0.65",
+            "0.05"
+        ]
+    },
+    {
+        "id": 31318,
+        "cuisine": "southern_us",
+        "ingredients": [
+            "milk",
+            "parmesan cheese",
+            "celery",
+            "mustard powder",
+            "cod",
+            "onion",
+            "butter",
+            "flour",
+            "black pepper",
+            "potatoes",
+            "salt",
+            "red bell pepper",
+            "pepper",
+            "old bay seasoning",
+            "dry bread crumbs"
+        ],
+        "quantities": [
+            "0.04",
+            "1.00",
+            "0.34",
+            "1.00",
+            "1.00",
+            "0.07",
+            "0.15",
+            "0.22",
+            "0.14",
+            "0.67",
+            "0.17",
+            "1.00",
+            "0.02",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 31027,
+        "cuisine": "irish",
+        "ingredients": [
+            "vegetable oil cooking spray",
+            "golden raisins",
+            "salt",
+            "margarine",
+            "eggs",
+            "mace",
+            "brewed tea",
+            "flour",
+            "orange",
+            "nutmeg",
+            "raisins",
+            "grated lemon zest",
+            "cinnamon",
+            "dried currants",
+            "baking powder",
+            "rum extract",
+            "dark brown sugar"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "0.21",
+            "0.00",
+            "0.06",
+            "1.00",
+            "1.00",
+            "0.09",
+            "0.38",
+            "0.02",
+            "1.00",
+            "1.00",
+            "0.04",
+            "1.00",
+            "0.13",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 47095,
+        "cuisine": "korean",
+        "ingredients": [
+            "sugar",
+            "noodles",
+            "pork",
+            "corn starch",
+            "bok choy",
+            "bean",
+            "red potato",
+            "kosher salt",
+            "onions"
+        ],
+        "quantities": [
+            "0.21",
+            "1.00",
+            "1.28",
+            "1.00",
+            "1.24",
+            "0.05",
+            "1.00",
+            "1.00",
+            "1.21"
+        ]
+    },
+    {
+        "id": 4574,
+        "cuisine": "chinese",
+        "ingredients": [
+            "wine",
+            "shiitake",
+            "sesame oil",
+            "oil",
+            "soy sauce",
+            "egg roll wrappers",
+            "garlic",
+            "corn starch",
+            "sugar",
+            "black pepper",
+            "pork",
+            "carrots",
+            "ginger",
+            "salt",
+            "cabbage"
+        ],
+        "quantities": [
+            "0.84",
+            "1.00",
+            "0.20",
+            "0.05",
+            "0.06",
+            "1.00",
+            "0.15",
+            "1.00",
+            "0.20",
+            "0.17",
+            "1.96",
+            "0.98",
+            "0.18",
+            "0.22",
+            "1.29"
+        ]
+    },
+    {
+        "id": 19757,
+        "cuisine": "mexican",
+        "ingredients": [
+            "beans",
+            "quinoa",
+            "garlic",
+            "lime",
+            "tomatoes",
+            "cilantro",
+            "kosher salt",
+            "chili",
+            "frozen corn",
+            "olive oil",
+            "vegetable broth"
+        ],
+        "quantities": [
+            "0.65",
+            "1.00",
+            "0.11",
+            "0.05",
+            "0.83",
+            "0.03",
+            "1.00",
+            "1.45",
+            "1.00",
+            "0.08",
+            "1.00"
+        ]
+    },
+    {
+        "id": 35570,
+        "cuisine": "southern_us",
+        "ingredients": [
+            "salt",
+            "butter",
+            "red bell pepper",
+            "black pepper",
+            "okra pods",
+            "yellow bell pepper",
+            "cilantro"
+        ],
+        "quantities": [
+            "0.15",
+            "0.12",
+            "1.00",
+            "0.11",
+            "1.00",
+            "1.00",
+            "0.04"
+        ]
+    },
+    {
+        "id": 44812,
+        "cuisine": "chinese",
+        "ingredients": [
+            "salt",
+            "garlic cloves",
+            "orange",
+            "sauce",
+            "onions",
+            "soy sauce",
+            "star ",
+            "chinese five-spice powder",
+            "brown sugar",
+            "ginger",
+            "duck"
+        ],
+        "quantities": [
+            "0.12",
+            "1.00",
+            "0.19",
+            "0.01",
+            "1.82",
+            "0.07",
+            "1.00",
+            "1.00",
+            "0.36",
+            "0.11",
+            "1.00"
+        ]
+    },
+    {
+        "id": 27858,
+        "cuisine": "moroccan",
+        "ingredients": [
+            "tomato paste",
+            "unsalted butter",
+            "dried mint flakes",
+            "purple onion",
+            "cumin",
+            "olive oil",
+            "parmesan cheese",
+            " tomatoes",
+            "penne rigate",
+            "milk",
+            "ras el hanout",
+            "lamb",
+            "cinnamon",
+            "large eggs",
+            "large garlic cloves",
+            "flour"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.28",
+            "0.13",
+            "0.01",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.21",
+            "1.00",
+            "1.00",
+            "0.11",
+            "1.00",
+            "1.00",
+            "0.40"
+        ]
+    },
+    {
+        "id": 18624,
+        "cuisine": "irish",
+        "ingredients": [
+            "salt",
+            "large egg whites",
+            "oil",
+            "sugar",
+            "cooking spray",
+            "flour",
+            "large eggs",
+            "milk"
+        ],
+        "quantities": [
+            "0.27",
+            "1.00",
+            "0.06",
+            "0.28",
+            "1.00",
+            "0.58",
+            "1.00",
+            "0.27"
+        ]
+    },
+    {
+        "id": 9406,
+        "cuisine": "chinese",
+        "ingredients": [
+            "sugar",
+            "cabbage",
+            "garlic",
+            "chicken",
+            "soy sauce",
+            "butter",
+            "vinegar",
+            "chili",
+            "sesame oil",
+            "salt",
+            "cucumber",
+            "pepper",
+            "ginger",
+            "rice"
+        ],
+        "quantities": [
+            "0.36",
+            "1.72",
+            "0.11",
+            "3.67",
+            "0.14",
+            "0.18",
+            "0.07",
+            "0.93",
+            "0.32",
+            "0.17",
+            "1.00",
+            "0.02",
+            "0.09",
+            "0.89"
+        ]
+    },
+    {
+        "id": 35132,
+        "cuisine": "irish",
+        "ingredients": [
+            "crusty bread",
+            "salt",
+            "potatoes",
+            "olive oil",
+            "parsley",
+            "bacon",
+            "sausages",
+            "chicken stock",
+            "black pepper",
+            "onions"
+        ],
+        "quantities": [
+            "1.00",
+            "0.24",
+            "0.62",
+            "0.19",
+            "0.11",
+            "0.37",
+            "1.00",
+            "1.85",
+            "0.11",
+            "1.12"
+        ]
+    },
+    {
+        "id": 33071,
+        "cuisine": "mexican",
+        "ingredients": [
+            "piloncillo",
+            "hibiscus",
+            "cloves",
+            "cinnamon sticks",
+            "gronutmeg",
+            "white sugar"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "0.33",
+            "1.00",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 8321,
+        "cuisine": "italian",
+        "ingredients": [
+            "olive oil",
+            "pepper",
+            "rosemary",
+            "salt",
+            "parsley",
+            "basil",
+            "oregano",
+            "crushed red pepper",
+            "garlic cloves"
+        ],
+        "quantities": [
+            "0.08",
+            "0.03",
+            "1.00",
+            "0.10",
+            "0.04",
+            "0.11",
+            "0.26",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 20955,
+        "cuisine": "italian",
+        "ingredients": [
+            "sugar",
+            "butter",
+            "morsels",
+            "cream sweeten whip",
+            "instant espresso granules",
+            "whipping cream",
+            "black pepper",
+            "kahlúa",
+            "large eggs",
+            "beans",
+            "unflavored gelatin",
+            "mascarpone",
+            "pound cake"
+        ],
+        "quantities": [
+            "0.20",
+            "0.08",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.07",
+            "1.00",
+            "1.00",
+            "0.70",
+            "1.00",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 45776,
+        "cuisine": "italian",
+        "ingredients": [
+            "pinenuts",
+            "zucchini",
+            "basil",
+            "olive oil",
+            "dry white wine",
+            "asparagus",
+            "white onion",
+            "parmesan cheese",
+            "carrots",
+            "frozen peas",
+            "rice",
+            "yellow crookneck squash",
+            "butter",
+            "chicken broth"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "0.47",
+            "0.03",
+            "1.00",
+            "1.04",
+            "0.86",
+            "1.00",
+            "0.27",
+            "1.00",
+            "0.50",
+            "1.00",
+            "0.19",
+            "0.07"
+        ]
+    },
+    {
+        "id": 6043,
+        "cuisine": "jamaican",
+        "ingredients": [
+            "tomato sauce",
+            "black pepper",
+            "garlic",
+            "scallions",
+            "chipotles in adobo",
+            "avocado",
+            "dried thyme",
+            "rice",
+            "cilantro",
+            "milk",
+            "beans",
+            "celery",
+            "chicken",
+            "onions",
+            "lime zest",
+            "lime juice",
+            "lime wedges",
+            "salt",
+            "carrots"
+        ],
+        "quantities": [
+            "1.00",
+            "0.06",
+            "0.08",
+            "1.00",
+            "1.00",
+            "0.43",
+            "1.00",
+            "0.77",
+            "0.02",
+            "0.15",
+            "0.62",
+            "0.39",
+            "2.65",
+            "1.49",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.10",
+            "0.23"
+        ]
+    },
+    {
+        "id": 336,
+        "cuisine": "mexican",
+        "ingredients": [
+            "condensed cream of mushroom soup",
+            "chicken",
+            "beef",
+            "cheese",
+            "chunky salsa",
+            "taco seasoning mix",
+            "tortillas"
+        ],
+        "quantities": [
+            "1.00",
+            "0.90",
+            "1.40",
+            "0.19",
+            "1.00",
+            "1.00",
+            "0.18"
+        ]
+    },
+    {
+        "id": 25751,
+        "cuisine": "japanese",
+        "ingredients": [
+            "pepper",
+            "butter",
+            "flour",
+            "oil",
+            "salt",
+            "eggs",
+            "steak"
+        ],
+        "quantities": [
+            "0.04",
+            "1.00",
+            "0.52",
+            "0.07",
+            "0.04",
+            "0.27",
+            "1.09"
+        ]
+    },
+    {
+        "id": 793,
+        "cuisine": "spanish",
+        "ingredients": [
+            " garlic",
+            "chorizo spanish",
+            "red bell pepper",
+            "olive oil",
+            "pineapple juice",
+            "lime",
+            "cilantro ",
+            "large shrimp",
+            "dark rum",
+            "lemon"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.11",
+            "1.00",
+            "0.06",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.44"
+        ]
+    },
+    {
+        "id": 34367,
+        "cuisine": "chinese",
+        "ingredients": [
+            "daikon",
+            "sugar",
+            "pork ribs",
+            "oil",
+            "soy sauce",
+            "shallots",
+            "goji berries",
+            "rice wine",
+            "oysters",
+            "salt"
+        ],
+        "quantities": [
+            "1.00",
+            "0.38",
+            "1.00",
+            "0.06",
+            "0.12",
+            "0.15",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.17"
+        ]
+    },
+    {
+        "id": 7406,
+        "cuisine": "mexican",
+        "ingredients": [
+            "cheddar cheese",
+            "tortillas",
+            "salsa",
+            "vegetable oil",
+            "beans",
+            "sour cream"
+        ],
+        "quantities": [
+            "0.06",
+            "0.43",
+            "1.00",
+            "0.28",
+            "1.35",
+            "1.00"
+        ]
+    },
+    {
+        "id": 7473,
+        "cuisine": "british",
+        "ingredients": [
+            "demerara sugar",
+            "egg whites",
+            "fruit",
+            "butter",
+            "dried currants",
+            "frozen pastry puff sheets",
+            "mixed spice",
+            "white sugar"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.02",
+            "0.08",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 7532,
+        "cuisine": "indian",
+        "ingredients": [
+            "parsnips",
+            "garam masala",
+            "olive oil",
+            "brown mustard seeds",
+            "cilantro",
+            "sugar",
+            "cooking spray",
+            "salt",
+            "coriander seeds",
+            "potatoes",
+            "cumin"
+        ],
+        "quantities": [
+            "1.00",
+            "0.06",
+            "0.04",
+            "1.00",
+            "0.07",
+            "0.28",
+            "1.00",
+            "0.18",
+            "1.00",
+            "1.17",
+            "0.12"
+        ]
+    },
+    {
+        "id": 5924,
+        "cuisine": "thai",
+        "ingredients": [
+            "Sriracha",
+            "unsalted cashews",
+            "thai green curry paste",
+            "soy sauce",
+            "kecap manis",
+            "garlic",
+            "beans",
+            "basil ",
+            "onion",
+            "chili",
+            "oil",
+            "chicken"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.16",
+            "1.00",
+            "0.04",
+            "1.87",
+            "1.00",
+            "0.05",
+            "1.10",
+            "0.03",
+            "2.43"
+        ]
+    },
+    {
+        "id": 5802,
+        "cuisine": "southern_us",
+        "ingredients": [
+            "butter",
+            "parsley",
+            "black pepper",
+            "pepper",
+            "shrimp",
+            "paprika",
+            "cheddar cheese",
+            "milk",
+            "onion",
+            "mushrooms"
+        ],
+        "quantities": [
+            "0.13",
+            "0.18",
+            "0.12",
+            "0.03",
+            "1.10",
+            "0.31",
+            "0.14",
+            "0.24",
+            "0.05",
+            "1.00"
+        ]
+    },
+    {
+        "id": 41078,
+        "cuisine": "mexican",
+        "ingredients": [
+            "beans",
+            "cheese",
+            "hot sauce",
+            "sour cream"
+        ],
+        "quantities": [
+            "1.26",
+            "0.18",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 20665,
+        "cuisine": "spanish",
+        "ingredients": [
+            "cinnamon",
+            "flour",
+            "milk",
+            "egg yolks",
+            "sugar",
+            "cinnamon sticks"
+        ],
+        "quantities": [
+            "0.09",
+            "0.04",
+            "0.31",
+            "1.00",
+            "0.44",
+            "1.00"
+        ]
+    },
+    {
+        "id": 39471,
+        "cuisine": "french",
+        "ingredients": [
+            "parmesan cheese",
+            "asparagus",
+            "bacon",
+            "black pepper",
+            "green onions",
+            "large eggs",
+            "salt"
+        ],
+        "quantities": [
+            "1.00",
+            "1.12",
+            "0.16",
+            "0.14",
+            "0.01",
+            "1.00",
+            "0.09"
+        ]
+    },
+    {
+        "id": 9595,
+        "cuisine": "italian",
+        "ingredients": [
+            "spinach",
+            "basil",
+            "tomatoes",
+            "lemon",
+            "capers",
+            "parmesan cheese",
+            "beans",
+            "pepper",
+            "olive oil"
+        ],
+        "quantities": [
+            "0.21",
+            "0.60",
+            "1.22",
+            "0.34",
+            "0.01",
+            "1.00",
+            "0.52",
+            "0.03",
+            "0.10"
+        ]
+    },
+    {
+        "id": 27869,
+        "cuisine": "indian",
+        "ingredients": [
+            "quinoa",
+            "milk",
+            "apples",
+            "paprika",
+            "chicken broth",
+            "chicken breasts",
+            "onion",
+            "curry powder",
+            "celery"
+        ],
+        "quantities": [
+            "1.00",
+            "0.28",
+            "1.04",
+            "0.31",
+            "4.07",
+            "1.00",
+            "0.14",
+            "1.00",
+            "0.29"
+        ]
+    },
+    {
+        "id": 44776,
+        "cuisine": "british",
+        "ingredients": [
+            "milk",
+            "salt",
+            "flour",
+            "eggs",
+            "lard"
+        ],
+        "quantities": [
+            "0.00",
+            "0.13",
+            "0.16",
+            "0.36",
+            "1.00"
+        ]
+    },
+    {
+        "id": 17771,
+        "cuisine": "spanish",
+        "ingredients": [
+            "tomatoes",
+            "golden raisins",
+            "salt",
+            "olive oil",
+            "yellow bell pepper",
+            "olives",
+            "pepper",
+            "vinegar",
+            "green bell pepper",
+            "green onions",
+            "basil"
+        ],
+        "quantities": [
+            "1.64",
+            "1.00",
+            "0.28",
+            "0.14",
+            "1.00",
+            "0.27",
+            "0.02",
+            "0.48",
+            "1.00",
+            "0.01",
+            "0.41"
+        ]
+    },
+    {
+        "id": 43970,
+        "cuisine": "italian",
+        "ingredients": [
+            "cheese",
+            "bean",
+            "onion",
+            "olive oil",
+            "tomatoes",
+            "italian sausage",
+            "large garlic cloves",
+            "pasta sheets",
+            "dry white wine",
+            "crushed red pepper"
+        ],
+        "quantities": [
+            "0.11",
+            "1.35",
+            "0.14",
+            "0.07",
+            "1.08",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 27165,
+        "cuisine": "korean",
+        "ingredients": [
+            "fish sauce",
+            "chicken broth",
+            "sesame oil",
+            "green onions",
+            "eggs"
+        ],
+        "quantities": [
+            "1.00",
+            "3.03",
+            "0.24",
+            "0.02",
+            "0.16"
+        ]
+    },
+    {
+        "id": 11190,
+        "cuisine": "indian",
+        "ingredients": [
+            "lime zest",
+            "sweet potatoes",
+            "purple onion",
+            "black pepper",
+            "spinach ",
+            "ginger",
+            "low-fat natural yogurt",
+            "red lentils",
+            "vegetable stock",
+            "carrots",
+            "rice",
+            "lime",
+            "curry paste"
+        ],
+        "quantities": [
+            "1.00",
+            "1.12",
+            "1.26",
+            "0.03",
+            "1.00",
+            "0.05",
+            "1.00",
+            "1.00",
+            "4.12",
+            "0.99",
+            "0.33",
+            "0.03",
+            "1.00"
+        ]
+    },
+    {
+        "id": 21872,
+        "cuisine": "mexican",
+        "ingredients": [
+            "kosher salt",
+            "radishes",
+            "garlic cloves",
+            "dried oregano",
+            "chicken stock",
+            "black pepper",
+            "chicken breasts",
+            "red bell pepper",
+            "oil",
+            "tomato paste",
+            "white hominy",
+            "tortilla chips",
+            "onions",
+            "avocado",
+            "lime",
+            "cilantro ",
+            "dried chile peppers",
+            "cabbage"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "2.85",
+            "0.19",
+            "1.00",
+            "1.00",
+            "0.04",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.06",
+            "0.26",
+            "0.16",
+            "1.00",
+            "1.00",
+            "2.33"
+        ]
+    },
+    {
+        "id": 29853,
+        "cuisine": "mexican",
+        "ingredients": [
+            "granulated sugar",
+            "large egg whites"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 1154,
+        "cuisine": "southern_us",
+        "ingredients": [
+            "frozen whipped topping",
+            "chocolate",
+            "instant butterscotch pudding mix",
+            "cheese",
+            "milk",
+            "butter",
+            "graham cracker crumbs",
+            "white sugar"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.18",
+            "0.04",
+            "0.26",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 9069,
+        "cuisine": "french",
+        "ingredients": [
+            "fennel seeds",
+            "kalamata",
+            "capers",
+            "dried oregano",
+            "beans",
+            "salt",
+            "vinegar"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "0.13",
+            "1.00",
+            "1.01",
+            "0.11",
+            "0.13"
+        ]
+    },
+    {
+        "id": 46975,
+        "cuisine": "cajun_creole",
+        "ingredients": [
+            "kosher salt",
+            "kielbasa",
+            "red bell pepper",
+            "celery ribs",
+            "large garlic cloves",
+            "rice",
+            "parsley",
+            "olive oil",
+            "pepper",
+            "medium shrimp",
+            "chicken broth",
+            "tomatoes",
+            "ham",
+            "onions"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.31",
+            "0.13",
+            "0.06",
+            "0.03",
+            "1.00",
+            "3.63",
+            "0.72",
+            "0.29",
+            "0.31"
+        ]
+    },
+    {
+        "id": 4892,
+        "cuisine": "indian",
+        "ingredients": [
+            "moong dal",
+            "cilantro ",
+            "onions",
+            "tomatoes",
+            "lemon juice",
+            "green mango",
+            "oil",
+            "garlic paste",
+            "salt",
+            "carrots"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.44",
+            "0.92",
+            "1.00",
+            "1.00",
+            "0.04",
+            "1.00",
+            "0.18",
+            "1.02"
+        ]
+    },
+    {
+        "id": 21467,
+        "cuisine": "chinese",
+        "ingredients": [
+            "ginger",
+            "garlic",
+            "soy sauce",
+            "mirin",
+            "sesame oil",
+            "tofu",
+            "rice",
+            "dried shiitake mushrooms",
+            "gari",
+            "green onions"
+        ],
+        "quantities": [
+            "0.12",
+            "0.14",
+            "0.09",
+            "1.00",
+            "0.07",
+            "1.00",
+            "0.30",
+            "1.00",
+            "0.04",
+            "0.01"
+        ]
+    },
+    {
+        "id": 20919,
+        "cuisine": "italian",
+        "ingredients": [
+            "mozzarella",
+            "marinara sauce",
+            "basil",
+            "penne pasta"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "0.16",
+            "1.00"
+        ]
+    },
+    {
+        "id": 42013,
+        "cuisine": "italian",
+        "ingredients": [
+            "olive oil",
+            "carrots",
+            "hot red pepper flakes",
+            "bay ",
+            "dried chickpeas",
+            "onions",
+            "celery ribs",
+            "semolina",
+            "fine sea salt",
+            "flat leaf parsley",
+            "tomatoes",
+            "garlic cloves"
+        ],
+        "quantities": [
+            "0.07",
+            "0.52",
+            "1.00",
+            "0.02",
+            "1.00",
+            "1.02",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.78",
+            "1.00"
+        ]
+    },
+    {
+        "id": 44138,
+        "cuisine": "southern_us",
+        "ingredients": [
+            "onion powder",
+            "oil",
+            "black pepper",
+            "garlic powder",
+            "salt",
+            "eggs",
+            "chicken",
+            "milk",
+            "corn starch",
+            "pepper",
+            "flour",
+            "pepper"
+        ],
+        "quantities": [
+            "0.16",
+            "0.05",
+            "0.10",
+            "0.09",
+            "0.29",
+            "0.41",
+            "2.69",
+            "0.07",
+            "1.00",
+            "0.04",
+            "0.62",
+            "0.04"
+        ]
+    },
+    {
+        "id": 5980,
+        "cuisine": "greek",
+        "ingredients": [
+            "orange",
+            "",
+            "cinnamon sticks",
+            "unflavored gelatin",
+            "zinfandel",
+            "orange",
+            "sugar",
+            "lemon",
+            "calimyrna figs",
+            "clove",
+            "honey",
+            "whipping cream",
+            "yogurt"
+        ],
+        "quantities": [
+            "0.88",
+            "0.25",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.16",
+            "0.18",
+            "0.36",
+            "1.00",
+            "0.19",
+            "1.00",
+            "1.00",
+            "0.09"
+        ]
+    },
+    {
+        "id": 41961,
+        "cuisine": "japanese",
+        "ingredients": [
+            "pepper",
+            "flour",
+            "garlic",
+            "onions",
+            "ginger",
+            "mirin",
+            "daikon",
+            "corn starch",
+            "olive oil",
+            "soy sauce",
+            "beef stock",
+            "salt",
+            "onions",
+            "shiitake",
+            "chuck roast",
+            "star ",
+            "cilantro"
+        ],
+        "quantities": [
+            "0.03",
+            "0.44",
+            "0.12",
+            "0.71",
+            "0.28",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.06",
+            "0.12",
+            "2.14",
+            "0.11",
+            "0.54",
+            "1.00",
+            "1.01",
+            "1.00",
+            "0.03"
+        ]
+    },
+    {
+        "id": 27008,
+        "cuisine": "cajun_creole",
+        "ingredients": [
+            "Corn Flakes Cereal",
+            "yellow corn meal",
+            "coleslaw",
+            "creole seasoning",
+            "cooking spray"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 31867,
+        "cuisine": "italian",
+        "ingredients": [
+            "tomatoes",
+            "sugar",
+            "garlic salt",
+            "tomato paste",
+            "crushed red pepper",
+            "basil",
+            "dried oregano"
+        ],
+        "quantities": [
+            "1.05",
+            "0.11",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.28",
+            "1.00"
+        ]
+    },
+    {
+        "id": 34248,
+        "cuisine": "korean",
+        "ingredients": [
+            "soy sauce",
+            "chili",
+            "oil",
+            "brown sugar",
+            "honey",
+            "red pepper flakes",
+            "kiwi",
+            "pepper",
+            "pear",
+            "garlic cloves",
+            "pork",
+            "ginger",
+            "salt"
+        ],
+        "quantities": [
+            "0.07",
+            "1.20",
+            "0.04",
+            "0.29",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.06",
+            "0.99",
+            "1.00",
+            "1.22",
+            "0.28",
+            "0.15"
+        ]
+    },
+    {
+        "id": 13792,
+        "cuisine": "mexican",
+        "ingredients": [
+            "chicken broth",
+            "cheese",
+            "tortillas",
+            "swiss chard",
+            "salt",
+            "olive oil",
+            "garlic",
+            "onions",
+            "red pepper flakes",
+            "salsa"
+        ],
+        "quantities": [
+            "2.09",
+            "0.06",
+            "0.52",
+            "1.00",
+            "0.07",
+            "0.11",
+            "0.11",
+            "0.58",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 38502,
+        "cuisine": "indian",
+        "ingredients": [
+            "chili",
+            "coriander",
+            "garam masala",
+            "salt",
+            "tumeric",
+            "vegetable oil",
+            "cumin",
+            "prawns",
+            "sauce"
+        ],
+        "quantities": [
+            "1.30",
+            "0.07",
+            "0.12",
+            "0.25",
+            "1.00",
+            "0.14",
+            "0.14",
+            "1.00",
+            "0.08"
+        ]
+    },
+    {
+        "id": 7023,
+        "cuisine": "italian",
+        "ingredients": [
+            "mushrooms",
+            "flour",
+            "rosemary",
+            "veal cutlets",
+            "tomatoes",
+            "dry white wine",
+            "chicken broth",
+            "olive oil",
+            "large garlic cloves"
+        ],
+        "quantities": [
+            "1.00",
+            "0.25",
+            "1.00",
+            "1.00",
+            "0.17",
+            "1.00",
+            "2.87",
+            "0.07",
+            "1.00"
+        ]
+    },
+    {
+        "id": 7783,
+        "cuisine": "mexican",
+        "ingredients": [
+            "tomato sauce",
+            "garlic salt",
+            "chili",
+            "cumin",
+            "pasta",
+            "vegetable oil"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "2.45",
+            "0.07",
+            "1.00",
+            "0.12"
+        ]
+    },
+    {
+        "id": 2472,
+        "cuisine": "korean",
+        "ingredients": [
+            "wakame",
+            "extra-lean beef",
+            " garlic",
+            "salt",
+            "soy sauce",
+            "sesame oil"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.17",
+            "0.15",
+            "0.24"
+        ]
+    },
+    {
+        "id": 45193,
+        "cuisine": "chinese",
+        "ingredients": [
+            "scallion greens",
+            "Sriracha",
+            "carrots",
+            "soy sauce",
+            "wonton wrappers",
+            "sesame oil",
+            "sugar",
+            "ginger",
+            "nonstick spray",
+            "vinegar",
+            "large egg whites",
+            "scallions",
+            "large shrimp"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.00",
+            "1.00",
+            "0.26",
+            "0.24",
+            "0.04",
+            "1.00",
+            "0.01",
+            "1.00",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 7501,
+        "cuisine": "french",
+        "ingredients": [
+            "tomatoes",
+            "olive oil",
+            "thyme",
+            "salt",
+            "chicken bones",
+            "green bell pepper, slice",
+            "black olives",
+            "lemon juice",
+            "eggs",
+            "black pepper",
+            "garlic",
+            "dried thyme",
+            "lettuce ",
+            "onion",
+            "crusty rolls"
+        ],
+        "quantities": [
+            "1.01",
+            "0.03",
+            "0.24",
+            "0.17",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.15",
+            "0.07",
+            "0.10",
+            "1.00",
+            "1.00",
+            "0.12",
+            "1.00"
+        ]
+    },
+    {
+        "id": 34930,
+        "cuisine": "chinese",
+        "ingredients": [
+            "oil",
+            "red pepper",
+            "scallions",
+            "curry powder",
+            "salt",
+            "milk",
+            "pepper",
+            "sesame oil",
+            "carrots",
+            "ginger",
+            "flour",
+            "coconut aminos",
+            "beef"
+        ],
+        "quantities": [
+            "0.06",
+            "0.03",
+            "1.00",
+            "1.00",
+            "0.25",
+            "0.32",
+            "0.05",
+            "0.21",
+            "0.58",
+            "0.09",
+            "0.57",
+            "1.00",
+            "1.64"
+        ]
+    },
+    {
+        "id": 42967,
+        "cuisine": "spanish",
+        "ingredients": [
+            "olive oil",
+            "rice",
+            "onion",
+            "chicken broth",
+            "crushed garlic",
+            "flour",
+            "saffron",
+            "pepper",
+            "green peas",
+            "shrimp",
+            "chorizo sausage",
+            "clams",
+            "tomatoes",
+            "salt",
+            "chicken breast"
+        ],
+        "quantities": [
+            "0.09",
+            "0.77",
+            "0.16",
+            "2.63",
+            "1.00",
+            "0.42",
+            "1.00",
+            "0.04",
+            "1.00",
+            "0.43",
+            "1.00",
+            "1.00",
+            "0.48",
+            "0.08",
+            "1.38"
+        ]
+    },
+    {
+        "id": 14080,
+        "cuisine": "chinese",
+        "ingredients": [
+            "chicken stock",
+            " garlic",
+            "vinegar",
+            "snow peas",
+            "soy sauce",
+            "vegetable oil",
+            "garlic cloves",
+            "sugar",
+            "ginger",
+            "large shrimp",
+            "white pepper",
+            "garlic",
+            "corn starch"
+        ],
+        "quantities": [
+            "3.25",
+            "1.00",
+            "0.28",
+            "1.00",
+            "0.17",
+            "0.09",
+            "1.00",
+            "0.14",
+            "0.16",
+            "1.00",
+            "1.00",
+            "0.11",
+            "1.00"
+        ]
+    },
+    {
+        "id": 45352,
+        "cuisine": "spanish",
+        "ingredients": [
+            "olive oil",
+            "paprika",
+            "onion",
+            "sugar",
+            "egg",
+            "bacon",
+            "spinach ",
+            "dry mustard",
+            "black pepper",
+            "vinegar",
+            "salt"
+        ],
+        "quantities": [
+            "0.14",
+            "0.05",
+            "0.14",
+            "0.12",
+            "0.03",
+            "0.07",
+            "1.00",
+            "1.00",
+            "0.00",
+            "0.54",
+            "0.18"
+        ]
+    },
+    {
+        "id": 46205,
+        "cuisine": "japanese",
+        "ingredients": [
+            "chili",
+            "oil",
+            "stuffing",
+            "salt",
+            "ghee",
+            "coriander powder",
+            "flour",
+            "cardamom",
+            "sugar",
+            "baking powder",
+            "cumin seed",
+            "frozen peas"
+        ],
+        "quantities": [
+            "1.15",
+            "0.07",
+            "1.00",
+            "0.06",
+            "1.00",
+            "1.00",
+            "0.07",
+            "0.15",
+            "0.25",
+            "0.09",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 47427,
+        "cuisine": "mexican",
+        "ingredients": [
+            "pepper",
+            "pita bread rounds",
+            "red bell pepper",
+            "olive oil",
+            "garlic",
+            "tomatoes",
+            "eggplant",
+            "salt",
+            "lime",
+            "butter",
+            "cilantro"
+        ],
+        "quantities": [
+            "0.06",
+            "1.00",
+            "1.00",
+            "0.09",
+            "0.13",
+            "0.86",
+            "1.00",
+            "0.17",
+            "0.32",
+            "0.13",
+            "0.02"
+        ]
+    },
+    {
+        "id": 40064,
+        "cuisine": "french",
+        "ingredients": [
+            "pepper",
+            "grated Gruyère cheese",
+            "heavy cream",
+            "salt",
+            "potatoes"
+        ],
+        "quantities": [
+            "0.02",
+            "1.00",
+            "1.00",
+            "0.12",
+            "0.95"
+        ]
+    },
+    {
+        "id": 9010,
+        "cuisine": "japanese",
+        "ingredients": [
+            "ginger",
+            "vegetable broth",
+            "sake",
+            "green onions",
+            "carrots",
+            "udon",
+            "red miso",
+            "silken tofu",
+            "button mushrooms"
+        ],
+        "quantities": [
+            "0.24",
+            "1.00",
+            "1.00",
+            "0.01",
+            "0.83",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 18611,
+        "cuisine": "mexican",
+        "ingredients": [
+            "chicken",
+            "cilantro ",
+            "lime",
+            "tomatoes",
+            "coarse salt",
+            "sour cream",
+            "oil",
+            "chili",
+            "garlic",
+            "tortillas",
+            "cheese",
+            "pickled jalapenos",
+            "pepper",
+            "onion"
+        ],
+        "quantities": [
+            "3.37",
+            "1.00",
+            "0.20",
+            "0.40",
+            "1.00",
+            "1.00",
+            "0.04",
+            "1.74",
+            "0.13",
+            "0.72",
+            "0.15",
+            "1.00",
+            "0.03",
+            "0.13"
+        ]
+    },
+    {
+        "id": 35124,
+        "cuisine": "italian",
+        "ingredients": [
+            "hot red pepper flakes",
+            "milk",
+            "garlic cloves",
+            "black pepper",
+            "cheese",
+            "flour",
+            "sausage casings",
+            "olive oil",
+            "large eggs",
+            "dry bread crumbs",
+            "fontina",
+            "unsalted butter",
+            "salt"
+        ],
+        "quantities": [
+            "1.00",
+            "0.06",
+            "1.00",
+            "0.07",
+            "0.15",
+            "0.06",
+            "1.00",
+            "0.22",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.12"
+        ]
+    },
+    {
+        "id": 45605,
+        "cuisine": "filipino",
+        "ingredients": [
+            "sesame oil",
+            "cucumber",
+            "sugar",
+            "onion",
+            "fish sauce",
+            "thai chile",
+            "peppercorns",
+            "vinegar",
+            "salt"
+        ],
+        "quantities": [
+            "0.26",
+            "1.00",
+            "0.16",
+            "0.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.05",
+            "0.13"
+        ]
+    },
+    {
+        "id": 16334,
+        "cuisine": "southern_us",
+        "ingredients": [
+            "dry white wine",
+            "corn starch",
+            "herbs",
+            "refrigerated piecrusts",
+            "chicken soup",
+            "chicken",
+            "carrots",
+            "chicken broth",
+            "milk"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "3.38",
+            "0.80",
+            "2.17",
+            "0.04"
+        ]
+    },
+    {
+        "id": 32035,
+        "cuisine": "italian",
+        "ingredients": [
+            "pasta sauce",
+            "parmesan cheese",
+            "oil",
+            "spinach",
+            "large egg whites",
+            "pepper",
+            "large eggs",
+            "italian seasoning",
+            "manicotti shells",
+            "mozzarella cheese",
+            "salt"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "0.05",
+            "0.27",
+            "1.00",
+            "0.01",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.17"
+        ]
+    },
+    {
+        "id": 16810,
+        "cuisine": "italian",
+        "ingredients": [
+            "vegetable oil",
+            "dry white wine",
+            "mushrooms",
+            "fettucine",
+            "olive oil",
+            "oregano",
+            "onion",
+            "basil",
+            "parmesan cheese",
+            "corn starch",
+            "large shrimp",
+            "tomatoes",
+            "garlic",
+            "flat leaf parsley"
+        ],
+        "quantities": [
+            "0.28",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.07",
+            "0.26",
+            "0.09",
+            "0.40",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.39",
+            "0.14",
+            "1.00"
+        ]
+    },
+    {
+        "id": 3641,
+        "cuisine": "chinese",
+        "ingredients": [
+            "soy sauce",
+            "egg whites",
+            "oil",
+            "chicken stock",
+            "peanuts",
+            "chicken breasts",
+            "chili",
+            "ginger",
+            "green onions",
+            "red pepper flakes",
+            "corn starch",
+            "sugar",
+            "veget",
+            "sesame oil",
+            "vinegar"
+        ],
+        "quantities": [
+            "0.03",
+            "1.00",
+            "0.05",
+            "2.59",
+            "1.00",
+            "1.00",
+            "1.42",
+            "0.07",
+            "0.00",
+            "1.00",
+            "1.00",
+            "0.13",
+            "2.16",
+            "0.36",
+            "0.54"
+        ]
+    },
+    {
+        "id": 43374,
+        "cuisine": "mexican",
+        "ingredients": [
+            "taco sauce",
+            "milk",
+            "guacamole",
+            "garlic",
+            "salsa verde",
+            "shredded cabbage",
+            "dried oregano",
+            "kosher salt",
+            "onion",
+            "condiments",
+            "pepper",
+            "avocado",
+            "pork shoulder roast",
+            "tortillas",
+            "chili",
+            "cumin"
+        ],
+        "quantities": [
+            "1.00",
+            "0.16",
+            "1.00",
+            "0.12",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.11",
+            "1.00",
+            "0.04",
+            "0.20",
+            "1.00",
+            "1.31",
+            "1.64",
+            "0.20"
+        ]
+    },
+    {
+        "id": 9112,
+        "cuisine": "indian",
+        "ingredients": [
+            "rose petals",
+            "rice",
+            "sugar",
+            "milk",
+            "pistachios",
+            "saffron"
+        ],
+        "quantities": [
+            "1.00",
+            "0.67",
+            "0.38",
+            "0.30",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 14970,
+        "cuisine": "korean",
+        "ingredients": [
+            "soy sauce",
+            "ginger",
+            "oil",
+            "flour",
+            "vinegar",
+            "honey",
+            "garlic",
+            "chicken wings",
+            "sesame oil",
+            "corn starch"
+        ],
+        "quantities": [
+            "0.09",
+            "0.21",
+            "0.04",
+            "0.76",
+            "0.34",
+            "1.00",
+            "0.13",
+            "1.00",
+            "0.36",
+            "1.00"
+        ]
+    },
+    {
+        "id": 41396,
+        "cuisine": "mexican",
+        "ingredients": [
+            "chicken stock",
+            "drumstick",
+            "black pepper",
+            "cilantro",
+            "green chile",
+            "tomatoes",
+            "salt",
+            "chicken",
+            "chiles",
+            "olive oil",
+            "yellow corn meal",
+            "chipotle chile",
+            "chipotle chile powder"
+        ],
+        "quantities": [
+            "2.33",
+            "1.00",
+            "0.20",
+            "0.08",
+            "1.00",
+            "0.22",
+            "0.03",
+            "2.05",
+            "1.00",
+            "0.13",
+            "1.00",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 4748,
+        "cuisine": "mexican",
+        "ingredients": [
+            "cheddar cheese",
+            "taco seasoning mix",
+            "salt",
+            "Tortillas",
+            "cranberry sauce",
+            "cilantro",
+            "Sriracha",
+            "beer",
+            "avocado",
+            "soy sauce",
+            "olive oil",
+            "chili",
+            "brown sugar",
+            "lime",
+            "beef rib short"
+        ],
+        "quantities": [
+            "0.28",
+            "1.00",
+            "0.00",
+            "1.00",
+            "1.00",
+            "0.07",
+            "1.00",
+            "0.23",
+            "0.02",
+            "0.13",
+            "0.08",
+            "1.65",
+            "0.28",
+            "0.08",
+            "1.00"
+        ]
+    },
+    {
+        "id": 41833,
+        "cuisine": "japanese",
+        "ingredients": [
+            "miso paste",
+            "seaweed",
+            "tofu",
+            "green onions",
+            "dashi"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 18031,
+        "cuisine": "greek",
+        "ingredients": [
+            "dill",
+            "yogurt",
+            "salt",
+            "myzithra",
+            "large eggs",
+            "cheese",
+            "feta cheese",
+            "phyllo",
+            "kefalotyri",
+            "black pepper",
+            "olive oil",
+            "onion"
+        ],
+        "quantities": [
+            "1.00",
+            "0.17",
+            "0.22",
+            "1.00",
+            "1.00",
+            "0.14",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.12",
+            "0.07",
+            "0.19"
+        ]
+    },
+    {
+        "id": 29734,
+        "cuisine": "mexican",
+        "ingredients": [
+            "sea salt",
+            "cilantro",
+            "black pepper",
+            "onion",
+            "cheese",
+            "lime",
+            "garlic",
+            "oil",
+            "Sriracha",
+            "tortilla chips"
+        ],
+        "quantities": [
+            "1.00",
+            "0.14",
+            "0.10",
+            "0.09",
+            "0.11",
+            "0.07",
+            "0.20",
+            "0.05",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 26415,
+        "cuisine": "southern_us",
+        "ingredients": [
+            "milk",
+            "okra",
+            "large eggs",
+            "flour",
+            "salt",
+            "cracker crumbs",
+            "oil"
+        ],
+        "quantities": [
+            "0.18",
+            "1.00",
+            "1.00",
+            "0.22",
+            "0.15",
+            "1.00",
+            "0.05"
+        ]
+    },
+    {
+        "id": 29801,
+        "cuisine": "chinese",
+        "ingredients": [
+            "cheese",
+            "powdered sugar",
+            "oil",
+            "crab meat",
+            "salt",
+            "wonton wrappers"
+        ],
+        "quantities": [
+            "0.17",
+            "1.00",
+            "0.04",
+            "1.00",
+            "0.12",
+            "1.00"
+        ]
+    },
+    {
+        "id": 24351,
+        "cuisine": "british",
+        "ingredients": [
+            "savoy cabbage",
+            "salt",
+            "unsalted butter",
+            "potatoes",
+            "black pepper"
+        ],
+        "quantities": [
+            "1.00",
+            "0.04",
+            "1.00",
+            "1.87",
+            "0.11"
+        ]
+    },
+    {
+        "id": 8480,
+        "cuisine": "japanese",
+        "ingredients": [
+            "sake",
+            "sesame oil",
+            "chicken",
+            "soy sauce",
+            "vegetable oil",
+            "potato starch",
+            "ginger"
+        ],
+        "quantities": [
+            "1.00",
+            "0.37",
+            "2.83",
+            "0.14",
+            "0.22",
+            "1.00",
+            "0.03"
+        ]
+    },
+    {
+        "id": 27023,
+        "cuisine": "italian",
+        "ingredients": [
+            "salt",
+            "orange",
+            "eggs",
+            "vanilla",
+            "cream",
+            "flour",
+            "sugar",
+            "cinnamon",
+            "cheese",
+            "white sugar"
+        ],
+        "quantities": [
+            "0.13",
+            "0.92",
+            "0.08",
+            "0.02",
+            "1.22",
+            "0.31",
+            "0.30",
+            "0.17",
+            "0.10",
+            "1.00"
+        ]
+    },
+    {
+        "id": 10425,
+        "cuisine": "mexican",
+        "ingredients": [
+            "tomatoes",
+            "coarse salt",
+            "white onion",
+            "serrano",
+            "cilantro"
+        ],
+        "quantities": [
+            "0.96",
+            "1.00",
+            "0.25",
+            "1.00",
+            "0.28"
+        ]
+    },
+    {
+        "id": 37188,
+        "cuisine": "irish",
+        "ingredients": [
+            "steel-cut oats",
+            "salt",
+            "cinnamon",
+            "hazelnuts",
+            "oil",
+            "brown sugar",
+            "sweet cherries"
+        ],
+        "quantities": [
+            "1.00",
+            "0.30",
+            "0.13",
+            "1.00",
+            "0.05",
+            "0.25",
+            "1.00"
+        ]
+    },
+    {
+        "id": 24338,
+        "cuisine": "greek",
+        "ingredients": [
+            "olive oil",
+            "salt",
+            "hamburger buns",
+            "paprika",
+            "mint",
+            "cinnamon",
+            "vinegar",
+            "cheese",
+            "spinach ",
+            "purple onion",
+            "lamb"
+        ],
+        "quantities": [
+            "0.08",
+            "0.02",
+            "1.00",
+            "0.10",
+            "1.00",
+            "0.03",
+            "0.45",
+            "0.09",
+            "1.00",
+            "0.74",
+            "1.00"
+        ]
+    },
+    {
+        "id": 3457,
+        "cuisine": "cajun_creole",
+        "ingredients": [
+            "celery",
+            "tomatoes",
+            "sausage",
+            "sweet pepper",
+            "beans"
+        ],
+        "quantities": [
+            "0.44",
+            "0.68",
+            "1.00",
+            "1.00",
+            "1.14"
+        ]
+    },
+    {
+        "id": 1355,
+        "cuisine": "japanese",
+        "ingredients": [
+            "gari",
+            "vinegar",
+            "wasabi paste",
+            "sesame seeds",
+            "scallions",
+            "soy sauce",
+            "salmon",
+            "sugar",
+            "ginger",
+            "garlic cloves"
+        ],
+        "quantities": [
+            "0.06",
+            "0.11",
+            "1.00",
+            "0.02",
+            "1.00",
+            "0.03",
+            "1.61",
+            "0.21",
+            "0.30",
+            "1.00"
+        ]
+    },
+    {
+        "id": 40738,
+        "cuisine": "italian",
+        "ingredients": [
+            "dried porcini mushrooms",
+            "thyme",
+            "beef rib short",
+            "tomato paste",
+            "kosher salt",
+            "dry red wine",
+            "black pepper",
+            "fat free less sodium beef broth",
+            "garlic cloves",
+            "cremini mushrooms",
+            "olive oil",
+            "flour",
+            "onions"
+        ],
+        "quantities": [
+            "1.00",
+            "0.44",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.14",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.18",
+            "0.46",
+            "0.74"
+        ]
+    },
+    {
+        "id": 42380,
+        "cuisine": "southern_us",
+        "ingredients": [
+            "creole mustard",
+            " garlic",
+            "tomatoes",
+            "creole seasoning",
+            "pepper oil",
+            "mayonaise",
+            "prepared horseradish",
+            "paprika",
+            "shrimp",
+            "celery salt",
+            "milk",
+            "lemon juice",
+            "shallots",
+            "salt",
+            "medium shrimp"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "0.16",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.08",
+            "0.15",
+            "1.00",
+            "0.23",
+            "1.00",
+            "0.26",
+            "0.14",
+            "1.00"
+        ]
+    },
+    {
+        "id": 16857,
+        "cuisine": "southern_us",
+        "ingredients": [
+            "turnip greens",
+            "vegetable oil",
+            "lemon",
+            "black pepper",
+            "apples",
+            "kosher salt",
+            "buttermilk",
+            "country ham",
+            "shallots",
+            "olive oil"
+        ],
+        "quantities": [
+            "1.00",
+            "0.02",
+            "0.19",
+            "0.16",
+            "0.34",
+            "1.00",
+            "0.53",
+            "1.00",
+            "0.24",
+            "0.05"
+        ]
+    },
+    {
+        "id": 2923,
+        "cuisine": "southern_us",
+        "ingredients": [
+            "vegetable oil",
+            "beans",
+            "onions",
+            "whole kernel corn, drain",
+            "seasoning salt"
+        ],
+        "quantities": [
+            "0.54",
+            "0.65",
+            "0.92",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 7528,
+        "cuisine": "italian",
+        "ingredients": [
+            "pitted kalamata olives",
+            "parmesan cheese",
+            "penne pasta",
+            "",
+            "olive oil",
+            "crushed red pepper",
+            "pepper",
+            "garlic",
+            "parsley",
+            "capers",
+            "tomatoes",
+            "salt"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.35",
+            "0.08",
+            "1.00",
+            "0.02",
+            "0.12",
+            "0.02",
+            "0.08",
+            "0.13",
+            "0.16"
+        ]
+    },
+    {
+        "id": 15990,
+        "cuisine": "indian",
+        "ingredients": [
+            "flour",
+            "salted butter",
+            "oil",
+            "yoghurt",
+            "kalonji",
+            "sugar",
+            "instant yeast",
+            "garlic",
+            "coriander",
+            "sea salt"
+        ],
+        "quantities": [
+            "0.32",
+            "1.00",
+            "0.06",
+            "1.00",
+            "1.00",
+            "0.38",
+            "1.00",
+            "0.05",
+            "0.07",
+            "1.00"
+        ]
+    },
+    {
+        "id": 27615,
+        "cuisine": "chinese",
+        "ingredients": [
+            "chicken breasts",
+            "oyster sauce",
+            "soy sauce",
+            "egg whites",
+            "garlic",
+            "rice",
+            "kosher salt",
+            "mixed mushrooms",
+            "sauce",
+            "wood ear mushrooms",
+            "wine",
+            "vegetables",
+            "sesame oil",
+            "corn starch"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "0.16",
+            "1.00",
+            "0.11",
+            "0.51",
+            "1.00",
+            "1.00",
+            "0.11",
+            "1.00",
+            "1.02",
+            "1.00",
+            "0.21",
+            "1.00"
+        ]
+    },
+    {
+        "id": 26061,
+        "cuisine": "japanese",
+        "ingredients": [
+            "hoisin sauce",
+            "corn starch",
+            "green onions",
+            "extra firm tofu",
+            "oil"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "0.00",
+            "1.00",
+            "0.06"
+        ]
+    },
+    {
+        "id": 23053,
+        "cuisine": "mexican",
+        "ingredients": [
+            "quinoa",
+            "salt",
+            "oil",
+            "black beans",
+            "chili",
+            "taco seasoning",
+            "chicken broth",
+            "bell pepper",
+            "salsa",
+            "onions",
+            " garlic",
+            "chicken breasts",
+            "cheese"
+        ],
+        "quantities": [
+            "1.00",
+            "0.06",
+            "0.06",
+            "0.52",
+            "1.50",
+            "1.00",
+            "2.28",
+            "1.08",
+            "1.00",
+            "0.98",
+            "1.00",
+            "1.00",
+            "0.13"
+        ]
+    },
+    {
+        "id": 5090,
+        "cuisine": "mexican",
+        "ingredients": [
+            "chili",
+            "lime",
+            "tomatillos",
+            "coarse salt",
+            "cilantro",
+            "purple onion"
+        ],
+        "quantities": [
+            "1.61",
+            "0.13",
+            "1.00",
+            "1.00",
+            "0.02",
+            "1.12"
+        ]
+    },
+    {
+        "id": 36862,
+        "cuisine": "french",
+        "ingredients": [
+            "eau de vie",
+            "",
+            "cane sugar",
+            "pinenuts",
+            "golden raisins",
+            "apples",
+            "large eggs",
+            "cinnamon",
+            "parmesan cheese",
+            "salt"
+        ],
+        "quantities": [
+            "1.00",
+            "0.23",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.60",
+            "1.00",
+            "0.23",
+            "1.00",
+            "0.01"
+        ]
+    },
+    {
+        "id": 873,
+        "cuisine": "mexican",
+        "ingredients": [
+            "salt and black pepper",
+            "purple onion",
+            "chili",
+            "tomatoes",
+            "garlic powder",
+            "cilantro",
+            "lime",
+            "garlic",
+            "cumin"
+        ],
+        "quantities": [
+            "1.00",
+            "0.77",
+            "1.95",
+            "1.19",
+            "0.08",
+            "0.15",
+            "0.04",
+            "0.13",
+            "0.46"
+        ]
+    },
+    {
+        "id": 23726,
+        "cuisine": "mexican",
+        "ingredients": [
+            "lime juice",
+            "chocolate black olives",
+            "chili",
+            "cheddar cheese",
+            "green onions",
+            "butter",
+            "garlic powder",
+            "chicken breasts",
+            "enchilada sauce",
+            "tortillas",
+            "onion powder",
+            "onions"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.97",
+            "0.27",
+            "0.00",
+            "0.19",
+            "0.12",
+            "1.00",
+            "1.00",
+            "0.51",
+            "0.14",
+            "0.67"
+        ]
+    },
+    {
+        "id": 48576,
+        "cuisine": "irish",
+        "ingredients": [
+            "pepper",
+            "potatoes",
+            "butter",
+            "salt",
+            "onions",
+            "tomato paste",
+            "olive oil",
+            "beef stock",
+            "tomatoes",
+            "carrots",
+            "sugar",
+            "baking soda",
+            "baking powder",
+            "rosemary ",
+            "steak",
+            "flour",
+            "buttermilk",
+            "Beer",
+            "dried rosemary"
+        ],
+        "quantities": [
+            "0.03",
+            "3.16",
+            "0.17",
+            "0.19",
+            "0.47",
+            "1.00",
+            "0.10",
+            "3.88",
+            "0.57",
+            "0.60",
+            "0.16",
+            "0.08",
+            "0.08",
+            "1.00",
+            "1.00",
+            "0.62",
+            "0.48",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 25118,
+        "cuisine": "chinese",
+        "ingredients": [
+            "wonton wrappers",
+            "garlic cloves",
+            "chestnuts",
+            "ginger",
+            "chinese cabbage",
+            "soy sauce",
+            "cooking spray",
+            "dipping sauces",
+            "lean pork",
+            "green onions",
+            "sesame oil"
+        ],
+        "quantities": [
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.14",
+            "1.00",
+            "0.11",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.00",
+            "0.20"
+        ]
+    },
+    {
+        "id": 17586,
+        "cuisine": "mexican",
+        "ingredients": [
+            "pico de gallo",
+            "cheese",
+            "refried beans",
+            "chorizo",
+            "french bread"
+        ],
+        "quantities": [
+            "1.00",
+            "0.15",
+            "1.00",
+            "1.00",
+            "1.00"
+        ]
+    },
+    {
+        "id": 22678,
+        "cuisine": "greek",
+        "ingredients": [
+            "pepper",
+            "dried mint flakes",
+            "salt",
+            "dried oregano",
+            "tomatoes",
+            "black pepper",
+            "garlic",
+            "dried dillweed",
+            "olive oil",
+            "red wine",
+            "lamb",
+            "plain yogurt",
+            "pita bread rounds",
+            "purple onion",
+            "cucumber"
+        ],
+        "quantities": [
+            "0.06",
+            "1.00",
+            "0.07",
+            "1.00",
+            "0.87",
+            "0.07",
+            "0.10",
+            "1.00",
+            "0.12",
+            "1.00",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.75",
+            "1.00"
+        ]
+    },
+    {
+        "id": 428,
+        "cuisine": "korean",
+        "ingredients": [
+            "sesame oil",
+            "soy sauce",
+            "kale"
+        ],
+        "quantities": [
+            "0.41",
+            "0.04",
+            "1.00"
+        ]
+    },
+    {
+        "id": 6745,
+        "cuisine": "mexican",
+        "ingredients": [
+            "beer",
+            "tortillas",
+            "chipotle chile",
+            "lime wedges",
+            "salsa",
+            "oil",
+            "beef",
+            "garlic",
+            "cilantro",
+            "white onion",
+            "guajillo",
+            "onion",
+            "cumin"
+        ],
+        "quantities": [
+            "1.90",
+            "0.66",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.04",
+            "0.63",
+            "0.10",
+            "0.07",
+            "0.79",
+            "1.00",
+            "0.13",
+            "0.12"
+        ]
+    },
+    {
+        "id": 31009,
+        "cuisine": "spanish",
+        "ingredients": [
+            "saffron threads",
+            "black pepper",
+            "dry bread crumbs",
+            "lemon",
+            "crushed red pepper",
+            "onion",
+            "cumin",
+            "spinach",
+            "dry sherry",
+            "chickpeas",
+            "parsley",
+            "olive oil",
+            "salt",
+            "garlic cloves"
+        ],
+        "quantities": [
+            "1.00",
+            "0.22",
+            "1.00",
+            "0.23",
+            "1.00",
+            "0.04",
+            "0.07",
+            "1.30",
+            "1.00",
+            "1.00",
+            "0.24",
+            "0.07",
+            "0.28",
+            "1.00"
+        ]
+    },
+    {
+        "id": 20983,
+        "cuisine": "italian",
+        "ingredients": [
+            "swiss chard",
+            "tomatoes",
+            "onion",
+            "pepper",
+            "garlic",
+            "italian seasoning",
+            "parmesan cheese",
+            "vegetable broth",
+            "bay leaf",
+            "olive oil",
+            "beans",
+            "salt"
+        ],
+        "quantities": [
+            "1.00",
+            "0.53",
+            "0.14",
+            "0.01",
+            "0.11",
+            "1.00",
+            "1.00",
+            "1.00",
+            "0.00",
+            "0.13",
+            "1.11",
+            "0.05"
+        ]
+    }
+]
