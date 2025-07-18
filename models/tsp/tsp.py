@@ -32,6 +32,7 @@ The model has the following options:
 from __future__ import annotations
 
 import json
+import os
 import time
 
 import gamspy as gp
@@ -306,7 +307,7 @@ def main():
         dist_matrix = np.sqrt(np.sum(diff**2, axis=-1))
         return dist_matrix
 
-    with open(r"cities.json", "r") as fp:
+    with open(os.path.join(os.path.dirname(__file__), "cities.json"), "r") as fp:
         city_data = json.load(fp)
 
     city_df = pd.json_normalize(city_data)
