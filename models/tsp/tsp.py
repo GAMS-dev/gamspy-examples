@@ -174,12 +174,12 @@ def tspModel(
     objective_function[...] = gp.Sum(ij[i, j], distance[i, j] * X[i, j]) == total_cost
 
     eq_enter_once = gp.Equation(m, "eq_enter_once", domain=[n1])
-    eq_enter_once[j].where[~j.sameAs(start_point)] = (
+    eq_enter_once[j] = (
         gp.Sum(i.where[ij[i, j]], X[i, j]) == 1
     )
 
     eq_leave_once = gp.Equation(m, "eq_leave_once", domain=[n1])
-    eq_leave_once[i].where[~i.sameAs(start_point)] = (
+    eq_leave_once[i] = (
         gp.Sum(j.where[ij[i, j]], X[i, j]) == 1
     )
 
