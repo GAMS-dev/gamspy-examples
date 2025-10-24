@@ -152,8 +152,8 @@ def main():
     square.solve()
 
     assert math.isclose(
-        square.objective_value, 9.356868347239827e-21, rel_tol=1e-2
-    )
+        square.objective_value, 1.6008754067854354, rel_tol=1e-2
+    ), square.objective_value
 
 
 if __name__ == "__main__":

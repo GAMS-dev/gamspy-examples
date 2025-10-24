@@ -170,12 +170,12 @@ def main():
         objective=objval,
     )
 
-    HeatEx3.solve()
+    HeatEx3.solve(solver="conopt")
     print("Objective Function Variable:  ", HeatEx3.objective_value)
 
     import math
 
-    assert math.isclose(HeatEx3.objective_value, 5937.437344646649)
+    assert math.isclose(HeatEx3.objective_value, 4845.462000669056), HeatEx3.objective_value
 
     # End HeatEx3
 
