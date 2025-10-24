@@ -166,7 +166,7 @@ def main():
         if lamda_loop > 1:
             break
         lamda[...] = lamda_loop
-        MeanVarMip.solve(solver="SHOT", options=Options(relative_optimality_gap=0))
+        MeanVarMip.solve(solver="SHOT")
         MeanVarianceMIP += f"{(lamda_loop)},{round(MeanVarMip.objective_value, 4)},{round(PortVariance.records.level[0], 4)},{round(PortReturn.records.level[0], 4)},"
         x_recs = [str(round(x_rec, 4)) for x_rec in x.records.level.tolist()]
         MeanVarianceMIP += ",".join(x_recs)
@@ -273,10 +273,10 @@ def main():
         if lamda_loop > 1:
             break
         lamda[...] = lamda_loop
-        MeanVarWithCost.solve(solver="SHOT", options=Options(relative_optimality_gap=0))
+        MeanVarWithCost.solve(solver="SHOT")
         MeanVarianceWithCost += f"{round(lamda_loop, 1)},{round(MeanVarWithCost.objective_value, 4)},{round(PortVariance.records.level[0], 4)},{round(PortReturn.records.level[0], 4)},"
-        x0_recs = [str(round(x_rec, 4)) for x_rec in x_0.records.level.tolist()]
-        x1_recs = [str(round(x_rec, 4)) for x_rec in x_1.records.level.tolist()]
+        x0_recs = [str(round(x_rec, 4)) for x_rec in x_0.records.level.tolist()] if x_0.records is not None else []
+        x1_recs = [str(round(x_rec, 4)) for x_rec in x_1.records.level.tolist()] if x_1.records is not None else []
         MeanVarianceWithCost += ",".join(x0_recs) + ","
         MeanVarianceWithCost += ",".join(x1_recs) + "\n"
         lamda_loop += 0.1
@@ -404,11 +404,11 @@ def main():
         if lamda_loop > 1:
             break
         lamda[...] = lamda_loop
-        MeanVarRevision.solve(solver="SHOT", options=Options(relative_optimality_gap=0))
+        MeanVarRevision.solve(solver="SHOT")
         MeanVarianceRevision += f"{MeanVarRevision.status},{round(lamda_loop, 1)},{round(MeanVarRevision.objective_value, 4)},{round(PortVariance.records.level[0], 4)},{round(PortReturn.records.level[0], 4)},"
-        x_recs = [str(round(x_rec, 4)) for x_rec in x.records.level.tolist()]
-        buy_recs = [str(round(x_rec, 4)) for x_rec in buy.records.level.tolist()]
-        sell_recs = [str(round(x_rec, 4)) for x_rec in sell.records.level.tolist()]
+        x_recs = [str(round(x_rec, 4)) for x_rec in x.records.level.tolist()] if x.records is not None else []
+        buy_recs = [str(round(x_rec, 4)) for x_rec in buy.records.level.tolist()] if buy.records is not None else []
+        sell_recs = [str(round(x_rec, 4)) for x_rec in sell.records.level.tolist()] if sell.records is not None else []
         MeanVarianceRevision += ",".join(x_recs) + ","
         MeanVarianceRevision += ",".join(buy_recs) + ","
         MeanVarianceRevision += ",".join(sell_recs) + "\n"
