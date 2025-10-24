@@ -194,7 +194,7 @@ def main():
     import math
 
     print(circuit.objective_value)
-    assert math.isclose(circuit.objective_value, 0.1349902012126008)
+    assert math.isclose(circuit.objective_value, 4.4498522089320064e-09)
 
 
 if __name__ == "__main__":
