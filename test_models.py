@@ -1,3 +1,4 @@
+import sys
 import glob
 import subprocess
 
@@ -16,5 +17,7 @@ def test_all_models():
                 continue
 
         print(f"Running {model}...")
-        process = subprocess.run(["python", model], capture_output=True, text=True)
+        process = subprocess.run(
+            [sys.executable, model], capture_output=True, text=True
+        )
         assert process.returncode == 0, process.stderr
