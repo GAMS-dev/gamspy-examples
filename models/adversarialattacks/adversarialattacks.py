@@ -64,31 +64,8 @@ def convert_nlp(m: gp.Container, layer: torch.nn.ReLU):
     return gp.math.relu_with_complementarity_var
 
 
-def relu_with_mpec(x: gp.Variable):
-    assert isinstance(x.container, gp.Container)
-    domain = x.domain
-
-    y = x.container.addVariable(
-        type="positive",
-        domain=domain,
-    )
-
-    eq = x.container.addEquation(
-        domain=domain,
-    )
-
-    eq[...] = y - x >= gp.Number(0)
-    return y, [], {eq: y}
-
-
-def mpec_wrapper(x: gp.Variable):
-    output, equations, local_matches = relu_with_mpec(x)
-    matches.update(local_matches)
-    return output, equations
-
-
-def convert_mpec(m: gp.Container, layer):
-    return mpec_wrapper
+def convert_mpec(m: gp.Container, layer: torch.nn.ReLU):
+    return gp.math.relu_with_equilibrium
 
 
 def save_results(report, results_file: str = "performance_report.json") -> None:
@@ -111,8 +88,6 @@ def save_results(report, results_file: str = "performance_report.json") -> None:
         print(f"Error saving results: {e}")
 
 
-global matches
-
 MEAN = (0.1307,)
 STD = (0.3081,)
 MNIST_NOISE_BOUND = 0.1
@@ -124,7 +99,12 @@ problem_type_map = {
 }
 
 
-def main(hidden_layers, hidden_layer_neurons, prob_type: str, noise_init=None):
+def main(
+    hidden_layers: int,
+    hidden_layer_neurons: int,
+    prob_type: str,
+    noise_init: np.ndarray = None,
+) -> float:
     m = gp.Container()
     network = build_network(hidden_layers, hidden_layer_neurons)
     single_image = get_image(network)
@@ -155,8 +135,12 @@ def main(hidden_layers, hidden_layer_neurons, prob_type: str, noise_init=None):
     set_a1 = gp.Equation(m, "set_a1", domain=dim(a1.shape))
     set_a1[...] = a1 == (image + noise - MEAN[0]) / STD[0]
 
+    matches = {}
     seq_formulation = gp.formulations.TorchSequential(m, network, relu_converter)
-    y, _ = seq_formulation(a1)
+    if prob_type.lower() == "mpec":
+        y, matches, _ = seq_formulation(a1)
+    else:
+        y, _ = seq_formulation(a1)
 
     output_np = network(single_image.unsqueeze(0)).detach().numpy()[0][0]
     right_label = np.argsort(output_np)[-1]
