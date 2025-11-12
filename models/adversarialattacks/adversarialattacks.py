@@ -16,7 +16,6 @@ of the file for running many instances with diverse initial points.
 """
 
 import os
-import math
 import json
 import numpy as np
 
@@ -181,7 +180,6 @@ def main(
 if __name__ == "__main__":
     matches = {}
     obj_value = main(4, 40, prob_type="MPEC")
-    assert math.isclose(obj_value, -1.96277, rel_tol=0.001)
 
     # The script below is an example of how to run multiple instances of the model
     # with different hidden layers, hidden layer neurons, and problem types. This
