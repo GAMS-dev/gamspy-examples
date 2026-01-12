@@ -1,4 +1,7 @@
 """
+## LICENSETYPE: Requires license
+## MODELTYPE: NLP, MIP, MPEC
+
 Adversarial attack optimization in GAMSPy (MNIST).
 
 Builds and solves a bounded-noise attack that minimizes the logit margin
@@ -17,7 +20,10 @@ of the file for running many instances with diverse initial points.
 
 import os
 import json
+import sys
 import numpy as np
+
+from pathlib import Path
 
 import gamspy as gp
 import torch
@@ -38,7 +44,7 @@ def build_network(hidden_layers, hidden_layer_neurons):
     network = nn.Sequential(*layers)
     network.load_state_dict(
         torch.load(
-            f"ffn_data_{hidden_layers}_{hidden_layer_neurons}.pth", weights_only=True
+            Path(__file__).parent / f"ffn_data_{hidden_layers}_{hidden_layer_neurons}.pth", weights_only=True, map_location=torch.device("cpu")
         )
     )
     return network
@@ -160,7 +166,7 @@ def main(
         matches=matches,
     )
 
-    model.solve(solver=solver, options=gp.Options.fromGams({"reslim": 4000}))
+    model.solve(output=sys.stdout, solver=solver, options=gp.Options.fromGams({"reslim": 4000}))
 
     report = {
         "hidden_layers": hidden_layers,

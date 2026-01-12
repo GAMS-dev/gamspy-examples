@@ -1,4 +1,6 @@
 gamspy[torch]
+torchvision
 pytest
 nbmake
 tox
+cerberus
