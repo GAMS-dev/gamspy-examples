@@ -1,4 +1,4 @@
-gamspy[test,dev,doc]
+gamspy[test,dev]
 pytest
 nbmake
 tox

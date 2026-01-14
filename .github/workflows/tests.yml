@@ -6,13 +6,26 @@ on:
 
 jobs:
   test-models:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         python-version: ["3.12"]
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Free up disk space on the GitHub-hosted runner
+    - name: Free disk space
+      run: |
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /opt/ghc
+        sudo rm -rf /opt/hostedtoolcache/CodeQL
+        rm -rf ~/.cache/pip
+
+    - name: Show disk space after cleanup
+      run: df -h
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
