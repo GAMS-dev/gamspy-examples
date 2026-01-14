@@ -3,3 +3,6 @@ pytest
 nbmake
 tox
 cerberus
+networkx
+openpyxl
+pyyaml
