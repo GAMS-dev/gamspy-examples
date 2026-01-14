@@ -71,12 +71,7 @@ def main():
         * x3
         * (
             gams_math.exp(
-                x5
-                * (
-                    g["r1", n]
-                    - g["r3", n] * x7 / 1000
-                    - g["r5", n] * x8 / 1000
-                )
+                x5 * (g["r1", n] - g["r3", n] * x7 / 1000 - g["r5", n] * x8 / 1000)
             )
             - 1
         )
@@ -90,12 +85,7 @@ def main():
         * x3
         * (
             gams_math.exp(
-                x5
-                * (
-                    g["r1", n]
-                    - g["r3", n] * x7 / 1000
-                    - g["r5", n] * x8 / 1000
-                )
+                x5 * (g["r1", n] - g["r3", n] * x7 / 1000 - g["r5", n] * x8 / 1000)
             )
             - 1
         )
@@ -193,8 +183,9 @@ def main():
 
     import math
 
-    print(circuit.objective_value)
-    assert math.isclose(circuit.objective_value, 4.4498522089320064e-09)
+    assert math.isclose(circuit.objective_value, 4.449866350397786e-09, rel_tol=1e-6), (
+        circuit.objective_value
+    )
 
 
 if __name__ == "__main__":

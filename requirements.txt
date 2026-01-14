@@ -1,4 +1,5 @@
-gamspy[test,dev]
+gamspy
 pytest
 nbmake
 tox
+cerberus
