@@ -21,9 +21,9 @@ de Wetering, A V, private communication.
 from __future__ import annotations
 
 from pathlib import Path
+
 import networkx as nx
 
-import gamspy.math as gams_math
 from gamspy import (
     Alias,
     Container,
@@ -33,7 +33,6 @@ from gamspy import (
     Ord,
     Parameter,
     Set,
-    Smax,
     Sum,
     Variable,
 )
@@ -110,15 +109,6 @@ def main():
     if len(t) < len(i):
         raise GamspyException("Set t is possibly too small")
 
-    # SETS
-    tour = Set(m, name="tour", domain=[i, j, t], description="subtours")
-    visited = Set(
-        m,
-        name="visited",
-        domain=i,
-        description="flag whether a city is already visited",
-    )
-
     # SINGLETON SETS
     fromi = Set(
         m,
@@ -127,13 +117,6 @@ def main():
         is_singleton=True,
         description="contains always one element: the from city",
     )
-    nextj = Set(
-        m,
-        name="nextj",
-        domain=j,
-        is_singleton=True,
-        description="contains always one element: the to city",
-    )
     tt = Set(
         m,
         name="tt",
@@ -141,9 +124,6 @@ def main():
         is_singleton=True,
         description="contains always one element: the current subtour",
     )
-
-    # ALIASES ##
-    ix = Alias(m, name="ix", alias_with=i)
 
     # initialize
     fromi[i].where[Ord(i) == 1] = True  # turn first element on
@@ -172,9 +152,7 @@ def main():
     # Equation
     cut = Equation(m, name="cut", domain=cc, description="dynamic cuts")
 
-    cut[allcuts] = (
-        Sum([i, j], cutcoeff[allcuts, i, j] * x[i, j]) <= rhs[allcuts]
-    )
+    cut[allcuts] = Sum([i, j], cutcoeff[allcuts, i, j] * x[i, j]) <= rhs[allcuts]
 
     tspcut = Model(
         m,
@@ -190,8 +168,8 @@ def main():
     for ccc_loop in ccc.toList():
         G = nx.DiGraph()
         G.add_nodes_from(i.getUELs())
-        x_filtered = x.records[x.records['level'] > 0.5].loc[:, :"level"]
-        edges =  list(zip(x_filtered['ii'], x_filtered['jj']))
+        x_filtered = x.records[x.records["level"] > 0.5].loc[:, :"level"]
+        edges = list(zip(x_filtered["ii"], x_filtered["jj"], strict=False))
         G.add_edges_from(edges)
         S = [G.subgraph(c).copy() for c in nx.strongly_connected_components(G)]
 
@@ -202,7 +180,7 @@ def main():
         for s in S:
             rhs[curcut] = -1
             for u, v in s.edges():
-                if x.l[u, v].records['level'].squeeze() > 0.5:
+                if x.l[u, v].records["level"].squeeze() > 0.5:
                     cutcoeff[curcut, i, j].where[i.sameAs(u) & j.sameAs(v)] = 1
                 rhs[curcut] = rhs[curcut] + 1
             allcuts[curcut] = True  # include this cut in set
