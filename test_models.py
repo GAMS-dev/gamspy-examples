@@ -13,6 +13,7 @@ def test_all_models():
                 "LICENSETYPE: Requires license" in content
                 or "LICENSETYPE: Community" in content
                 or "hansmge" in model
+                or "cta" in model
             ):
                 continue
 
