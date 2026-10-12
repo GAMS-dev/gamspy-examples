@@ -1,6 +1,6 @@
 """
 ## LICENSETYPE: Demo
-## MODELTYPE: MIP, LP
+## MODELTYPE: MIP
 ## KEYWORDS: mixed integer linear programming, minimum, transportation problem, economies of scale, formulations
 
 
@@ -18,16 +18,9 @@ a route is
 The cost is concave, i.e. it rewards consolidating shipments on fewer
 routes, which makes the problem non-convex.
 
-The model is organized as follows:
-  1) The usual linear formulation of a minimum only requires the cost to be
-     at most each operand. This only works if the model benefits from a
-     large minimum. Here, the shipper benefits from a small cost and ships
-     everything for free.
-
-  2) gamspy.formulations.minimum makes the cost equal to the minimum by
-     selecting one operand with a binary variable. The shipper then pays
-     for every route it uses.
-
+gamspy.formulations.minimum makes the cost equal to the minimum by
+selecting one operand with a binary variable, so the shipper pays for every
+route it uses.
 
 Dantzig, G B, Chapter 3.3. In Linear Programming and Extensions.
 Princeton University Press, Princeton, New Jersey, 1963.
@@ -128,68 +121,25 @@ def main():
     )
     demand[j] = Sum(i, x[i, j]) >= b[j]
 
-    # 1) Linear formulation: cost[i, j] <= min(c[i, j] * x[i, j], charter[i, j])
-    cost = Variable(
+    # cost[i, j] == min(c[i, j] * x[i, j], charter[i, j])
+    cost, eqs = formulations.minimum(c[i, j] * x[i, j], charter[i, j])
+
+    transport = Model(
         m,
-        name="cost",
-        type="positive",
-        domain=[i, j],
-        description="cost of route (i,j) in thousands of dollars",
-    )
-
-    below_parcel = Equation(
-        m,
-        name="below_parcel",
-        domain=[i, j],
-        description="cost is at most the parcel cost",
-    )
-    below_parcel[i, j] = cost[i, j] <= c[i, j] * x[i, j]
-    below_charter = Equation(
-        m,
-        name="below_charter",
-        domain=[i, j],
-        description="cost is at most the charter fee",
-    )
-    below_charter[i, j] = cost[i, j] <= charter[i, j]
-
-    linear = Model(
-        m,
-        name="linear",
-        equations=[supply, demand, below_parcel, below_charter],
-        problem="lp",
-        sense=Sense.MIN,
-        objective=Sum([i, j], cost[i, j]),
-    )
-    linear.solve()
-
-    print("Linear formulation")
-    print("Objective Function Value: ", round(linear.objective_value, 3))
-    print(x.pivot(), cost.pivot(), sep="\n")
-
-    # The cost is not the minimum anymore, i.e. shipping is free
-    if linear.objective_value > 1e-6:
-        raise Exception("expected the linear formulation to ship for free")
-
-    # 2) Exact formulation: cost[i, j] == min(c[i, j] * x[i, j], charter[i, j])
-    exact_cost, eqs = formulations.minimum(c[i, j] * x[i, j], charter[i, j])
-
-    exact = Model(
-        m,
-        name="exact",
+        name="transport",
         equations=[supply, demand, *eqs],
         problem="mip",
         sense=Sense.MIN,
-        objective=Sum([i, j], exact_cost[i, j]),
+        objective=Sum([i, j], cost[i, j]),
     )
-    exact.solve()
+    transport.solve()
 
-    print("Exact formulation")
-    print("Objective Function Value: ", round(exact.objective_value, 3))
-    print(x.pivot(), exact_cost.pivot().round(3), sep="\n")
+    print("Objective Function Value: ", round(transport.objective_value, 3))
+    print(x.pivot(), cost.pivot().round(3), sep="\n")
 
     # The cost equals the minimum on every route
     expected = np.minimum(c.toDense() * x.toDense(), charter.toDense())
-    if np.abs(exact_cost.toDense() - expected).max() > 1e-6:
+    if np.abs(cost.toDense() - expected).max() > 1e-6:
         raise Exception("cost does not equal the minimum")
 
 
