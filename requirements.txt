@@ -1,4 +1,8 @@
-gamspy[test,dev,doc]
+gamspy
 pytest
 nbmake
 tox
+cerberus
+networkx
+openpyxl
+pyyaml
